@@ -1,0 +1,18 @@
+# Netlify build configuration
+#
+# The Next.js Runtime is auto-detected and installed by Netlify, so it is not
+# declared here — pinning it risks fighting Netlify over which version supports
+# the Next.js release in package.json.
+#
+# `publish = ".next"` is what the Next.js Runtime expects. The site serves both
+# statically prerendered routes and server-rendered ones: /contact is
+# `force-dynamic` and posts to a Server Action, so this site cannot be deployed
+# as a purely static export.
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  # Match the Node version the project is developed and built against.
+  NODE_VERSION = "22"
