@@ -21,7 +21,7 @@ Canonical domain: `https://amglobalcommodities.com`
 | **Homepage (8 sections)** | **Complete** |
 | Commodity page template + 4 commodity pages | Complete (awaiting commercial data) |
 | `/commodities`, `/sourcing-trade`, `/about`, `/quality-compliance` | Complete (awaiting commercial data) |
-| `/contact` | Direct-contact page live; **structured enquiry form is the next build step** |
+| `/contact` | **Trade enquiry form complete** — validated, anti-spam, delivery-aware. Provider not yet connected |
 | `/privacy`, `/terms` | Drafted — **require legal review before launch** |
 | SEO: metadata, canonicals, OG, sitemap, robots, JSON-LD | Complete |
 | Photography | Not yet supplied — see `data/images.ts` |
@@ -184,15 +184,28 @@ Copy `.env.example` to `.env.local`:
 cp .env.example .env.local
 ```
 
-`TRADE_ENQUIRY_TO` is the destination for enquiries and defaults to
-`antoniomarcoindia@gmail.com`. It is read **server-side only** — it has no
-`NEXT_PUBLIC_` prefix and is never sent to the browser.
+| Variable | Purpose |
+| --- | --- |
+| `TRADE_ENQUIRY_TO` | Destination inbox. Defaults to `antoniomarcoindia@gmail.com`. |
+| `TRADE_ENQUIRY_FROM` | Sender address. **Must be verified with the provider.** |
+| `TRADE_ENQUIRY_API_KEY` | Provider API key. |
+| `TRADE_ENQUIRY_API_URL` | Optional. Overrides the endpoint (testing, or a regional endpoint). |
 
-No secrets are committed. `.env*` is git-ignored.
+All are read **server-side only** — none has a `NEXT_PUBLIC_` prefix, and
+`lib/email/index.ts` starts with `import "server-only"`, which makes it a build
+error to pull the key into a Client Component. No secrets are committed;
+`.env*` is git-ignored apart from `.env.example`.
 
-> The structured enquiry form that consumes these variables is the next build
-> step; the variables are defined now so deployment configuration can be set up
-> in parallel.
+**Delivery is live as soon as `TRADE_ENQUIRY_FROM` and `TRADE_ENQUIRY_API_KEY`
+are both set.** No code change and no redeploy of the form is needed —
+`/contact` is rendered per request, so it picks the configuration up
+immediately.
+
+Until then the site is honest about it: `/contact` shows a notice pointing at
+direct email and phone *before* the form, and a submitted enquiry ends in a
+"could not be sent" state rather than a false confirmation. The full enquiry is
+written to the server log in that case, so nothing submitted during the gap is
+lost.
 
 ### …deploy
 
@@ -208,6 +221,44 @@ Confirm after the first deploy that `https://amglobalcommodities.com/robots.txt`
 and `/sitemap.xml` resolve, and that canonical URLs use the apex domain.
 
 ---
+
+## The trade enquiry
+
+`/contact` is the site's only conversion. The pieces:
+
+| File | Role |
+| --- | --- |
+| `data/enquiry.ts` | Field options, section headings, copy |
+| `lib/enquiry.ts` | Validation, sanitisation, anti-spam — the single definition of a valid enquiry |
+| `app/contact/actions.ts` | Server Action: re-validates, builds, delivers |
+| `lib/email/message.ts` | Builds the notification (subject, text and HTML parts) |
+| `lib/email/index.ts` | Provider abstraction and delivery status |
+| `components/enquiry/` | The form and its field primitives |
+
+Things worth knowing before changing it:
+
+- **The form works without JavaScript.** It is a Server Action on a plain
+  `<form>`; JavaScript adds the pending state, focus management and the
+  conditional required-field logic, but gates nothing. Verified in a browser
+  with scripting disabled, including delivery.
+- **Validation runs twice.** The client's checks are a convenience; the server
+  re-validates every field, constrains every select to its allowed values, caps
+  every length and strips control characters. Nothing the browser sends is
+  trusted.
+- **A validation error must not clear the form.** React resets an uncontrolled
+  form once its action resolves, so the server echoes the sanitised values back
+  and they are re-applied as `defaultValue`. Assuming DOM values simply persist
+  is wrong — it was caught in a browser, not in review.
+- **The UI never claims an email was sent unless it was.** `deliver()` returns
+  `sent` / `not-configured` / `failed`, and the three states render
+  differently. Keep it that way.
+- **Anti-spam is a honeypot plus a minimum completion time**, both
+  non-intrusive. There is no CAPTCHA: it would add friction and a third-party
+  dependency to the only conversion on the site. Automated submissions get the
+  ordinary acceptance response so a bot learns nothing.
+- **An acknowledgement email to the buyer is deliberately not enabled.** The
+  hook is in `lib/email/index.ts` (`ACKNOWLEDGEMENT_ENABLED`). What it should
+  say — and whether it implies a response time — is a commercial decision.
 
 ## Design system
 

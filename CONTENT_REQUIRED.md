@@ -250,21 +250,34 @@ _Files: `app/privacy/page.tsx`, `app/terms/page.tsx`_
 
 ---
 
-## 11. Enquiry form (next build step)
+## 11. Enquiry form — activation
 
-_Not yet implemented; `/contact` currently converts to email and phone._
+The form is **built and working**: validated on client and server, anti-spam in
+place, and honest about delivery. Only the email provider is missing.
 
-Decisions needed before it is built:
+To switch delivery on:
 
-- [ ] Transactional email provider (Resend, Postmark, SES, SMTP).
-- [ ] Destination address(es) and whether enquiries should be CC'd anywhere.
-- [ ] Whether **file attachments** should be accepted. If yes: permitted types,
-      size limit, and where files are stored. Uploads will only be enabled once
-      storage and scanning are securely implemented.
-- [ ] Anti-spam approach — honeypot and timing checks are planned; confirm
-      whether a CAPTCHA (e.g. Turnstile) is also wanted, and supply keys.
-- [ ] Whether an auto-acknowledgement should be sent to the enquirer.
-- [ ] Required vs optional fields across: commodity, specific product,
-      approximate quantity, quantity unit, destination country, destination
-      port, preferred Incoterm, packaging requirements, purchase frequency,
-      company name, contact name, business email, phone/WhatsApp, message.
+- [ ] Choose a transactional email provider. `lib/email/index.ts` implements
+      **Resend** already; any other provider needs one new branch in that file
+      and nothing else.
+- [ ] Verify a sending domain with the provider (`amglobalcommodities.com`).
+- [ ] Set `TRADE_ENQUIRY_FROM` to a verified sender address on that domain.
+- [ ] Set `TRADE_ENQUIRY_API_KEY` in the hosting environment (never in the
+      repository).
+- [ ] Confirm `TRADE_ENQUIRY_TO` — currently defaults to
+      `antoniomarcoindia@gmail.com`. Consider a domain mailbox instead.
+
+Delivery goes live the moment those are set. No redeploy of the form is needed.
+
+Still to decide:
+
+- [ ] Should enquiries be copied to a second address?
+- [ ] Should an **automated acknowledgement** be sent to the buyer? Not enabled
+      by default — the wording would need to avoid promising a response time.
+      Hook is `ACKNOWLEDGEMENT_ENABLED` in `lib/email/index.ts`.
+- [ ] Should **file attachments** be accepted (specification sheets)? Not
+      implemented: uploads will only be enabled once storage, size/type limits
+      and scanning are securely in place.
+- [ ] Is the current required-field set right? Currently required: commodity,
+      destination country, company name, contact name, business email, and
+      either an approximate quantity or a description in the message.

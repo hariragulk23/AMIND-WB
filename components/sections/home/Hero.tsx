@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { DisplayReveal } from "@/components/animation/DisplayReveal";
 import { Parallax } from "@/components/animation/Parallax";
 import { Reveal } from "@/components/animation/Reveal";
@@ -5,6 +6,7 @@ import { ScrollCue } from "@/components/animation/ScrollCue";
 import { Container } from "@/components/ui/Container";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { Media } from "@/components/ui/Media";
+import { commodities } from "@/data/commodities";
 import { company } from "@/data/company";
 import { heroContent } from "@/data/home";
 import { primaryCta, secondaryCtas } from "@/data/navigation";
@@ -44,7 +46,7 @@ export function Hero() {
         {/* Clears the fixed header without relying on a magic number. */}
         <div
           aria-hidden="true"
-          style={{ paddingTop: "calc(var(--am-header-h) + 3rem)" }}
+          style={{ paddingTop: "calc(var(--am-header-h) + 1.5rem)" }}
         />
 
         {/* ---- Wordmark composition ------------------------------------- */}
@@ -56,8 +58,40 @@ export function Hero() {
           delay={0.15}
         />
 
+        {/*
+          ---- Commodity index ------------------------------------------
+          The four platforms, stated in the first viewport. Without this a
+          visitor has to scroll before learning what is actually traded — the
+          hero otherwise says only that the company exists. It doubles as the
+          rule that separates the wordmark from the statement, so it costs one
+          row of height rather than a whole band, and it fills the right of a
+          wide canvas with substance instead of decoration.
+        */}
+        <Reveal
+          as="ul"
+          stagger="tight"
+          delay={0.4}
+          y={14}
+          immediate
+          className="mt-6 grid grid-cols-4 border-y border-charcoal md:mt-8"
+        >
+          {commodities.map((commodity, index) => (
+            <li key={commodity.slug} className="min-w-0">
+              <Link
+                href={`/commodities/${commodity.slug}`}
+                className="label-xs group flex items-baseline gap-2 py-4 text-on-dark transition-colors duration-300 ease-brand hover:text-brass md:gap-3"
+              >
+                <span className="numeral hidden text-brass sm:inline">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="truncate">{commodity.name}</span>
+              </Link>
+            </li>
+          ))}
+        </Reveal>
+
         {/* ---- Statement + intro + CTAs ---------------------------------- */}
-        <div className="mt-10 border-t border-charcoal pt-8 md:mt-14 md:pt-10">
+        <div className="mt-8 md:mt-12">
           <div className="grid gap-9 lg:grid-cols-12 lg:gap-10">
             <Reveal
               as="p"
@@ -104,7 +138,7 @@ export function Hero() {
         </div>
 
         {/* ---- Base line: scroll cue + operational base ------------------ */}
-        <div className="mt-10 flex items-end justify-between gap-6 pb-8 md:mt-14 md:pb-12">
+        <div className="mt-8 flex items-end justify-between gap-6 pb-7 md:mt-12 md:pb-10">
           <ScrollCue label={heroContent.scrollCue} />
 
           <p className="label-xs hidden text-right text-on-dark-muted sm:block">

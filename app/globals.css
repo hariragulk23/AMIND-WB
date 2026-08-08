@@ -188,10 +188,15 @@
    Oversized, responsive, editorial. All sizes use clamp().
    ========================================================================== */
 
+/* The `min(vw, vh)` term is what keeps the hero honest. A width-only clamp
+   either caps too early — leaving the wordmark stranded in the middle of a
+   1920 canvas — or overflows a short laptop window. Bounding by viewport
+   height as well lets the type grow on large, tall screens while staying
+   inside a 900px-tall window, where the whole hero composition must fit. */
 @utility display-hero {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(3.25rem, 13vw, 9rem);
+  font-size: clamp(3.25rem, min(13vw, 16vh), 11rem);
   line-height: 0.86;
   letter-spacing: -0.025em;
   text-transform: uppercase;
@@ -200,7 +205,7 @@
 @utility display-xl {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(2.75rem, 10vw, 8.5rem);
+  font-size: clamp(2.75rem, 10vw, 10.5rem);
   line-height: 0.9;
   letter-spacing: -0.02em;
   text-transform: uppercase;
@@ -209,7 +214,7 @@
 @utility display-lg {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(2.25rem, 6vw, 4.75rem);
+  font-size: clamp(2.25rem, 6vw, 6.5rem);
   line-height: 0.96;
   letter-spacing: -0.015em;
 }
@@ -312,6 +317,18 @@
 /* ==========================================================================
    ACCESSIBILITY
    ========================================================================== */
+
+/* The submit button's pending indicator: a single rule travelling once across
+   the button. No spinner and no bounce. The reduced-motion block below flattens
+   it to a static mark. */
+@keyframes am-loading {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(300%);
+  }
+}
 
 /* `sr-only` / `not-sr-only` come from Tailwind itself — redefining them here
    would outrank the `focus:not-sr-only` used by the skip link. */

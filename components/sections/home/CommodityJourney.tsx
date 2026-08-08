@@ -159,7 +159,10 @@ export function CommodityJourney() {
             <div
               key={commodity.slug}
               data-layer
-              className="absolute inset-0 will-change-transform"
+              /* No `will-change` here on purpose: four permanently promoted
+                 full-viewport layers cost real memory on mid-range Android,
+                 and GSAP promotes whichever layer it is animating anyway. */
+              className="absolute inset-0"
               style={{ opacity: index === 0 ? 1 : 0 }}
             >
               <Media imageKey={commodity.journeyImage} fill sizes="100vw" />
@@ -175,7 +178,7 @@ export function CommodityJourney() {
               <li
                 key={commodity.slug}
                 data-marker
-                className="label-xs numeral flex items-center justify-end gap-3 text-on-dark opacity-30 transition-opacity duration-500 ease-brand [&.is-active]:opacity-100"
+                className="label-xs numeral flex items-center justify-end gap-3 text-on-dark opacity-45 transition-opacity duration-500 ease-brand [&.is-active]:opacity-100"
               >
                 <span>{commodity.name}</span>
                 <span className="text-brass">
@@ -219,10 +222,9 @@ export function CommodityJourney() {
                     <CtaLink
                       href={`/commodities/${commodity.slug}`}
                       tone="dark"
-                      variant="outline"
-                      srSuffix={commodity.name}
+                      variant="text"
                     >
-                      Explore
+                      {`Explore ${commodity.name}`}
                     </CtaLink>
                   </div>
                 </div>
