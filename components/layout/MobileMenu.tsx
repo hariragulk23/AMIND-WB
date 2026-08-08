@@ -167,7 +167,7 @@ export function MobileMenu({ open, onClose, id, toggleRef }: MobileMenuProps) {
           <Link
             href={primaryCta.href}
             onClick={onClose}
-            className="label-sm flex w-full items-center justify-between bg-brand-red px-6 py-5 text-white transition-colors duration-300 hover:bg-brand-red-deep"
+            className="label-sm flex w-full items-center justify-between bg-brand-red-cta px-6 py-5 text-white transition-colors duration-300 hover:bg-brand-red-deep"
           >
             <span>{primaryCta.labelLong}</span>
             <span aria-hidden="true">→</span>

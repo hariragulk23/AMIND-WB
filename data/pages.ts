@@ -83,10 +83,10 @@ export const aboutContent = {
       ],
     },
     {
-      title: "A new company, said plainly",
+      title: "Built for international trade",
       paragraphs: [
-        "The Indian company was incorporated in 2025. It has no long history and does not claim one. What it has is a deliberate structure: registered for cross-border trade from the outset, organised around four commodity platforms, and built to handle specification-led B2B transactions rather than adapted to them later.",
-        "The ambition is to become a trading house that international buyers return to. That is earned through executed contracts, not asserted on a website.",
+        "The Indian company was incorporated in 2025 and is structured deliberately: registered for cross-border trade from the outset, organised around four commodity platforms, and built to handle specification-led B2B transactions rather than adapted to them later.",
+        "The ambition is to become a trading house that international buyers return to — earned through executed contracts rather than asserted on a website.",
       ],
     },
   ],

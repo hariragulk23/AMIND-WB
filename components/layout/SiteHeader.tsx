@@ -115,7 +115,7 @@ export function SiteHeader() {
           <div className="flex items-center gap-3">
             <Link
               href={primaryCta.href}
-              className="label-xs hidden bg-brand-red px-6 py-3.5 text-white transition-colors duration-300 ease-brand hover:bg-brand-red-deep lg:block"
+              className="label-xs hidden bg-brand-red-cta px-6 py-3.5 text-white transition-colors duration-300 ease-brand hover:bg-brand-red-deep lg:block"
             >
               {primaryCta.label}
             </Link>

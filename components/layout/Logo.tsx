@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 interface LogoProps {
   /** The ground the mark sits on, not the colour of the mark. */
   tone?: "dark" | "light";
-  /** `full` shows the wordmark plus descriptor; `mark` shows AM only. */
+  /** `full` pairs the wordmark with the corporate mark; `mark` is wordmark only. */
   variant?: "full" | "mark";
   className?: string;
 }
@@ -14,73 +14,56 @@ interface LogoProps {
 /**
  * Site identity.
  *
- * BRAND HIERARCHY (option B of the two considered): the public brand
- * AM GLOBAL COMMODITIES is primary and set in the display face; Antonio Marco
- * appears beneath it as a quiet corporate descriptor. A visitor should leave
- * remembering AM Global Commodities, while recognising Antonio Marco as the
- * corporate identity behind it — so the descriptor is deliberately one third
- * the size of the wordmark and never competes with it.
+ * BRAND HIERARCHY — AM GLOBAL COMMODITIES is the public brand and leads, set in
+ * the display face. The supplied Antonio Marco artwork sits beside it, smaller
+ * and behind a hairline, as the corporate identity.
  *
- * The official Antonio Marco artwork is rendered here as an image the moment
- * it exists in the repository (see data/brand.ts). It is placed, never
- * redrawn: `Image` with fixed intrinsic dimensions and `h-auto` scales it
- * proportionally, so it cannot be stretched or distorted. Until the file is
- * supplied the component sets the AM Global Commodities name typographically —
- * which is the public brand, not a reconstruction of the Antonio Marco mark.
+ * The "by Antonio Marco" line that stood here while the artwork was missing has
+ * been REMOVED. The logo already reads "ANTONIO MARCO / EXPORTS AND TRADE
+ * PRIVATE LIMITED", so keeping the text as well said the same name three times
+ * in one lockup. The logo states the relationship better than the caption did.
+ *
+ * The artwork is placed, never redrawn: `Image` with the file's true intrinsic
+ * dimensions plus `w-auto` means it can only ever scale proportionally.
+ *
+ * On dark grounds the mark is withheld rather than inverted — its lettering is
+ * brown and navy, so it needs a light ground. The footer gives it one.
  */
 export function Logo({ tone = "light", variant = "full", className }: LogoProps) {
   const onDark = tone === "dark";
   const logo = brandAssets.antonioMarcoLogo;
+  const showMark = variant === "full" && logo.available && !onDark;
 
   return (
     <Link
       href="/"
       aria-label={`${brandLockup.primary} — home`}
       className={cn(
-        "group inline-flex items-center gap-3 transition-opacity duration-300 ease-brand hover:opacity-80",
+        "group inline-flex items-center gap-3 transition-opacity duration-300 ease-brand hover:opacity-80 md:gap-4",
         onDark ? "text-on-dark" : "text-on-light",
         className,
       )}
     >
-      <span className="flex flex-col leading-none">
-        <span
-          aria-hidden="true"
-          className={cn(
-            "font-display font-semibold uppercase leading-none",
-            variant === "full"
-              ? "text-[0.95rem] tracking-[0.13em] md:text-[1.0625rem]"
-              : "text-[1.125rem] tracking-[0.08em]",
-          )}
-        >
-          {variant === "full" ? "AM Global" : "AM"}
-          {variant === "full" ? (
-            <span className="block">Commodities</span>
-          ) : null}
-        </span>
-
-        {variant === "full" ? (
-          <span
-            aria-hidden="true"
-            className={cn(
-              "mt-1.5 text-[0.5625rem] uppercase tracking-[0.18em]",
-              onDark ? "text-on-dark-muted" : "text-on-light-muted",
-            )}
-          >
-            {brandLockup.descriptor}
-          </span>
-        ) : null}
+      <span
+        aria-hidden="true"
+        className={cn(
+          "font-display font-semibold uppercase leading-[1.08]",
+          variant === "full"
+            ? "text-[0.95rem] tracking-[0.13em] md:text-[1.0625rem]"
+            : "text-[1.125rem] tracking-[0.08em]",
+        )}
+      >
+        AM Global
+        {variant === "full" ? <span className="block">Commodities</span> : null}
       </span>
 
-      {/* The supplied artwork, once it exists. Separated by a hairline so the
-          two identities read as related but distinct. */}
-      {variant === "full" && logo.available ? (
+      {/* The corporate mark. Held back until `md`: below that the header must
+          stay minimal, and the wordmark alone carries the public brand. */}
+      {showMark ? (
         <>
           <span
             aria-hidden="true"
-            className={cn(
-              "h-8 w-px",
-              onDark ? "bg-charcoal" : "bg-paper-line",
-            )}
+            className="hidden h-9 w-px bg-paper-line md:block"
           />
           <Image
             src={logo.path}
@@ -88,7 +71,8 @@ export function Logo({ tone = "light", variant = "full", className }: LogoProps)
             width={logo.width}
             height={logo.height}
             priority
-            className="h-7 w-auto md:h-8"
+            sizes="160px"
+            className="hidden h-7 w-auto md:block xl:h-8"
           />
         </>
       ) : null}

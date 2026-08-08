@@ -26,7 +26,7 @@ export const positioningContent = {
   paragraphs: [
     "AM Global Commodities is the international trading identity of Antonio Marco Exports and Trade Private Limited — a B2B sourcing and trading company operating from Tamil Nadu, India.",
     "The company sits between supply and demand: interpreting a buyer's written specification, identifying a sourcing route capable of meeting it, and coordinating the quality evidence, documentation and shipment arrangements that let a contract be executed cleanly.",
-    "It is a young company with a deliberate structure — incorporated in India in 2025 with European corporate roots, and built from the outset for cross-border trade rather than adapted to it.",
+    "Established in India in 2025 with European corporate roots, the company was built from the outset for cross-border trade rather than adapted to it — registered, structured and staffed for it from day one.",
   ],
 } as const;
 
@@ -104,10 +104,10 @@ export const gridContent = {
 } as const;
 
 export const trustContent = {
-  label: "Standing",
-  headingLines: ["What can be", "verified."] as const,
+  label: "Corporate foundation",
+  headingLines: ["Built for", "international trade."] as const,
   intro:
-    "No counters, no unverifiable claims. The company is new, and says so. What follows is a matter of record.",
+    "Everything below is a matter of public record or a statement of how the business is structured. No counters, no unverifiable claims.",
 } as const;
 
 export const finalCtaContent = {

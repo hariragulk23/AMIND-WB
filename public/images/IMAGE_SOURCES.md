@@ -2,9 +2,8 @@
 
 Provenance record for every photograph used on this site.
 
-**Status: no photography is present yet.** The four commodity images below are
-the site's most important visual assets and are currently the only thing
-standing between the homepage and completion.
+**Status: the logo is in place. The four commodity photographs are not.** They
+are the site's most important remaining visual assets.
 
 They could not be obtained in the build environment this project was developed
 in: outbound network access is restricted to an allowlist, and every stock
@@ -38,16 +37,21 @@ Framing notes that apply to all four:
   should read as material, not as a styled product shot.
 - WebP or AVIF preferred. JPEG is accepted — Next.js re-encodes on request.
 
-## Required — the official logo
+## The official logo — SUPPLIED AND LIVE
 
 | Path | Notes |
 | --- | --- |
-| `public/brand/antonio-marco-logo-original.png` | The supplied artwork, preserved untouched |
-| `public/brand/antonio-marco-logo.webp` | Optimised derivative, visually identical |
+| `public/brand/antonio-marco-logo-original.png` | Supplied artwork, preserved untouched — 1774×887, 829 KB |
+| `public/brand/antonio-marco-logo.webp` | Derivative the site renders — 1567×365, 74 KB |
 
-Then set `available: true` in `data/brand.ts`. The header and footer switch
-from the typographic lockup to the real artwork automatically. Trimming excess
-empty canvas around the mark is fine; cropping any bar, letter or rule is not.
+Two things were done to produce the derivative, neither of which alters the
+mark: the empty canvas was trimmed to the artwork plus 7% brand safe space, and
+the flat white backdrop was lifted to transparency with a soft edge so the
+antialiasing survives. No bar, letterform, proportion or colour was changed.
+
+Because the artwork's lettering is brown and navy it needs a light ground. The
+footer places it on a light panel rather than inverting it — a supplied logo is
+never recoloured to suit a background.
 
 ## Optional
 
@@ -66,7 +70,8 @@ recorded here so it can be found and replaced before launch.
 
 | File | Source | Source URL | Photographer / attribution | Licence | Temporary? |
 | --- | --- | --- | --- | --- | --- |
-| _(none yet)_ | | | | | |
+| `brand/antonio-marco-logo-original.png` | Supplied by the company | — | Antonio Marco Exports and Trade Private Limited | Company's own mark | No |
+| `brand/antonio-marco-logo.webp` | Derived from the above | — | — | Company's own mark | No |
 
 Rules for temporary staging imagery:
 

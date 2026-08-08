@@ -19,18 +19,29 @@
    ========================================================================== */
 
 :root {
-  /* --- Brand colours, read from the supplied logo artwork --------------- */
-  --brand-red: #c0453b;
-  --brand-red-deep: #a63a31; /* red that passes AA as text on off-white */
-  --brand-red-light: #d9695c; /* red that passes AA as text on navy */
-  --brand-green: #7d9b6c;
-  --brand-green-deep: #4f6b3e; /* green that passes AA as text on off-white */
-  --brand-brown: #4a2c1b;
-  --brand-brown-deep: #2a1a0e;
-  --brand-navy: #1e2e5f;
-  --brand-navy-deep: #151f3d;
+  /* --- Brand colours, sampled from the supplied logo artwork -------------
+     Measured directly off /public/brand/antonio-marco-logo-original.png
+     (median of the ink pixels in each element), not estimated by eye.
+        red   #c75051  the diagonal bars and the rule
+        green #758c67  the centre bar and the rule's midsection
+        brown #522f1f  the ANTONIO MARCO wordmark
+        navy  #101f56  the EXPORTS AND TRADE PRIVATE LIMITED descriptor
+     The variants beneath each are the same hue pushed until it passes AA on
+     the ground it is used against; the ratio is noted. The logo red is only
+     4.1:1 on the canvas and carries just 4.47:1 under white, so it is kept for
+     marks and rules while text and fills use the adjusted values. */
+  --brand-red: #c75051; /* logo red — rules, marks, motif        */
+  --brand-red-cta: #c24b4c; /* CTA fill      — white text 4.8:1  */
+  --brand-red-deep: #a83f3c; /* text on off-white       5.6:1     */
+  --brand-red-light: #d4675f; /* text on navy            4.7:1     */
+  --brand-green: #758c67; /* logo green — accents, motif       */
+  --brand-green-deep: #4f6344; /* text on off-white       6.0:1     */
+  --brand-brown: #522f1f; /* logo brown — headings  10.7:1     */
+  --brand-brown-deep: #2e1a10; /* deep brown band                   */
+  --brand-navy: #101f56; /* logo navy — body copy  14.1:1     */
+  --brand-navy-deep: #0d1a48; /* dark sections and footer          */
   --brand-white: #ffffff;
-  --brand-offwhite: #f6f4ef;
+  --brand-offwhite: #f6f4ef; /* site canvas — a design choice, not a logo colour */
 
   /* --- Grounds ---------------------------------------------------------
      The site is light-first. `ink` is the dark counterpoint, not the norm. */
@@ -50,15 +61,15 @@
   /* --- Accents ---------------------------------------------------------
      Named `brass` for continuity with the existing components; both are now
      Antonio Marco red. */
-  --am-brass: var(--brand-red-light); /*  4.8:1 on navy   */
-  --am-brass-deep: var(--brand-red-deep); /*  5.8:1 on off-white */
+  --am-brass: var(--brand-red-light); /*  4.7:1 on navy   */
+  --am-brass-deep: var(--brand-red-deep); /*  5.6:1 on off-white */
 
   /* --- Semantic text colours ------------------------------------------- */
-  --am-text-on-dark: var(--brand-offwhite); /* 14.9:1 on navy      */
-  --am-text-on-dark-muted: #a9b2c9; /*  7.7:1 on navy      */
-  --am-text-on-light: var(--brand-navy); /* 11.9:1 on off-white */
+  --am-text-on-dark: var(--brand-offwhite); /* 15.2:1 on navy      */
+  --am-text-on-dark-muted: #a9b2c9; /*  7.9:1 on navy      */
+  --am-text-on-light: var(--brand-navy); /* 14.1:1 on off-white */
   --am-text-on-light-muted: #4e5566; /*  6.7:1 on off-white */
-  --am-text-heading: var(--brand-brown); /* 11.3:1 on off-white */
+  --am-text-heading: var(--brand-brown); /* 10.7:1 on off-white */
 
   /* --- Focus ring ------------------------------------------------------ */
   --am-focus: var(--brand-red);
@@ -110,6 +121,7 @@
 
   --color-brand-red: var(--brand-red);
   --color-brand-red-deep: var(--brand-red-deep);
+  --color-brand-red-cta: var(--brand-red-cta);
   --color-brand-green: var(--brand-green);
   --color-brand-green-deep: var(--brand-green-deep);
   --color-brand-brown: var(--brand-brown);

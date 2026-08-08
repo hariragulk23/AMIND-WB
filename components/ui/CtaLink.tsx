@@ -38,7 +38,7 @@ export function CtaLink({
   /* Solid is always Antonio Marco red — the primary action reads identically
      on either ground, which is what makes it recognisable as *the* action. */
   const styles: Record<Variant, string> = {
-    solid: "bg-brand-red px-7 py-4 text-white hover:bg-brand-red-deep",
+    solid: "bg-brand-red-cta px-7 py-4 text-white hover:bg-brand-red-deep",
     outline: cn(
       "px-7 py-4 border",
       onDark

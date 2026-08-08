@@ -63,7 +63,19 @@ export function Hero() {
           delay={0.12}
         />
 
-        <Reveal as="p" className="mt-3 label-xs text-on-light-muted" delay={0.3} immediate>
+        {/*
+          Below `md` the header withholds the Antonio Marco mark to stay
+          minimal, so the corporate relationship is stated here in text instead.
+          From `md` up the header carries the real logo and this line is
+          withheld — the first viewport should name Antonio Marco once, not
+          twice.
+        */}
+        <Reveal
+          as="p"
+          className="mt-3 label-xs text-on-light-muted md:hidden"
+          delay={0.3}
+          immediate
+        >
           {brandLockup.descriptorLong}
         </Reveal>
 

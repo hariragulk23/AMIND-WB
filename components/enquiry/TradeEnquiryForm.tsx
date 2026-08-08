@@ -347,7 +347,7 @@ export function TradeEnquiryForm() {
             type="submit"
             disabled={pending}
             aria-busy={pending}
-            className="label-sm group relative inline-flex w-full items-center justify-between gap-6 bg-brand-red px-8 py-6 text-white transition-colors duration-300 ease-brand hover:bg-brand-red-deep disabled:cursor-progress disabled:bg-on-light-muted sm:w-auto"
+            className="label-sm group relative inline-flex w-full items-center justify-between gap-6 bg-brand-red-cta px-8 py-6 text-white transition-colors duration-300 ease-brand hover:bg-brand-red-deep disabled:cursor-progress disabled:bg-on-light-muted sm:w-auto"
           >
             <span>
               {pending ? enquiryCopy.submittingLabel : enquiryCopy.submitLabel}
