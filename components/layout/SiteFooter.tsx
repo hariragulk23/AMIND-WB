@@ -2,6 +2,7 @@ import Link from "next/link";
 import { company, registeredOfficeLines } from "@/data/company";
 import { footerNav, legalNav } from "@/data/navigation";
 import { Container } from "@/components/ui/Container";
+import { FooterMark } from "./FooterMark";
 
 /**
  * Site footer — the legal record of the business.
@@ -15,19 +16,24 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="grain relative bg-ink text-on-dark">
-      <div className="grain-layer" />
+    <footer className="relative bg-ink text-on-dark">
+      {/* The logo's red/green/red rule, capping the footer. One of the three
+          places the motif is allowed to appear. */}
+      <div aria-hidden="true" className="brand-rule w-full" />
 
       <Container className="relative py-16 md:py-24">
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-10">
           {/* ---- Identity + legal entity ---- */}
           <div className="lg:col-span-5">
-            <p className="font-display text-[clamp(2rem,4vw,3rem)] leading-none tracking-[-0.02em] text-on-dark">
-              AM Global Commodities
+            <p className="font-display text-[clamp(1.5rem,2.6vw,2.125rem)] font-semibold uppercase leading-[1.05] tracking-[0.06em] text-on-dark">
+              AM Global
+              <span className="block">Commodities</span>
             </p>
             <p className="mt-4 max-w-[28rem] text-sm text-on-dark-muted">
               {company.tagline}
             </p>
+
+            <FooterMark />
 
             <div className="mt-10">
               <h2 className="label-xs text-brass">Registered entity</h2>

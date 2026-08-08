@@ -11,14 +11,20 @@ import { MobileMenu } from "./MobileMenu";
 /**
  * Site header.
  *
- * Sits transparent over the hero and transitions to a solid, minimal bar once
- * the visitor scrolls past it. The state is driven by a passive scroll
- * listener throttled to one animation frame — deliberately not a ScrollTrigger,
- * so the header stays correct even before ScrollTrigger has measured the page
- * (which matters on mobile, where the collapsing URL bar changes heights).
+ * Sits transparent over the off-white hero and settles into a solid bar with a
+ * hairline once the visitor scrolls past it. The state is driven by a passive
+ * scroll listener throttled to one animation frame — deliberately not a
+ * ScrollTrigger, so the header stays correct even before ScrollTrigger has
+ * measured the page (which matters on mobile, where the collapsing URL bar
+ * changes heights).
  *
- * Every page hero on this site uses a dark ground, so the header's light
- * treatment is consistent across all routes.
+ * Every page hero on this site now uses the light canvas, so the header keeps
+ * one consistent dark-on-light treatment across all routes. The only exception
+ * is while the mobile panel is open, when the toggle sits over a navy ground
+ * and inverts.
+ *
+ * The active navigation state uses the logo's red/green/red rule — one of the
+ * three places that motif is allowed to appear.
  */
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
@@ -61,19 +67,19 @@ export function SiteHeader() {
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-colors duration-500 ease-brand",
-          scrolled
-            ? "border-b border-charcoal bg-ink/92 backdrop-blur-[6px]"
+          scrolled && !menuOpen
+            ? "border-b border-paper-line bg-paper/92 backdrop-blur-[6px]"
             : "border-b border-transparent bg-transparent",
         )}
       >
         <div
-          className="gutter mx-auto flex max-w-[100rem] items-center justify-between"
+          className="gutter mx-auto flex max-w-[100rem] items-center justify-between gap-6"
           style={{ height: "var(--am-header-h)" }}
         >
-          <Logo tone="dark" />
+          <Logo tone={menuOpen ? "dark" : "light"} />
 
           <nav aria-label="Main" className="hidden lg:block">
-            <ul className="flex items-center gap-9">
+            <ul className="flex items-center gap-8">
               {primaryNav.map((item) => {
                 const active =
                   pathname === item.href || pathname.startsWith(`${item.href}/`);
@@ -85,15 +91,15 @@ export function SiteHeader() {
                       className={cn(
                         "label-xs group relative block py-2 transition-colors duration-300 ease-brand",
                         active
-                          ? "text-on-dark"
-                          : "text-on-dark-muted hover:text-on-dark",
+                          ? "text-on-light"
+                          : "text-on-light-muted hover:text-on-light",
                       )}
                     >
                       {item.label}
                       <span
                         aria-hidden="true"
                         className={cn(
-                          "absolute inset-x-0 -bottom-0.5 block h-px origin-left bg-brass transition-transform duration-500 ease-brand",
+                          "brand-rule absolute inset-x-0 -bottom-1 block origin-left transition-transform duration-500 ease-brand",
                           active
                             ? "scale-x-100"
                             : "scale-x-0 group-hover:scale-x-100",
@@ -106,10 +112,10 @@ export function SiteHeader() {
             </ul>
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <Link
               href={primaryCta.href}
-              className="label-xs hidden bg-paper px-6 py-3.5 text-ink transition-colors duration-300 ease-brand hover:bg-brass lg:block"
+              className="label-xs hidden bg-brand-red px-6 py-3.5 text-white transition-colors duration-300 ease-brand hover:bg-brand-red-deep lg:block"
             >
               {primaryCta.label}
             </Link>
@@ -120,7 +126,12 @@ export function SiteHeader() {
               onClick={() => setMenuOpen((open) => !open)}
               aria-expanded={menuOpen}
               aria-controls={menuId}
-              className="label-xs -mr-2 p-2 text-on-dark transition-colors duration-300 hover:text-brass lg:hidden"
+              className={cn(
+                "label-xs -mr-2 p-2 transition-colors duration-300 lg:hidden",
+                menuOpen
+                  ? "text-on-dark hover:text-brass"
+                  : "text-on-light hover:text-brand-red",
+              )}
             >
               {menuOpen ? "Close" : "Menu"}
             </button>

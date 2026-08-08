@@ -8,6 +8,8 @@ registerGsap();
 
 interface ScrollCueProps {
   label: string;
+  /** The ground the cue sits on. */
+  tone?: "dark" | "light";
 }
 
 /**
@@ -17,7 +19,7 @@ interface ScrollCueProps {
  * With reduced motion the rule simply sits still — the label still explains
  * what to do, so nothing is lost.
  */
-export function ScrollCue({ label }: ScrollCueProps) {
+export function ScrollCue({ label, tone = "dark" }: ScrollCueProps) {
   const scope = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -42,14 +44,22 @@ export function ScrollCue({ label }: ScrollCueProps) {
   return (
     <div
       ref={scope}
-      className="flex items-center gap-4 text-on-dark-muted"
+      className={
+        tone === "light"
+          ? "flex items-center gap-4 text-on-light-muted"
+          : "flex items-center gap-4 text-on-dark-muted"
+      }
     >
       <span className="label-xs">{label}</span>
       <span
         aria-hidden="true"
-        className="relative block h-14 w-px overflow-hidden bg-charcoal"
+        className={
+          tone === "light"
+            ? "relative block h-14 w-px overflow-hidden bg-paper-line"
+            : "relative block h-14 w-px overflow-hidden bg-charcoal"
+        }
       >
-        <span data-cue-fill className="absolute inset-0 block bg-brass" />
+        <span data-cue-fill className="absolute inset-0 block bg-brand-red" />
       </span>
     </div>
   );

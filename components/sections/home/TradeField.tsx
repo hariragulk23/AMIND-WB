@@ -44,7 +44,7 @@ export function TradeField() {
       </defs>
 
       {/* Measurement field */}
-      <g mask="url(#am-mask)" className="text-on-dark-muted" opacity="0.5">
+      <g mask="url(#am-mask)" className="text-on-dark-muted" opacity="0.45">
         <rect width="1000" height="560" fill="url(#am-dots)" />
       </g>
 
@@ -65,7 +65,7 @@ export function TradeField() {
         mask="url(#am-mask)"
         fill="none"
         stroke="currentColor"
-        className="text-brass"
+        className="text-brand-red-light"
         opacity="0.5"
       >
         <circle cx="622" cy="298" r="62" strokeWidth="1" />
@@ -75,7 +75,7 @@ export function TradeField() {
       </g>
 
       {/* Marked position — the operational base */}
-      <g className="text-brass">
+      <g className="text-brand-red-light">
         <circle cx="622" cy="298" r="5" fill="currentColor" />
         <circle
           cx="622"

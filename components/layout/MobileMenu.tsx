@@ -135,10 +135,8 @@ export function MobileMenu({ open, onClose, id, toggleRef }: MobileMenuProps) {
          and never covers the page when JavaScript is unavailable. */
       style={{ visibility: "hidden", opacity: 0 }}
       aria-hidden={!open}
-      className="grain fixed inset-0 z-40 flex flex-col bg-ink lg:hidden"
+      className="fixed inset-0 z-40 flex flex-col bg-ink lg:hidden"
     >
-      <div className="grain-layer" />
-
       {/* Clears the fixed header, whose Menu/Close button sits above. */}
       <div aria-hidden="true" style={{ height: "var(--am-header-h)" }} />
 
@@ -154,7 +152,7 @@ export function MobileMenu({ open, onClose, id, toggleRef }: MobileMenuProps) {
                 onClick={onClose}
                 className="block py-5 transition-colors duration-300 hover:text-brass"
               >
-                <span className="display-md block text-on-dark">{item.label}</span>
+                <span className="display-md block font-display uppercase tracking-[0.04em] text-on-dark">{item.label}</span>
                 {item.description ? (
                   <span className="mt-1 block text-sm text-on-dark-muted">
                     {item.description}
@@ -169,7 +167,7 @@ export function MobileMenu({ open, onClose, id, toggleRef }: MobileMenuProps) {
           <Link
             href={primaryCta.href}
             onClick={onClose}
-            className="label-sm flex w-full items-center justify-between bg-paper px-6 py-5 text-ink"
+            className="label-sm flex w-full items-center justify-between bg-brand-red px-6 py-5 text-white transition-colors duration-300 hover:bg-brand-red-deep"
           >
             <span>{primaryCta.labelLong}</span>
             <span aria-hidden="true">→</span>

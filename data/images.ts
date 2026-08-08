@@ -84,7 +84,7 @@ export const imageManifest = {
   /* ------------------------------------------------- COMMODITY JOURNEY */
   "journey-coffee": {
     key: "journey-coffee",
-    path: "/images/coffee/journey-coffee.webp",
+    path: "/images/commodities/coffee.webp",
     section: "home-journey",
     aspectRatio: "16/9",
     minResolution: "2560x1440",
@@ -96,7 +96,7 @@ export const imageManifest = {
   },
   "journey-teak": {
     key: "journey-teak",
-    path: "/images/teak/journey-teak.webp",
+    path: "/images/commodities/teak.webp",
     section: "home-journey",
     aspectRatio: "16/9",
     minResolution: "2560x1440",
@@ -108,7 +108,7 @@ export const imageManifest = {
   },
   "journey-spices": {
     key: "journey-spices",
-    path: "/images/spices/journey-spices.webp",
+    path: "/images/commodities/spices.webp",
     section: "home-journey",
     aspectRatio: "16/9",
     minResolution: "2560x1440",
@@ -120,7 +120,7 @@ export const imageManifest = {
   },
   "journey-nuts": {
     key: "journey-nuts",
-    path: "/images/nuts/journey-nuts.webp",
+    path: "/images/commodities/nuts.webp",
     section: "home-journey",
     aspectRatio: "16/9",
     minResolution: "2560x1440",
@@ -134,7 +134,7 @@ export const imageManifest = {
   /* ------------------------------------------------- COMMODITY TILES */
   "tile-coffee": {
     key: "tile-coffee",
-    path: "/images/coffee/tile-coffee.webp",
+    path: "/images/commodities/coffee.webp",
     section: "home-grid",
     aspectRatio: "4/5",
     minResolution: "1200x1500",
@@ -145,7 +145,7 @@ export const imageManifest = {
   },
   "tile-teak": {
     key: "tile-teak",
-    path: "/images/teak/tile-teak.webp",
+    path: "/images/commodities/teak.webp",
     section: "home-grid",
     aspectRatio: "4/5",
     minResolution: "1200x1500",
@@ -156,7 +156,7 @@ export const imageManifest = {
   },
   "tile-spices": {
     key: "tile-spices",
-    path: "/images/spices/tile-spices.webp",
+    path: "/images/commodities/spices.webp",
     section: "home-grid",
     aspectRatio: "4/5",
     minResolution: "1200x1500",
@@ -167,7 +167,7 @@ export const imageManifest = {
   },
   "tile-nuts": {
     key: "tile-nuts",
-    path: "/images/nuts/tile-nuts.webp",
+    path: "/images/commodities/nuts.webp",
     section: "home-grid",
     aspectRatio: "4/5",
     minResolution: "1200x1500",

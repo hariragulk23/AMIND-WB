@@ -48,10 +48,10 @@ export default function SourcingTradePage() {
                 y={22}
               >
                 <div className="grid gap-4 py-9 md:grid-cols-12 md:gap-8 md:py-12">
-                  <p className="numeral font-display text-[clamp(1.75rem,3.5vw,2.75rem)] leading-none text-brass-deep md:col-span-2">
+                  <p className="numeral font-display text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold leading-none text-brand-red md:col-span-2">
                     {stage.number}
                   </p>
-                  <h3 className="display-md text-on-light md:col-span-4">
+                  <h3 className="display-md text-heading md:col-span-4">
                     {stage.title}
                   </h3>
                   <p className="max-w-[42rem] text-on-light-muted md:col-span-6">

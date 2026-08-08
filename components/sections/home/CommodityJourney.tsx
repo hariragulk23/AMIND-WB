@@ -181,7 +181,7 @@ export function CommodityJourney() {
                 className="label-xs numeral flex items-center justify-end gap-3 text-on-dark opacity-45 transition-opacity duration-500 ease-brand [&.is-active]:opacity-100"
               >
                 <span>{commodity.name}</span>
-                <span className="text-brass">
+                <span className="text-brand-red-light">
                   {String(index + 1).padStart(2, "0")}
                 </span>
               </li>

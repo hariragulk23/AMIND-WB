@@ -22,10 +22,8 @@ export function EnquiryBanner({
   return (
     <section
       aria-labelledby="enquiry-banner-heading"
-      className="grain relative overflow-hidden bg-forest-deep text-on-dark"
+      className="relative overflow-hidden bg-forest-deep text-on-dark"
     >
-      <div className="grain-layer" />
-
       <Container className="relative py-20 md:py-28">
         <div className="grid gap-10 lg:grid-cols-12">
           <DisplayReveal

@@ -35,24 +35,21 @@ export function CtaLink({
   const base =
     "group relative inline-flex items-center gap-3 label-sm transition-colors duration-300 ease-brand";
 
+  /* Solid is always Antonio Marco red — the primary action reads identically
+     on either ground, which is what makes it recognisable as *the* action. */
   const styles: Record<Variant, string> = {
-    solid: cn(
-      "px-7 py-4",
-      onDark
-        ? "bg-paper text-ink hover:bg-brass"
-        : "bg-ink text-paper hover:bg-forest",
-    ),
+    solid: "bg-brand-red px-7 py-4 text-white hover:bg-brand-red-deep",
     outline: cn(
       "px-7 py-4 border",
       onDark
         ? "border-charcoal text-on-dark hover:border-brass hover:text-brass"
-        : "border-paper-line text-on-light hover:border-brass-deep hover:text-brass-deep",
+        : "border-paper-line text-on-light hover:border-brand-red hover:text-brand-red-deep",
     ),
     text: cn(
       "py-1",
       onDark
         ? "text-on-dark hover:text-brass"
-        : "text-on-light hover:text-brass-deep",
+        : "text-on-light hover:text-brand-red-deep",
     ),
   };
 

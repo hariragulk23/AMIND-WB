@@ -23,12 +23,12 @@ import { trustSignals, verifiedCompliance } from "@/data/compliance";
  */
 export function Trust() {
   return (
-    <section aria-labelledby="trust-heading" className="bg-ink text-on-dark">
+    <section aria-labelledby="trust-heading" className="bg-paper text-on-light">
       <Container className="py-24 md:py-36 lg:py-44">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-6">
             <Reveal>
-              <SectionLabel index="07" tone="dark">
+              <SectionLabel index="07" >
                 {trustContent.label}
               </SectionLabel>
             </Reveal>
@@ -36,13 +36,13 @@ export function Trust() {
               as="h2"
               id="trust-heading"
               lines={trustContent.headingLines}
-              className="display-lg mt-8 text-on-dark"
+              className="display-lg mt-8 text-heading"
             />
           </div>
 
           <Reveal
             as="p"
-            className="body-lg max-w-[32rem] text-on-dark-muted lg:col-span-5 lg:col-start-8 lg:pt-4"
+            className="body-lg max-w-[32rem] text-on-light-muted lg:col-span-5 lg:col-start-8 lg:pt-4"
           >
             {trustContent.intro}
           </Reveal>
@@ -52,15 +52,15 @@ export function Trust() {
         <Reveal
           as="ul"
           stagger="base"
-          className="mt-16 grid border-t border-charcoal md:grid-cols-2 lg:mt-24 lg:grid-cols-3"
+          className="mt-16 grid border-t border-paper-line md:grid-cols-2 lg:mt-24 lg:grid-cols-3"
         >
           {trustSignals.map((signal) => (
             <li
               key={signal.title}
-              className="border-b border-charcoal px-0 py-8 md:px-8 md:first:pl-0 lg:py-10"
+              className="border-b border-paper-line px-0 py-8 md:px-8 md:first:pl-0 lg:py-10"
             >
-              <h3 className="display-md text-on-dark">{signal.title}</h3>
-              <p className="mt-3 text-sm text-on-dark-muted">
+              <h3 className="display-md text-heading">{signal.title}</h3>
+              <p className="mt-3 text-sm text-on-light-muted">
                 {signal.description}
               </p>
             </li>
@@ -71,25 +71,25 @@ export function Trust() {
         <Reveal className="mt-14 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <dl className="flex flex-wrap gap-x-12 gap-y-6">
             <div>
-              <dt className="label-xs text-on-dark-muted">Incorporated</dt>
-              <dd className="numeral mt-2 font-display text-xl text-on-dark">
+              <dt className="label-xs text-on-light-muted">Incorporated</dt>
+              <dd className="numeral mt-2 font-display text-xl text-on-light">
                 {company.incorporation.displayDate}
               </dd>
             </div>
             {verifiedCompliance.map((record) => (
               <div key={record.id}>
-                <dt className="label-xs text-on-dark-muted">
+                <dt className="label-xs text-on-light-muted">
                   {record.label}
                   <span className="sr-only"> — {record.name}</span>
                 </dt>
-                <dd className="numeral mt-2 font-display text-xl text-on-dark">
+                <dd className="numeral mt-2 font-display text-xl text-on-light">
                   {record.number}
                 </dd>
               </div>
             ))}
           </dl>
 
-          <CtaLink href="/quality-compliance" tone="dark" variant="text">
+          <CtaLink href="/quality-compliance" variant="text">
             Quality &amp; Compliance
           </CtaLink>
         </Reveal>

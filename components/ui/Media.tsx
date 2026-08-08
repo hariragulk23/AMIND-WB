@@ -11,24 +11,20 @@ import { cn } from "@/lib/utils";
  */
 const TONE_BACKGROUNDS: Record<ImageAsset["tone"], string> = {
   ink: [
-    "radial-gradient(120% 90% at 25% 15%, color-mix(in oklab, var(--am-forest) 55%, transparent) 0%, transparent 60%)",
-    "radial-gradient(90% 70% at 85% 90%, color-mix(in oklab, var(--am-brass) 22%, transparent) 0%, transparent 65%)",
-    "linear-gradient(160deg, var(--am-ink-soft) 0%, var(--am-ink) 100%)",
+    "radial-gradient(120% 90% at 25% 15%, color-mix(in oklab, var(--brand-navy) 70%, transparent) 0%, transparent 62%)",
+    "linear-gradient(160deg, var(--brand-navy) 0%, var(--brand-navy-deep) 100%)",
   ].join(","),
   forest: [
-    "radial-gradient(110% 80% at 20% 20%, color-mix(in oklab, var(--am-forest-light) 70%, transparent) 0%, transparent 62%)",
-    "radial-gradient(80% 60% at 90% 85%, color-mix(in oklab, var(--am-brass) 18%, transparent) 0%, transparent 60%)",
-    "linear-gradient(150deg, var(--am-forest) 0%, var(--am-forest-deep) 100%)",
+    "radial-gradient(110% 80% at 20% 20%, color-mix(in oklab, var(--brand-green) 55%, transparent) 0%, transparent 62%)",
+    "linear-gradient(150deg, var(--brand-green-deep) 0%, var(--brand-brown-deep) 100%)",
   ].join(","),
   earth: [
-    "radial-gradient(115% 85% at 30% 25%, color-mix(in oklab, var(--am-brass-deep) 65%, transparent) 0%, transparent 62%)",
-    "radial-gradient(85% 65% at 88% 88%, color-mix(in oklab, var(--am-forest) 35%, transparent) 0%, transparent 60%)",
-    "linear-gradient(155deg, #2a2118 0%, var(--am-ink) 100%)",
+    "radial-gradient(115% 85% at 30% 25%, color-mix(in oklab, var(--brand-red) 40%, transparent) 0%, transparent 60%)",
+    "linear-gradient(155deg, var(--brand-brown) 0%, var(--brand-brown-deep) 100%)",
   ].join(","),
   paper: [
-    "radial-gradient(110% 85% at 25% 20%, color-mix(in oklab, var(--am-paper) 85%, transparent) 0%, transparent 65%)",
-    "radial-gradient(85% 70% at 90% 90%, color-mix(in oklab, var(--am-brass-deep) 28%, transparent) 0%, transparent 62%)",
-    "linear-gradient(150deg, var(--am-paper-dim) 0%, #b9b0a0 100%)",
+    "radial-gradient(110% 85% at 25% 20%, color-mix(in oklab, var(--brand-offwhite) 88%, transparent) 0%, transparent 65%)",
+    "linear-gradient(150deg, var(--am-paper-dim) 0%, color-mix(in oklab, var(--brand-brown) 45%, var(--am-paper-dim)) 100%)",
   ].join(","),
 };
 

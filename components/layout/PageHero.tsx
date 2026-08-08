@@ -30,9 +30,7 @@ export function PageHero({ headingLines, intro, crumbs }: PageHeroProps) {
   const current = crumbs[crumbs.length - 1];
 
   return (
-    <section className="grain relative overflow-hidden bg-ink text-on-dark">
-      <div className="grain-layer" />
-
+    <section className="relative overflow-hidden bg-paper text-on-light">
       <Container className="relative flex flex-col justify-end pb-14 md:pb-20">
         {/* Clears the fixed header. */}
         <div
@@ -42,21 +40,21 @@ export function PageHero({ headingLines, intro, crumbs }: PageHeroProps) {
 
         <Reveal>
           <nav aria-label="Breadcrumb">
-            <ol className="label-xs flex flex-wrap items-center gap-2 text-on-dark-muted">
+            <ol className="label-xs flex flex-wrap items-center gap-2 text-on-light-muted">
               {ancestors.map((crumb) => (
                 <li key={crumb.path} className="flex items-center gap-2">
                   <Link
                     href={crumb.path}
-                    className="transition-colors duration-300 ease-brand hover:text-brass"
+                    className="transition-colors duration-300 ease-brand hover:text-brand-red-deep"
                   >
                     {crumb.name}
                   </Link>
-                  <span aria-hidden="true" className="text-charcoal">
+                  <span aria-hidden="true" className="text-paper-line">
                     /
                   </span>
                 </li>
               ))}
-              <li aria-current="page" className="text-on-dark">
+              <li aria-current="page" className="text-on-light">
                 {current.name}
               </li>
             </ol>
@@ -66,7 +64,7 @@ export function PageHero({ headingLines, intro, crumbs }: PageHeroProps) {
         <DisplayReveal
           as="h1"
           lines={headingLines}
-          className="display-xl mt-10 text-on-dark md:mt-14"
+          className="display-xl mt-10 text-heading md:mt-14"
           immediate
           delay={0.1}
         />
@@ -74,7 +72,7 @@ export function PageHero({ headingLines, intro, crumbs }: PageHeroProps) {
         {intro ? (
           <Reveal
             as="p"
-            className="body-lg mt-8 max-w-[42rem] text-on-dark-muted"
+            className="body-lg mt-8 max-w-[42rem] text-on-light-muted"
             delay={0.35}
           >
             {intro}

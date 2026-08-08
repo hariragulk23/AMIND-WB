@@ -32,7 +32,7 @@ export function CommoditiesGrid() {
               as="h2"
               id="grid-heading"
               lines={gridContent.headingLines}
-              className="display-lg mt-8 text-on-light"
+              className="display-lg mt-8 text-heading"
             />
           </div>
 
@@ -65,7 +65,7 @@ export function CommoditiesGrid() {
               </div>
 
               <div className="mt-6 flex items-baseline justify-between gap-4">
-                <h3 className="display-md text-on-light">{commodity.name}</h3>
+                <h3 className="display-md text-heading">{commodity.name}</h3>
                 <span className="label-xs numeral text-brass-deep">
                   {commodity.index.replace("Platform ", "")}
                 </span>

@@ -29,7 +29,7 @@ export function Positioning() {
             as="h2"
             id="positioning-heading"
             lines={positioningContent.headingLines}
-            className="display-xl text-on-light lg:col-span-7"
+            className="display-xl text-heading lg:col-span-7"
           />
 
           <div className="lg:col-span-5 lg:pt-3">

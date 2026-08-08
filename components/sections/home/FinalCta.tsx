@@ -18,10 +18,8 @@ export function FinalCta() {
   return (
     <section
       aria-labelledby="final-cta-heading"
-      className="grain relative overflow-hidden bg-forest-deep text-on-dark"
+      className="relative overflow-hidden bg-forest-deep text-on-dark"
     >
-      <div className="grain-layer" />
-
       <Container className="relative py-24 md:py-36 lg:py-48">
         <Reveal>
           <SectionLabel index="08" tone="dark">
@@ -36,7 +34,7 @@ export function FinalCta() {
           className="display-hero mt-10 text-on-dark lg:mt-14"
         />
 
-        <div className="mt-14 grid gap-10 border-t border-forest pt-10 lg:grid-cols-12">
+        <div className="mt-14 grid gap-10 border-t border-white/15 pt-10 lg:grid-cols-12">
           <Reveal
             as="p"
             className="body-lg max-w-[34rem] text-on-dark-muted lg:col-span-5"

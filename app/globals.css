@@ -3,42 +3,65 @@
 /* ==========================================================================
    AM GLOBAL COMMODITIES — DESIGN TOKENS
    --------------------------------------------------------------------------
-   This is the single source of truth for the brand palette, type scale and
-   motion timing. When the official logo/brand assets arrive, only the values
-   in `:root` below need to change.
+   The palette is derived from the official ANTONIO MARCO logo: the red and
+   olive-green diagonal bars, the dark brown wordmark, and the navy legal
+   descriptor beneath the red/green/red rule.
 
-   The palette is a RESTRAINED TEMPORARY PALETTE and should be re-derived from
-   the official AM Global Commodities logo before public launch.
+   Colour discipline (the site must not read as a rainbow):
+     NAVY   structure — body copy, navigation, data, dark sections, footer
+     BROWN  editorial headings, material/commodity context
+     RED    primary calls to action, active states, rules, small accents
+     GREEN  origin and sourcing details, secondary accents only
+     WHITE / WARM OFF-WHITE  the principal canvas
+
+   Every pairing below has been contrast-checked; the ratio is noted against
+   the ground it is intended for.
    ========================================================================== */
 
 :root {
-  /* --- Neutrals: near-black / charcoal --------------------------------- */
-  --am-ink: #0e0f0d; /* primary dark ground */
-  --am-ink-soft: #161814; /* raised dark surface */
-  --am-charcoal: #1f221d; /* hairlines, borders on dark */
+  /* --- Brand colours, read from the supplied logo artwork --------------- */
+  --brand-red: #c0453b;
+  --brand-red-deep: #a63a31; /* red that passes AA as text on off-white */
+  --brand-red-light: #d9695c; /* red that passes AA as text on navy */
+  --brand-green: #7d9b6c;
+  --brand-green-deep: #4f6b3e; /* green that passes AA as text on off-white */
+  --brand-brown: #4a2c1b;
+  --brand-brown-deep: #2a1a0e;
+  --brand-navy: #1e2e5f;
+  --brand-navy-deep: #151f3d;
+  --brand-white: #ffffff;
+  --brand-offwhite: #f6f4ef;
 
-  /* --- Neutrals: warm off-white / natural paper ------------------------ */
-  --am-paper: #f4f1ea; /* primary light ground */
-  --am-paper-dim: #e7e2d7; /* raised light surface */
-  --am-paper-line: #d6d0c2; /* hairlines on light */
+  /* --- Grounds ---------------------------------------------------------
+     The site is light-first. `ink` is the dark counterpoint, not the norm. */
+  --am-paper: var(--brand-offwhite); /* principal canvas */
+  --am-paper-dim: #edeae2; /* raised light surface */
+  --am-paper-line: #d8d3c7; /* hairlines on light */
 
-  /* --- Botanical green ------------------------------------------------- */
-  --am-forest: #1f3a2e;
-  --am-forest-deep: #14261e;
-  --am-forest-light: #2e5545;
+  --am-ink: var(--brand-navy-deep); /* dark ground: deep corporate navy */
+  --am-ink-soft: #1c2950; /* raised dark surface */
+  --am-charcoal: #2c3a63; /* hairlines on dark */
 
-  /* --- Warm metallic / brass accent (use sparingly) -------------------- */
-  --am-brass: #b08a4f; /* accent on DARK grounds only (6.0:1 on ink) */
-  --am-brass-deep: #7a5c28; /* accent on LIGHT grounds (5.5:1 on paper) */
+  /* --- Material greens and browns -------------------------------------- */
+  --am-forest: var(--brand-green-deep);
+  --am-forest-light: var(--brand-green);
+  --am-forest-deep: var(--brand-brown-deep); /* deep brown band (final CTA) */
 
-  /* --- Semantic text colours (all AA or better) ------------------------ */
-  --am-text-on-dark: var(--am-paper); /* 17.1:1 on ink */
-  --am-text-on-dark-muted: #a8a49b; /*  7.8:1 on ink */
-  --am-text-on-light: var(--am-ink); /* 17.1:1 on paper */
-  --am-text-on-light-muted: #55584f; /*  6.4:1 on paper */
+  /* --- Accents ---------------------------------------------------------
+     Named `brass` for continuity with the existing components; both are now
+     Antonio Marco red. */
+  --am-brass: var(--brand-red-light); /*  4.8:1 on navy   */
+  --am-brass-deep: var(--brand-red-deep); /*  5.8:1 on off-white */
+
+  /* --- Semantic text colours ------------------------------------------- */
+  --am-text-on-dark: var(--brand-offwhite); /* 14.9:1 on navy      */
+  --am-text-on-dark-muted: #a9b2c9; /*  7.7:1 on navy      */
+  --am-text-on-light: var(--brand-navy); /* 11.9:1 on off-white */
+  --am-text-on-light-muted: #4e5566; /*  6.7:1 on off-white */
+  --am-text-heading: var(--brand-brown); /* 11.3:1 on off-white */
 
   /* --- Focus ring ------------------------------------------------------ */
-  --am-focus: #d8b072;
+  --am-focus: var(--brand-red);
 
   /* --- Layout ---------------------------------------------------------- */
   --am-gutter: 1.5rem;
@@ -69,7 +92,7 @@
 
 /* ==========================================================================
    TAILWIND THEME BRIDGE
-   Exposes the tokens above as Tailwind utilities (bg-ink, text-brass, …).
+   Exposes the tokens above as Tailwind utilities (bg-paper, text-brand-red…).
    ========================================================================== */
 
 @theme inline {
@@ -85,15 +108,22 @@
   --color-brass: var(--am-brass);
   --color-brass-deep: var(--am-brass-deep);
 
+  --color-brand-red: var(--brand-red);
+  --color-brand-red-deep: var(--brand-red-deep);
+  --color-brand-green: var(--brand-green);
+  --color-brand-green-deep: var(--brand-green-deep);
+  --color-brand-brown: var(--brand-brown);
+  --color-brand-navy: var(--brand-navy);
+
   --color-on-dark: var(--am-text-on-dark);
   --color-on-dark-muted: var(--am-text-on-dark-muted);
   --color-on-light: var(--am-text-on-light);
   --color-on-light-muted: var(--am-text-on-light-muted);
+  --color-heading: var(--am-text-heading);
 
-  --font-display: var(--font-instrument-serif), Georgia, "Times New Roman",
-    serif;
-  --font-sans: var(--font-instrument-sans), ui-sans-serif, system-ui,
-    "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-oxanium), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, "Helvetica Neue",
+    Arial, sans-serif;
 
   --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -192,57 +222,60 @@
    either caps too early — leaving the wordmark stranded in the middle of a
    1920 canvas — or overflows a short laptop window. Bounding by viewport
    height as well lets the type grow on large, tall screens while staying
-   inside a 900px-tall window, where the whole hero composition must fit. */
+   inside a 900px-tall window, where the whole hero composition must fit.
+
+   Sizes are materially smaller than the previous serif scale: Oxanium is a
+   broad geometric face, so the same nominal size sets roughly 40% wider. */
 @utility display-hero {
   font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(3.25rem, min(13vw, 16vh), 11rem);
-  line-height: 0.86;
-  letter-spacing: -0.025em;
+  font-weight: 600;
+  font-size: clamp(2.5rem, min(9vw, 11.5vh), 7rem);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
   text-transform: uppercase;
 }
 
 @utility display-xl {
   font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(2.75rem, 10vw, 10.5rem);
-  line-height: 0.9;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  font-size: clamp(2.25rem, 7.5vw, 6.5rem);
+  line-height: 1;
+  letter-spacing: -0.012em;
   text-transform: uppercase;
 }
 
 @utility display-lg {
   font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(2.25rem, 6vw, 6.5rem);
-  line-height: 0.96;
-  letter-spacing: -0.015em;
+  font-weight: 600;
+  font-size: clamp(1.75rem, 4.4vw, 3.5rem);
+  line-height: 1.06;
+  letter-spacing: -0.01em;
 }
 
 @utility display-md {
   font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(1.75rem, 3.6vw, 2.75rem);
-  line-height: 1.08;
-  letter-spacing: -0.01em;
+  font-weight: 600;
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  line-height: 1.18;
+  letter-spacing: -0.005em;
 }
 
 /* Tracked-out uppercase micro label — the site's structural voice. */
 @utility label-xs {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 0.6875rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.2;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
 @utility label-sm {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 0.8125rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.3;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -287,6 +320,29 @@
 @utility pull-up-screen {
   margin-top: -100vh;
   margin-top: -100svh;
+}
+
+/* ==========================================================================
+   BRAND RULE MOTIF
+   --------------------------------------------------------------------------
+   The logo's red → green → red rule, reduced to a 2px hairline. Used
+   deliberately sparingly: the active navigation state, one section separator
+   and the footer. Repeating it everywhere would turn a signature into
+   wallpaper.
+   ========================================================================== */
+
+@utility brand-rule {
+  height: 2px;
+  border: 0;
+  background-image: linear-gradient(
+    to right,
+    var(--brand-red) 0%,
+    var(--brand-red) 38%,
+    var(--brand-green) 38%,
+    var(--brand-green) 62%,
+    var(--brand-red) 62%,
+    var(--brand-red) 100%
+  );
 }
 
 /* ==========================================================================
