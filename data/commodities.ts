@@ -1,0 +1,232 @@
+/**
+ * data/commodities.ts
+ * ---------------------------------------------------------------------------
+ * COMMODITY CONTENT MODEL + DATA
+ *
+ * The model below intentionally supports far more than is currently populated.
+ * Every commercial field is OPTIONAL, and the commodity page template renders
+ * a section only when its data is present.
+ *
+ * ══════════════════════════════════════════════════════════════════════════
+ *  HARD RULE — DO NOT INVENT VALUES
+ *  Grades, origins, volumes, MOQs, Incoterms, loading ports, certifications,
+ *  crop years, moisture limits and availability must come from the company.
+ *  Leave a field `undefined` until it is confirmed. An absent field disappears
+ *  from the public site; a guessed field becomes a commercial misstatement.
+ *  Everything still missing is listed in CONTENT_REQUIRED.md.
+ * ══════════════════════════════════════════════════════════════════════════
+ *
+ * TO ADD A NEW COMMODITY: append an entry to `commodities` with a unique slug
+ * and add the matching image slots to data/images.ts. Navigation, the homepage
+ * journey, the homepage grid, the sitemap and /commodities pick it up
+ * automatically.
+ */
+
+import type { ImageKey } from "./images";
+
+/** Whether the platform is openly quoted, or enquiry-led. Data-driven only. */
+export type AvailabilityStatus = "enquiry" | "active" | "seasonal" | "unavailable";
+
+export interface Specification {
+  readonly parameter: string;
+  readonly value: string;
+  /** Test method or standard, when one applies. */
+  readonly method?: string;
+}
+
+export interface ProductType {
+  readonly name: string;
+  readonly note?: string;
+}
+
+export interface CommodityDocument {
+  readonly title: string;
+  readonly description: string;
+  /** Only set once a real file exists in /public/documents. */
+  readonly path?: string;
+}
+
+export interface Commodity {
+  // ---- Identity (always required) ----------------------------------------
+  readonly slug: string;
+  readonly name: string;
+  /** Editorial one-liner used in the homepage journey and tiles. */
+  readonly summary: string;
+  /** 1–2 paragraph B2B overview. General positioning only — no hard specs. */
+  readonly description: readonly string[];
+  /** Tracked micro-label, e.g. "Platform 01". */
+  readonly index: string;
+  /** Latin/trade descriptor shown as a typographic detail. */
+  readonly descriptor: string;
+  /** Buyer segments this platform is built to serve. NOT a customer list. */
+  readonly buyerSegments: readonly string[];
+  /** Honest framing of how sourcing is approached for this commodity. */
+  readonly sourcingApproach: string;
+  /** Honest framing of how quality is coordinated. No certification claims. */
+  readonly qualityApproach: string;
+
+  // ---- Media --------------------------------------------------------------
+  readonly journeyImage: ImageKey;
+  readonly tileImage: ImageKey;
+  readonly heroImage?: ImageKey;
+  readonly gallery?: readonly ImageKey[];
+
+  // ---- Commercial detail (ALL UNCONFIRMED — leave undefined) --------------
+  readonly origins?: readonly string[];
+  readonly productTypes?: readonly ProductType[];
+  readonly grades?: readonly string[];
+  readonly specifications?: readonly Specification[];
+  readonly process?: readonly string[];
+  readonly crop?: string;
+  readonly packaging?: readonly string[];
+  readonly moq?: string;
+  readonly incoterms?: readonly string[];
+  readonly loadingPorts?: readonly string[];
+  readonly certifications?: readonly string[];
+  readonly documents?: readonly CommodityDocument[];
+  readonly availabilityStatus?: AvailabilityStatus;
+}
+
+/**
+ * The four launch platforms.
+ *
+ * Copy discipline applied throughout: these entries describe the trade the
+ * company is built to serve and how it works — never volumes, grades, origins
+ * or certifications that have not been confirmed.
+ */
+export const commodities: readonly Commodity[] = [
+  {
+    slug: "coffee",
+    name: "Coffee",
+    index: "Platform 01",
+    descriptor: "Green coffee — Coffea",
+    summary:
+      "Green coffee for the roasting, importing and food manufacturing trade.",
+    description: [
+      "Coffee is a specification-led commodity. Buyers are precise about species, screen size, defect count, moisture and processing method, and a contract is only as good as the consistency behind it.",
+      "AM Global Commodities approaches coffee as a green commodity trade: understanding the exact specification a buyer works to, identifying a sourcing route capable of meeting it, and coordinating the quality evidence and documentation that allow the contract to be executed with confidence.",
+    ],
+    buyerSegments: [
+      "Roasters",
+      "Green coffee importers",
+      "Food manufacturers",
+      "Distributors",
+      "Wholesalers",
+    ],
+    sourcingApproach:
+      "Sourcing routes are identified against the buyer's written specification rather than offered from a fixed list, so the species, preparation and volume are matched to the requirement.",
+    qualityApproach:
+      "Sample approval before shipment, with inspection and analysis arranged through independent third parties where the contract requires it.",
+    journeyImage: "journey-coffee",
+    tileImage: "tile-coffee",
+    availabilityStatus: "enquiry",
+
+    // TODO(content): species offered, processing methods, screen sizes, grade
+    // nomenclature, crop year, bag type and weight, defect tolerances,
+    // moisture ceiling, origins, loading ports, MOQ, Incoterms.
+    // See CONTENT_REQUIRED.md → Coffee.
+  },
+  {
+    slug: "teak",
+    name: "Teak",
+    index: "Platform 02",
+    descriptor: "Timber — Tectona grandis",
+    summary: "Teak traded as a timber commodity, by dimension and documentation.",
+    description: [
+      "Teak is bought on dimension, grade, moisture and legality. Importers work to tolerances, cutting lists and container plans, and the paperwork that travels with a consignment matters as much as the timber itself.",
+      "We treat teak as a timber commodity rather than a finished product: the requirement is defined in measurable terms, the sourcing route is assessed against it, and the legal and shipping documentation is coordinated so the consignment clears cleanly at destination.",
+    ],
+    buyerSegments: [
+      "Timber importers",
+      "Sawmills and re-manufacturers",
+      "Joinery and furniture manufacturers",
+      "Timber distributors",
+      "Project buyers",
+    ],
+    sourcingApproach:
+      "Requirements are assessed by form, dimension and volume, and matched against sourcing routes able to supply a legally documented consignment.",
+    qualityApproach:
+      "Measurement, grading and moisture verification are coordinated before loading, with inspection arranged independently where a buyer requires it.",
+    journeyImage: "journey-teak",
+    tileImage: "tile-teak",
+    availabilityStatus: "enquiry",
+
+    // TODO(content): forms handled (logs / sawn / boards), dimension ranges and
+    // tolerances, grading standard used, moisture specification, origins,
+    // legal documentation set, container/packing plan, MOQ, Incoterms.
+    // NOTE: make NO forestry sustainability, FSC, PEFC, EUDR or CITES claim
+    // until the actual certificates/declarations are held and verified.
+    // See CONTENT_REQUIRED.md → Teak.
+  },
+  {
+    slug: "spices",
+    name: "Spices",
+    index: "Platform 03",
+    descriptor: "Whole and ground spices",
+    summary:
+      "A spice platform built around specification, purity and clean documentation.",
+    description: [
+      "Spices are traded on purity, moisture, volatile oil and contaminant limits, and requirements differ sharply between an industrial processor and a repacker. Specification control is the whole discipline.",
+      "The platform is structured to handle individual spices as distinct commercial products, each with its own specification, packing format and documentation set, rather than as a single undifferentiated category.",
+    ],
+    buyerSegments: [
+      "Spice importers",
+      "Food processors and blenders",
+      "Extraction and oleoresin manufacturers",
+      "Repackers",
+      "Distributors",
+    ],
+    sourcingApproach:
+      "Each spice is handled as its own commercial product, with the sourcing route identified against the written specification for that product.",
+    qualityApproach:
+      "Specification, purity and moisture are confirmed against agreed parameters, with laboratory analysis arranged through independent third parties where the contract requires it.",
+    journeyImage: "journey-spices",
+    tileImage: "tile-spices",
+    availabilityStatus: "enquiry",
+
+    // TODO(content): which spices are actually offered, and for each one:
+    // whole/ground form, origin, grade nomenclature, moisture, purity and
+    // contaminant limits, packing format, MOQ, Incoterms, loading ports.
+    // Availability MUST be driven from this data — do not imply that every
+    // spice named on the site is currently available.
+    // See CONTENT_REQUIRED.md → Spices.
+  },
+  {
+    slug: "nuts",
+    name: "Nuts",
+    index: "Platform 04",
+    descriptor: "Cashew and tree nuts",
+    summary: "Cashew-led nut sourcing, graded and packed to the buyer's requirement.",
+    description: [
+      "Cashew is a graded commodity where count, colour, breakage and moisture decide the commercial value, and where packing format is part of the specification rather than an afterthought.",
+      "Cashew is the initial focus of the nut platform, structured so further tree nuts can be added as distinct products with their own grades, sizes and packing formats.",
+    ],
+    buyerSegments: [
+      "Nut importers",
+      "Snack and confectionery manufacturers",
+      "Food processors",
+      "Repackers",
+      "Distributors",
+    ],
+    sourcingApproach:
+      "Grade, size and packing format are confirmed in writing first, then matched to a sourcing route able to supply them consistently.",
+    qualityApproach:
+      "Sample approval and grade verification are coordinated ahead of packing, with independent inspection arranged where the contract requires it.",
+    journeyImage: "journey-nuts",
+    tileImage: "tile-nuts",
+    availabilityStatus: "enquiry",
+
+    // TODO(content): raw vs processed, exact commercial cashew grades offered,
+    // counts/sizes, moisture, packing (tin / vacuum / carton weights), origins,
+    // MOQ, Incoterms, loading ports, other nuts to be added.
+    // Do NOT pre-populate cashew grade nomenclature that has not been confirmed.
+    // See CONTENT_REQUIRED.md → Nuts.
+  },
+];
+
+/** Lookup helper used by the commodity page template. */
+export function getCommodity(slug: string): Commodity | undefined {
+  return commodities.find((c) => c.slug === slug);
+}
+
+export const commoditySlugs: readonly string[] = commodities.map((c) => c.slug);

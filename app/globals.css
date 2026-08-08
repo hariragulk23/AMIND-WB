@@ -1,0 +1,331 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   AM GLOBAL COMMODITIES — DESIGN TOKENS
+   --------------------------------------------------------------------------
+   This is the single source of truth for the brand palette, type scale and
+   motion timing. When the official logo/brand assets arrive, only the values
+   in `:root` below need to change.
+
+   The palette is a RESTRAINED TEMPORARY PALETTE and should be re-derived from
+   the official AM Global Commodities logo before public launch.
+   ========================================================================== */
+
+:root {
+  /* --- Neutrals: near-black / charcoal --------------------------------- */
+  --am-ink: #0e0f0d; /* primary dark ground */
+  --am-ink-soft: #161814; /* raised dark surface */
+  --am-charcoal: #1f221d; /* hairlines, borders on dark */
+
+  /* --- Neutrals: warm off-white / natural paper ------------------------ */
+  --am-paper: #f4f1ea; /* primary light ground */
+  --am-paper-dim: #e7e2d7; /* raised light surface */
+  --am-paper-line: #d6d0c2; /* hairlines on light */
+
+  /* --- Botanical green ------------------------------------------------- */
+  --am-forest: #1f3a2e;
+  --am-forest-deep: #14261e;
+  --am-forest-light: #2e5545;
+
+  /* --- Warm metallic / brass accent (use sparingly) -------------------- */
+  --am-brass: #b08a4f; /* accent on DARK grounds only (6.0:1 on ink) */
+  --am-brass-deep: #7a5c28; /* accent on LIGHT grounds (5.5:1 on paper) */
+
+  /* --- Semantic text colours (all AA or better) ------------------------ */
+  --am-text-on-dark: var(--am-paper); /* 17.1:1 on ink */
+  --am-text-on-dark-muted: #a8a49b; /*  7.8:1 on ink */
+  --am-text-on-light: var(--am-ink); /* 17.1:1 on paper */
+  --am-text-on-light-muted: #55584f; /*  6.4:1 on paper */
+
+  /* --- Focus ring ------------------------------------------------------ */
+  --am-focus: #d8b072;
+
+  /* --- Layout ---------------------------------------------------------- */
+  --am-gutter: 1.5rem;
+  --am-measure: 34rem; /* comfortable reading measure */
+  --am-header-h: 4.5rem;
+
+  /* --- Motion ---------------------------------------------------------
+     Slow, intentional, cinematic. Referenced from lib/motion.ts so CSS and
+     GSAP stay in sync. */
+  --am-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --am-dur-fast: 240ms;
+  --am-dur: 560ms;
+  --am-dur-slow: 1100ms;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --am-gutter: 2.5rem;
+    --am-header-h: 5.25rem;
+  }
+}
+
+@media (min-width: 90rem) {
+  :root {
+    --am-gutter: 4rem;
+  }
+}
+
+/* ==========================================================================
+   TAILWIND THEME BRIDGE
+   Exposes the tokens above as Tailwind utilities (bg-ink, text-brass, …).
+   ========================================================================== */
+
+@theme inline {
+  --color-ink: var(--am-ink);
+  --color-ink-soft: var(--am-ink-soft);
+  --color-charcoal: var(--am-charcoal);
+  --color-paper: var(--am-paper);
+  --color-paper-dim: var(--am-paper-dim);
+  --color-paper-line: var(--am-paper-line);
+  --color-forest: var(--am-forest);
+  --color-forest-deep: var(--am-forest-deep);
+  --color-forest-light: var(--am-forest-light);
+  --color-brass: var(--am-brass);
+  --color-brass-deep: var(--am-brass-deep);
+
+  --color-on-dark: var(--am-text-on-dark);
+  --color-on-dark-muted: var(--am-text-on-dark-muted);
+  --color-on-light: var(--am-text-on-light);
+  --color-on-light-muted: var(--am-text-on-light-muted);
+
+  --font-display: var(--font-instrument-serif), Georgia, "Times New Roman",
+    serif;
+  --font-sans: var(--font-instrument-sans), ui-sans-serif, system-ui,
+    "Helvetica Neue", Arial, sans-serif;
+
+  --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ==========================================================================
+   BASE
+   --------------------------------------------------------------------------
+   These MUST live inside `@layer base`. Unlayered CSS outranks every layered
+   rule, so an unlayered `a { color: inherit }` or `p { margin: 0 }` would
+   silently beat Tailwind's own text-colour and spacing utilities everywhere.
+   ========================================================================== */
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    /* Native browser scrolling only — no smooth-scroll library. */
+    -webkit-text-size-adjust: 100%;
+    background-color: var(--am-ink);
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--am-paper);
+    color: var(--am-text-on-light);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    /* Prevent horizontal overflow from full-bleed/animated sections. */
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  figure,
+  blockquote {
+    margin: 0;
+  }
+
+  ul,
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+
+  button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+
+  /* Visible, high-contrast focus for keyboard users on any ground. */
+  :focus-visible {
+    outline: 2px solid var(--am-focus);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+
+  ::selection {
+    background-color: var(--am-brass);
+    color: var(--am-ink);
+  }
+}
+
+/* ==========================================================================
+   TYPOGRAPHY PRIMITIVES
+   Oversized, responsive, editorial. All sizes use clamp().
+   ========================================================================== */
+
+@utility display-hero {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3.25rem, 13vw, 9rem);
+  line-height: 0.86;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+
+@utility display-xl {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.75rem, 10vw, 8.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+@utility display-lg {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.25rem, 6vw, 4.75rem);
+  line-height: 0.96;
+  letter-spacing: -0.015em;
+}
+
+@utility display-md {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 3.6vw, 2.75rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+
+/* Tracked-out uppercase micro label — the site's structural voice. */
+@utility label-xs {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+@utility label-sm {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@utility body-lg {
+  font-size: clamp(1.0625rem, 1.15vw, 1.25rem);
+  line-height: 1.62;
+}
+
+@utility numeral {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* ==========================================================================
+   LAYOUT PRIMITIVES
+   ========================================================================== */
+
+@utility gutter {
+  padding-inline: var(--am-gutter);
+}
+
+@utility hairline-t {
+  border-top: 1px solid currentColor;
+  opacity: 1;
+}
+
+/* Full-viewport section that behaves correctly on mobile browsers where the
+   URL bar collapses (svh), with a dvh-free fallback for older engines. */
+@utility h-screen-safe {
+  height: 100vh;
+  height: 100svh;
+}
+
+@utility min-h-screen-safe {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+/* Pulls a scrolling column up over a sticky, full-viewport media stage.
+   Declared here rather than as an arbitrary Tailwind value so the vh
+   fallback survives on engines without `svh`. */
+@utility pull-up-screen {
+  margin-top: -100vh;
+  margin-top: -100svh;
+}
+
+/* ==========================================================================
+   TEXTURE
+   A single 160px tiling SVG grain, applied only over dark cinematic grounds.
+   Cheap to rasterise and cached — no per-frame cost.
+   ========================================================================== */
+
+/* Marks a section that hosts a `.grain-layer`.
+   It must NOT set `position` — custom utilities are emitted after Tailwind's
+   own, so a `position` here would beat `fixed`/`absolute`/`sticky` on the same
+   element. Each consumer sets its own positioning; this only creates the
+   stacking context that keeps the overlay's blend mode local. */
+@utility grain {
+  isolation: isolate;
+}
+
+@utility grain-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("/textures/grain.svg");
+  background-size: 160px 160px;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+}
+
+/* ==========================================================================
+   ACCESSIBILITY
+   ========================================================================== */
+
+/* `sr-only` / `not-sr-only` come from Tailwind itself — redefining them here
+   would outrank the `focus:not-sr-only` used by the skip link. */
+
+/* Reduced motion: strip every transition/animation. GSAP timelines are
+   additionally disabled in JS (see lib/motion.ts) so pinned/scrubbed
+   storytelling is replaced by plain, fully-visible content. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

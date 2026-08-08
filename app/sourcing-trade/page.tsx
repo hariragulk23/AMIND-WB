@@ -1,0 +1,104 @@
+import type { Metadata } from "next";
+
+import { Reveal } from "@/components/animation/Reveal";
+import { PageHero } from "@/components/layout/PageHero";
+import { EnquiryBanner } from "@/components/sections/EnquiryBanner";
+import { Container } from "@/components/ui/Container";
+import { SectionLabel } from "@/components/ui/SectionLabel";
+import { sourcingContent } from "@/data/pages";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Sourcing & Trade",
+  description:
+    "How a requirement becomes a shipment: understanding the specification, identifying the sourcing route, agreeing trade terms, and coordinating documentation and shipment.",
+  path: "/sourcing-trade",
+});
+
+export default function SourcingTradePage() {
+  return (
+    <>
+      <PageHero
+        headingLines={["Sourcing", "& Trade"]}
+        intro={sourcingContent.intro}
+        crumbs={[
+          { name: "Home", path: "/" },
+          { name: "Sourcing & Trade", path: "/sourcing-trade" },
+        ]}
+      />
+
+      <section
+        aria-labelledby="stages-heading"
+        className="bg-paper text-on-light"
+      >
+        <Container className="py-20 md:py-28">
+          <Reveal>
+            <SectionLabel index="01">The sequence</SectionLabel>
+          </Reveal>
+          <h2 id="stages-heading" className="sr-only">
+            The sourcing and trade sequence
+          </h2>
+
+          <ol className="mt-12 border-t border-paper-line">
+            {sourcingContent.stages.map((stage) => (
+              <Reveal
+                as="li"
+                key={stage.number}
+                className="border-b border-paper-line"
+                y={22}
+              >
+                <div className="grid gap-4 py-9 md:grid-cols-12 md:gap-8 md:py-12">
+                  <p className="numeral font-display text-[clamp(1.75rem,3.5vw,2.75rem)] leading-none text-brass-deep md:col-span-2">
+                    {stage.number}
+                  </p>
+                  <h3 className="display-md text-on-light md:col-span-4">
+                    {stage.title}
+                  </h3>
+                  <p className="max-w-[42rem] text-on-light-muted md:col-span-6">
+                    {stage.description}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </ol>
+        </Container>
+      </section>
+
+      <section
+        aria-labelledby="incoterms-heading"
+        className="bg-paper text-on-light"
+      >
+        <Container className="pb-20 md:pb-28">
+          <div className="grid gap-8 border-t border-paper-line pt-14 lg:grid-cols-12">
+            <div className="lg:col-span-4">
+              <Reveal>
+                <SectionLabel index="02">Reference</SectionLabel>
+              </Reveal>
+              <h2
+                id="incoterms-heading"
+                className="display-md mt-6 text-on-light"
+              >
+                {sourcingContent.incoterms.title}
+              </h2>
+            </div>
+            <Reveal
+              stagger="base"
+              className="space-y-5 lg:col-span-7 lg:col-start-6"
+            >
+              {sourcingContent.incoterms.body.map((paragraph) => (
+                <p key={paragraph} className="text-on-light-muted">
+                  {paragraph}
+                </p>
+              ))}
+            </Reveal>
+          </div>
+        </Container>
+      </section>
+
+      <EnquiryBanner
+        headingLines={["Submit a trade", "requirement."]}
+        intro="Set out the commodity, specification, quantity and destination. We will respond with a clear view of the sourcing route and the terms it would work on."
+      />
+    </>
+  );
+}

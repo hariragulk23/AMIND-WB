@@ -1,0 +1,134 @@
+import type { Metadata } from "next";
+
+import { Reveal } from "@/components/animation/Reveal";
+import { PageHero } from "@/components/layout/PageHero";
+import { EnquiryBanner } from "@/components/sections/EnquiryBanner";
+import { Container } from "@/components/ui/Container";
+import { SectionLabel } from "@/components/ui/SectionLabel";
+import { company, registeredOfficeLines } from "@/data/company";
+import { aboutContent } from "@/data/pages";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = pageMetadata({
+  title: "About",
+  description:
+    "AM Global Commodities is the international trading identity of Antonio Marco Exports and Trade Private Limited, a company incorporated in India in 2025 with European corporate roots.",
+  path: "/about",
+});
+
+export default function AboutPage() {
+  return (
+    <>
+      <PageHero
+        headingLines={["About the", "company"]}
+        intro={aboutContent.intro}
+        crumbs={[
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+        ]}
+      />
+
+      <section className="bg-paper text-on-light">
+        <Container className="py-20 md:py-28">
+          {aboutContent.sections.map((section, index) => (
+            <div
+              key={section.title}
+              className="grid gap-8 border-t border-paper-line py-14 lg:grid-cols-12 lg:py-20"
+            >
+              <div className="lg:col-span-4">
+                <Reveal>
+                  <SectionLabel index={String(index + 1).padStart(2, "0")}>
+                    {section.title}
+                  </SectionLabel>
+                </Reveal>
+              </div>
+              <Reveal
+                stagger="base"
+                className="space-y-6 lg:col-span-7 lg:col-start-6"
+              >
+                {section.paragraphs.map((paragraph, i) => (
+                  <p
+                    key={paragraph}
+                    className={
+                      i === 0 ? "body-lg text-on-light" : "text-on-light-muted"
+                    }
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </Reveal>
+            </div>
+          ))}
+
+          {/* ---- Corporate record ---------------------------------------- */}
+          <div className="grid gap-8 border-t border-paper-line py-14 lg:grid-cols-12 lg:py-20">
+            <div className="lg:col-span-4">
+              <Reveal>
+                <SectionLabel index="04">Corporate record</SectionLabel>
+              </Reveal>
+            </div>
+
+            <Reveal
+              as="dl"
+              stagger="base"
+              className="lg:col-span-7 lg:col-start-6"
+            >
+              <div className="flex flex-col gap-1 border-b border-paper-line py-5 sm:flex-row sm:justify-between sm:gap-6">
+                <dt className="label-xs text-on-light-muted">Legal entity</dt>
+                <dd className="text-on-light sm:text-right">
+                  {company.legalName}
+                </dd>
+              </div>
+              <div className="flex flex-col gap-1 border-b border-paper-line py-5 sm:flex-row sm:justify-between sm:gap-6">
+                <dt className="label-xs text-on-light-muted">Incorporated</dt>
+                <dd className="numeral text-on-light sm:text-right">
+                  {company.incorporation.displayDate}
+                </dd>
+              </div>
+              {company.registrations.map((registration) => (
+                <div
+                  key={registration.label}
+                  className="flex flex-col gap-1 border-b border-paper-line py-5 sm:flex-row sm:justify-between sm:gap-6"
+                >
+                  <dt className="label-xs text-on-light-muted">
+                    {registration.label}
+                    <span className="sr-only"> — {registration.description}</span>
+                  </dt>
+                  <dd className="numeral text-on-light sm:text-right">
+                    {registration.value}
+                  </dd>
+                </div>
+              ))}
+              <div className="flex flex-col gap-1 border-b border-paper-line py-5 sm:flex-row sm:justify-between sm:gap-6">
+                <dt className="label-xs text-on-light-muted">Directors</dt>
+                <dd className="text-on-light sm:text-right">
+                  {company.directors.map((director) => (
+                    <span key={director.name} className="block">
+                      {director.name}
+                    </span>
+                  ))}
+                </dd>
+              </div>
+              <div className="flex flex-col gap-1 border-b border-paper-line py-5 sm:flex-row sm:justify-between sm:gap-6">
+                <dt className="label-xs text-on-light-muted">
+                  Registered office
+                </dt>
+                <dd className="text-on-light sm:text-right">
+                  <address className="not-italic">
+                    {registeredOfficeLines.map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                      </span>
+                    ))}
+                  </address>
+                </dd>
+              </div>
+            </Reveal>
+          </div>
+        </Container>
+      </section>
+
+      <EnquiryBanner />
+    </>
+  );
+}
