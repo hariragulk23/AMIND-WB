@@ -51,13 +51,13 @@ export const brandAssets = {
 /**
  * The relationship shown to visitors.
  *
- * The public brand is AM GLOBAL COMMODITIES. Antonio Marco is the corporate
+ * The public brand is AM INDIA. Antonio Marco is the corporate
  * identity behind it, shown as a quiet descriptor — never large enough for a
  * visitor to think the company trades under a different name.
  */
 export const brandLockup = {
-  primary: "AM Global Commodities",
-  primaryUpper: "AM GLOBAL COMMODITIES",
+  primary: "AM INDIA",
+  primaryUpper: "AM INDIA",
   descriptor: "by Antonio Marco",
   /** Used where the full corporate relationship needs stating in text. */
   descriptorLong: "A brand of Antonio Marco Exports and Trade Private Limited",

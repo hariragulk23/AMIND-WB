@@ -8,7 +8,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Terms",
   description:
-    "Terms governing use of the AM Global Commodities website. Nothing on this website constitutes a contractual offer.",
+    "Terms governing use of the AM INDIA website. Nothing on this website constitutes a contractual offer.",
   path: "/terms",
 });
 

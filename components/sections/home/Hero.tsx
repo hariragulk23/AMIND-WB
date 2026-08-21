@@ -18,7 +18,7 @@ import { primaryCta, secondaryCtas } from "@/data/navigation";
  * composition is a corporate title page, not a film poster.
  *
  * Within the first viewport a visitor gets all four things they need:
- *   WHO      AM GLOBAL COMMODITIES, with Antonio Marco as corporate identity
+ *   WHO      AM INDIA, with Antonio Marco as corporate identity
  *   WHAT     international B2B commodity sourcing and trading
  *   PRODUCTS coffee, teak, spices and nuts, named in the platform index
  *   WHERE    Tamil Nadu, India — with an international orientation

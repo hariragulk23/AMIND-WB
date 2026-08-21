@@ -8,7 +8,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Privacy Policy",
   description:
-    "How AM Global Commodities handles personal data submitted through this website and by email.",
+    "How AM INDIA handles personal data submitted through this website and by email.",
   path: "/privacy",
 });
 

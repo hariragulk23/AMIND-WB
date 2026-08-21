@@ -66,13 +66,13 @@ export const sourcingContent = {
 
 export const aboutContent = {
   intro:
-    "AM Global Commodities is the international trading identity of Antonio Marco Exports and Trade Private Limited.",
+    "AM INDIA is the international trading identity of Antonio Marco Exports and Trade Private Limited.",
   sections: [
     {
       title: "The company",
       paragraphs: [
         "Antonio Marco Exports and Trade Private Limited is a private limited company incorporated in India and registered with the Ministry of Corporate Affairs. Its registered office is in Sivakasi, Tamil Nadu.",
-        "AM Global Commodities is the name the business trades under internationally. The two are the same entity: the brand is the commercial identity, the company is the legal one, and every contract is entered into by the registered company.",
+        "AM INDIA is the name the business trades under internationally. The two are the same entity: the brand is the commercial identity, the company is the legal one, and every contract is entered into by the registered company.",
       ],
     },
     {

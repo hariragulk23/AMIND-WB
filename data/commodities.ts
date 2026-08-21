@@ -104,7 +104,7 @@ export const commodities: readonly Commodity[] = [
       "Green coffee for the roasting, importing and food manufacturing trade.",
     description: [
       "Coffee is a specification-led commodity. Buyers are precise about species, screen size, defect count, moisture and processing method, and a contract is only as good as the consistency behind it.",
-      "AM Global Commodities approaches coffee as a green commodity trade: understanding the exact specification a buyer works to, identifying a sourcing route capable of meeting it, and coordinating the quality evidence and documentation that allow the contract to be executed with confidence.",
+      "AM INDIA approaches coffee as a green commodity trade: understanding the exact specification a buyer works to, identifying a sourcing route capable of meeting it, and coordinating the quality evidence and documentation that allow the contract to be executed with confidence.",
     ],
     buyerSegments: [
       "Roasters",

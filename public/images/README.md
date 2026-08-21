@@ -1,4 +1,4 @@
-# Photography brief — AM Global Commodities
+# Photography brief — AM INDIA
 
 This directory is where real photography goes. **No external stock-photo URLs
 are embedded anywhere in the project**, and nothing here is required for the

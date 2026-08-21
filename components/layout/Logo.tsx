@@ -14,7 +14,7 @@ interface LogoProps {
 /**
  * Site identity.
  *
- * BRAND HIERARCHY — AM GLOBAL COMMODITIES is the public brand and leads, set in
+ * BRAND HIERARCHY — AM INDIA is the public brand and leads, set in
  * the display face. The supplied Antonio Marco artwork sits beside it, smaller
  * and behind a hairline, as the corporate identity.
  *
@@ -47,14 +47,13 @@ export function Logo({ tone = "light", variant = "full", className }: LogoProps)
       <span
         aria-hidden="true"
         className={cn(
-          "font-display font-semibold uppercase leading-[1.08]",
+          "font-display whitespace-nowrap font-semibold uppercase leading-none",
           variant === "full"
-            ? "text-[0.95rem] tracking-[0.13em] md:text-[1.0625rem]"
-            : "text-[1.125rem] tracking-[0.08em]",
+            ? "text-[1.0625rem] tracking-[0.16em] md:text-[1.25rem]"
+            : "text-[1.125rem] tracking-[0.1em]",
         )}
       >
-        AM Global
-        {variant === "full" ? <span className="block">Commodities</span> : null}
+        {brandLockup.primary}
       </span>
 
       {/* The corporate mark. Held back until `md`: below that the header must

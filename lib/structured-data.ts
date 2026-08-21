@@ -22,8 +22,11 @@ export function organizationSchema(): JsonLd {
     "@type": "Organization",
     "@id": `${SITE_URL}/#organization`,
     name: company.brand,
+    /* The registered entity. Unchanged by the brand rename — contracts are
+       signed in this name, not the trading brand. */
     legalName: company.legalName,
-    alternateName: company.legalName,
+    /* The trading brand written out in full, for entity matching. */
+    alternateName: `${company.brand} — ${company.legalName}`,
     url: SITE_URL,
     description: company.summary,
     foundingDate: company.incorporation.date,

@@ -1,13 +1,12 @@
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import type { CSSProperties } from "react";
 import { getImage, type ImageAsset, type ImageKey } from "@/data/images";
 import { cn } from "@/lib/utils";
 
 /**
- * Tonal grounds used while a photograph has not yet been delivered. These are
- * built from the brand tokens so an un-shot section still reads as a
- * deliberate composition rather than a broken image — and no placeholder text
- * is ever shown to a visitor.
+ * Tonal grounds used while a photograph has not been delivered. Built from the
+ * brand tokens so an un-shot slot still reads as a deliberate composition
+ * rather than a broken image — and no placeholder text is shown to a visitor.
  */
 const TONE_BACKGROUNDS: Record<ImageAsset["tone"], string> = {
   ink: [
@@ -28,30 +27,35 @@ const TONE_BACKGROUNDS: Record<ImageAsset["tone"], string> = {
   ].join(","),
 };
 
+/** Breakpoint at which the landscape crop takes over from the portrait one. */
+const ART_DIRECTION_BREAKPOINT = "(min-width: 768px)";
+
 interface MediaProps {
   imageKey: ImageKey;
   /**
-   * `fill` stretches to a positioned parent (used for full-bleed sections).
-   * Otherwise the manifest aspect ratio reserves the box, so activating a real
-   * asset later causes zero layout shift.
+   * `fill` stretches to a positioned parent (full-bleed sections). Otherwise
+   * the manifest aspect ratio reserves the box, so activating a real asset
+   * later causes zero layout shift.
    */
   fill?: boolean;
   /** Responsive sizes hint. Required for correct srcset selection. */
   sizes?: string;
-  /** Only true for the single above-the-fold hero image. */
+  /** True only for the single first-painted frame. Everything else is lazy. */
   priority?: boolean;
   className?: string;
-  /** Override the manifest alt when local context makes it more specific. */
+  /** Override the manifest alt where local context makes it more specific. */
   alt?: string;
 }
 
 /**
- * The only image primitive on the site.
+ * The only image primitive on the site. Every path, dimension, crop and alt
+ * string comes from data/images.ts — nothing is passed in inline.
  *
- * It reads every slot from the manifest in data/images.ts. While an asset's
- * `available` flag is false it paints a tonal ground of the correct aspect
- * ratio; the moment the real file is dropped in and the flag flipped, the same
- * box renders an optimised next/image with identical dimensions.
+ * When an asset declares a `mobile` variant it renders a real `<picture>` with
+ * two `<source>` elements built by `getImageProps`, so the browser downloads
+ * exactly one of the two crops and Next.js still serves AVIF/WebP. That is the
+ * only way to art-direct through next/image; rendering two `<Image>` tags and
+ * hiding one with CSS would download both.
  */
 export function Media({
   imageKey,
@@ -62,17 +66,23 @@ export function Media({
   alt,
 }: MediaProps) {
   const asset = getImage(imageKey);
+  const resolvedAlt = alt ?? asset.alt;
 
   const wrapperStyle: CSSProperties | undefined = fill
     ? undefined
     : { aspectRatio: asset.aspectRatio.replace("/", " / ") };
 
+  const imageStyle: CSSProperties = {
+    objectFit: "cover",
+    objectPosition: asset.objectPosition ?? "50% 50%",
+  };
+
   return (
     <div
       className={cn(
-        /* `relative` is applied only in the non-fill case: custom and core
-           position utilities live in the same layer, so listing both would let
-           whichever Tailwind emits last win rather than the one intended. */
+        /* `relative` only in the non-fill case: custom and core position
+           utilities share a layer, so listing both would let stylesheet order
+           pick the winner rather than the one intended. */
         "overflow-hidden bg-ink",
         fill ? "absolute inset-0 h-full w-full" : "relative w-full",
         className,
@@ -80,15 +90,27 @@ export function Media({
       style={wrapperStyle}
     >
       {asset.available ? (
-        <Image
-          src={asset.path}
-          alt={alt ?? asset.alt}
-          fill
-          sizes={sizes}
-          priority={priority}
-          loading={priority ? undefined : "lazy"}
-          className="h-full w-full object-cover"
-        />
+        asset.mobile ? (
+          <ArtDirected
+            asset={asset}
+            alt={resolvedAlt}
+            sizes={sizes}
+            priority={priority}
+            style={imageStyle}
+          />
+        ) : (
+          <Image
+            src={asset.path}
+            alt={resolvedAlt}
+            width={asset.width}
+            height={asset.height}
+            sizes={sizes}
+            priority={priority}
+            loading={priority ? undefined : "lazy"}
+            className="h-full w-full"
+            style={imageStyle}
+          />
+        )
       ) : (
         /* Decorative tonal ground — carries no information, so it is hidden
            from assistive technology rather than given invented alt text. */
@@ -96,10 +118,66 @@ export function Media({
           aria-hidden="true"
           className="absolute inset-0"
           style={{ backgroundImage: TONE_BACKGROUNDS[asset.tone] }}
-        >
-          <div className="grain-layer" />
-        </div>
+        />
       )}
     </div>
+  );
+}
+
+interface ArtDirectedProps {
+  asset: ImageAsset;
+  alt: string;
+  sizes: string;
+  priority: boolean;
+  style: CSSProperties;
+}
+
+/**
+ * Landscape and portrait crops of the same scene, selected by media query.
+ *
+ * `getImageProps` gives us Next.js's optimised srcSet without rendering an
+ * `<Image>`, which is what lets the two crops live inside one `<picture>`.
+ */
+function ArtDirected({ asset, alt, sizes, priority, style }: ArtDirectedProps) {
+  const common = {
+    alt,
+    sizes,
+    priority,
+    loading: priority ? ("eager" as const) : ("lazy" as const),
+  };
+
+  const { props: desktop } = getImageProps({
+    ...common,
+    src: asset.path,
+    width: asset.width,
+    height: asset.height,
+  });
+
+  const { props: mobile } = getImageProps({
+    ...common,
+    src: asset.mobile!.path,
+    width: asset.mobile!.width,
+    height: asset.mobile!.height,
+  });
+
+  return (
+    <picture>
+      <source
+        media={ART_DIRECTION_BREAKPOINT}
+        srcSet={desktop.srcSet}
+        sizes={desktop.sizes}
+      />
+      <source srcSet={mobile.srcSet} sizes={mobile.sizes} />
+      {/* A plain <img> is correct here: the <source> elements above carry the
+          optimised srcSets, and this is the documented getImageProps pattern
+          for art direction. */}
+      <img
+        {...mobile}
+        alt={alt}
+        className="h-full w-full"
+        style={style}
+        decoding="async"
+      />
+    </picture>
   );
 }

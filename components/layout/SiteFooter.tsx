@@ -25,9 +25,8 @@ export function SiteFooter() {
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-10">
           {/* ---- Identity + legal entity ---- */}
           <div className="lg:col-span-5">
-            <p className="font-display text-[clamp(1.5rem,2.6vw,2.125rem)] font-semibold uppercase leading-[1.05] tracking-[0.06em] text-on-dark">
-              AM Global
-              <span className="block">Commodities</span>
+            <p className="font-display text-[clamp(1.75rem,3vw,2.5rem)] font-semibold uppercase leading-none tracking-[0.1em] text-on-dark">
+              {company.brand}
             </p>
             <p className="mt-4 max-w-[28rem] text-sm text-on-dark-muted">
               {company.tagline}

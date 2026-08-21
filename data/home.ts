@@ -7,12 +7,12 @@
  * Copy discipline: no counters, no years of experience, no shipment volumes,
  * no client claims. Process language uses coordinate / arrange / manage /
  * work with / facilitate, because logistics execution sits with third-party
- * providers, not with AM Global Commodities.
+ * providers, not with AM INDIA.
  */
 
 export const heroContent = {
   /** Rendered as three separate lines of oversized display type. */
-  lines: ["AM", "Global", "Commodities"] as const,
+  lines: ["AM", "India"] as const,
   statement: ["From origin.", "To opportunity."] as const,
   intro:
     "A B2B commodity sourcing and trading company connecting reliable supply with international demand across coffee, teak, spices and nuts.",
@@ -24,7 +24,7 @@ export const positioningContent = {
   /** Rendered as three lines of display type. */
   headingLines: ["We connect", "origin", "with market."] as const,
   paragraphs: [
-    "AM Global Commodities is the international trading identity of Antonio Marco Exports and Trade Private Limited — a B2B sourcing and trading company operating from Tamil Nadu, India.",
+    "AM INDIA is the international trading identity of Antonio Marco Exports and Trade Private Limited — a B2B sourcing and trading company operating from Tamil Nadu, India.",
     "The company sits between supply and demand: interpreting a buyer's written specification, identifying a sourcing route capable of meeting it, and coordinating the quality evidence, documentation and shipment arrangements that let a contract be executed cleanly.",
     "Established in India in 2025 with European corporate roots, the company was built from the outset for cross-border trade rather than adapted to it — registered, structured and staffed for it from day one.",
   ],

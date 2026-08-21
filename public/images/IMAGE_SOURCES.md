@@ -1,48 +1,69 @@
 # Image sources
 
-Provenance record for every photograph used on this site.
+Provenance record for every photograph and brand asset used on this site.
 
-**Status: the logo is in place. The four commodity photographs are not.** They
-are the site's most important remaining visual assets.
+**Status: all commodity photography and the logo are in place.**
 
-They could not be obtained in the build environment this project was developed
-in: outbound network access is restricted to an allowlist, and every stock
-photography host — `unsplash.com`, `images.unsplash.com`, `pexels.com`,
-`upload.wikimedia.org`, `commons.wikimedia.org` — is blocked at the proxy
-(HTTP 403 on CONNECT). Rather than leave the sections filled with gradients and
-call them finished, the exact requirement for each asset is recorded here.
+The single source of truth for paths, dimensions, crops and alt text is
+`data/images.ts`. No component hard-codes an image path. This file is the
+human-readable companion: what each asset is, where it came from, and the
+constraints it has to satisfy.
 
 ---
 
-## Required — the four commodity photographs
+## Commodity photography — SUPPLIED AND LIVE
 
-Drop each file at the path shown, then set `available: true` on the matching
-entries in `data/images.ts` (each photograph is used by two entries: the
-full-bleed `journey-*` slot and the `tile-*` slot).
+Each commodity ships as three files: a landscape hero frame, a portrait hero
+frame for phones, and a studio tile.
 
-| Path | Commodity | Min. resolution | Must show | Must not show |
+| File | Used by | Intrinsic | Ratio | Shows |
 | --- | --- | --- | --- | --- |
-| `public/images/commodities/coffee.webp` | Coffee | 2400×1350 or larger | Green coffee beans in bulk, coffee cherries, drying beds, jute bags of green coffee, hands grading or inspecting green coffee | Latte art, cups, cafés, espresso lifestyle, retail coffee packaging |
-| `public/images/commodities/teak.webp` | Teak | 2400×1350 or larger | Teak logs, sawn timber, stacked boards, timber grain, timber being measured or inspected in a yard | Finished furniture as the primary subject, interiors, showrooms |
-| `public/images/commodities/spices.webp` | Spices | 2400×1350 or larger | Black pepper, cardamom, turmeric, dried chilli, cinnamon or cloves in bulk — sacks, heaps, grading trays | Plated meals, restaurant food, kitchen flat-lays, consumer spice jars |
-| `public/images/commodities/nuts.webp` | Nuts (cashew-led) | 2400×1350 or larger | Raw cashew or graded kernels in bulk, sorting and grading, sacks or crates | Snack bowls, gift packs, consumer nut packaging |
+| `coffee/hero-coffee.png` | Homepage journey, tablet + desktop | 1376×768 | 16:9 | Ripe coffee cherries on the branch |
+| `coffee/hero-coffee-mobile.png` | Homepage journey, phones | 768×1376 | 9:16 | Same scene, portrait crop |
+| `coffee/tile-coffee.png` | Commodity grid | 928×1152 | 4:5 | Green coffee beans in an open jute sack |
+| `teak/hero-teak.png` | Homepage journey, tablet + desktop | 1376×768 | 16:9 | Squared teak logs stacked end-on |
+| `teak/hero-teak-mobile.png` | Homepage journey, phones | 768×1376 | 9:16 | Same scene, portrait crop |
+| `teak/tile-teak.png` | Commodity grid | 928×1152 | 4:5 | Sawn teak billets stacked, end grain out |
+| `spices/hero-spices.png` | Homepage journey, tablet + desktop | 1376×768 | 16:9 | Black pepper, star anise, cardamom, dried chilli |
+| `spices/hero-spices-mobile.png` | Homepage journey, phones | 768×1376 | 9:16 | Same scene, portrait crop |
+| `spices/tile-spices.png` | Commodity grid | 928×1152 | 4:5 | Heaps of peppercorns, dried chillies, turmeric |
+| `nuts/hero-nuts.png` | Homepage journey, tablet + desktop | 1376×768 | 16:9 | Cashews, almonds, pistachios, walnuts in bulk |
+| `nuts/hero-nuts-mobile.png` | Homepage journey, phones | 768×1376 | 9:16 | Same scene, portrait crop |
+| `nuts/tile-nuts.png` | Commodity grid | 928×1152 | 4:5 | A cloth sack spilling mixed nuts |
 
-Framing notes that apply to all four:
+### Two notes on how these are delivered
 
-- The composition is cropped to **16:9** full-bleed on the homepage and to
-  **4:5** in the commodity grid, so keep the subject away from the extreme
-  edges and leave some quieter area in the lower third — headings and the
-  Explore link sit there over a scrim.
-- Shoot or select for **texture**. These are raw commodities; the photograph
-  should read as material, not as a styled product shot.
-- WebP or AVIF preferred. JPEG is accepted — Next.js re-encodes on request.
+**Art direction, not scaling.** The hero frames are two genuinely different
+crops. `<Media>` renders a real `<picture>` with a `(min-width: 768px)` media
+query, so a phone downloads only the portrait file. Scaling the landscape file
+down to a 9:16 box would destroy the composition, so it is never done.
+
+**Source format is PNG; delivered format is not.** The files were supplied as
+PNG, which is why they are 1.2–2.7 MB each on disk. They are deliberately not
+pre-converted: Next.js negotiates AVIF or WebP per request and resizes to the
+breakpoint, so a full homepage — all four hero frames and all four tiles —
+transfers around **0.4 MB** in total. The source size affects repository weight
+and build time only.
+
+If repository size becomes a concern, re-exporting the sources as high-quality
+JPEG or WebP would cut roughly 20 MB with no visible difference. It would not
+change what visitors download.
+
+### Filename note
+
+These arrived named `hero-coffee.jpg.png` and so on — a double extension, with
+PNG being the true format. They were renamed with `git mv` to drop the
+misleading `.jpg`, so history follows the files. Referenced paths in
+`data/images.ts` match the files on disk exactly.
+
+---
 
 ## The official logo — SUPPLIED AND LIVE
 
 | Path | Notes |
 | --- | --- |
-| `public/brand/antonio-marco-logo-original.png` | Supplied artwork, preserved untouched — 1774×887, 829 KB |
-| `public/brand/antonio-marco-logo.webp` | Derivative the site renders — 1567×365, 74 KB |
+| `../brand/antonio-marco-logo-original.png` | Supplied artwork, preserved untouched — 1774×887, 829 KB |
+| `../brand/antonio-marco-logo.webp` | Derivative the site renders — 1567×365, 74 KB |
 
 Two things were done to produce the derivative, neither of which alters the
 mark: the empty canvas was trimmed to the artwork plus 7% brand safe space, and
@@ -53,31 +74,34 @@ Because the artwork's lettering is brown and navy it needs a light ground. The
 footer places it on a light panel rather than inverting it — a supplied logo is
 never recoloured to suit a background.
 
-## Optional
+---
 
-| Path | Used by | Notes |
-| --- | --- | --- |
-| `public/images/origin/hero-origin.webp` | Homepage hero | Not currently rendered — the hero is a typographic composition on the light canvas |
-| `public/images/trade/trade-documentation.webp` | Reserved | Documentation, inspection notes or a sample tray |
-| `public/images/company/operational-base.webp` | Reserved | Genuine locations only — never a stock office interior |
+## Reserved slots
+
+Declared in `data/images.ts` with `available: false`, so the layout and the
+photography brief stay in one place. Nothing is requested for them and no
+broken image request is ever made.
+
+| Path | Notes |
+| --- | --- |
+| `trade/trade-documentation.png` | Documentation, inspection notes or a sample tray |
+| `company/operational-base.png` | Genuine locations only — never a stock office interior |
+
+Also outstanding: **`brand/og-card.png`** (1200×630), the social share card.
+See the `TODO(og-card)` comment in `app/layout.tsx`. No `og:image` is emitted
+until it exists.
 
 ---
 
 ## Provenance log
 
-Complete one row per image as it is added. Anything used temporarily must be
-recorded here so it can be found and replaced before launch.
+| File | Source | Photographer / attribution | Licence | Temporary? |
+| --- | --- | --- | --- | --- |
+| `brand/antonio-marco-logo-original.png` | Supplied by the company | Antonio Marco Exports and Trade Private Limited | Company's own mark | No |
+| `brand/antonio-marco-logo.webp` | Derived from the above | — | Company's own mark | No |
+| All twelve commodity files above | Supplied by the company | To be confirmed | To be confirmed | To be confirmed |
 
-| File | Source | Source URL | Photographer / attribution | Licence | Temporary? |
-| --- | --- | --- | --- | --- | --- |
-| `brand/antonio-marco-logo-original.png` | Supplied by the company | — | Antonio Marco Exports and Trade Private Limited | Company's own mark | No |
-| `brand/antonio-marco-logo.webp` | Derived from the above | — | — | Company's own mark | No |
-
-Rules for temporary staging imagery:
-
-- Royalty-free only — Unsplash, Pexels, or Wikimedia Commons where the licence
-  permits commercial use. Download into the repository; never hotlink.
-- No watermarks, no visible competitor branding, no imagery whose licence
-  cannot be evidenced.
-- Every temporary image must be marked `Temporary? = yes` and replaced with the
-  company's own photography before public launch.
+**Action required:** confirm the source and licence of the twelve commodity
+images and complete the last row. If any of them is temporary staging imagery
+rather than the company's own, mark it so it can be found and replaced before
+public launch.

@@ -35,8 +35,8 @@ export interface CompanyRegistration {
 
 export const company = {
   /** Public-facing trading brand. Use this in all customer-facing copy. */
-  brand: "AM Global Commodities",
-  brandShort: "AM Global",
+  brand: "AM INDIA",
+  brandShort: "AM INDIA",
   /** Registered legal entity. Required in the footer and legal pages. */
   legalName: "Antonio Marco Exports and Trade Private Limited",
   legalNameUpper: "ANTONIO MARCO EXPORTS AND TRADE PRIVATE LIMITED",

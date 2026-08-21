@@ -165,7 +165,14 @@ export function CommodityJourney() {
               className="absolute inset-0"
               style={{ opacity: index === 0 ? 1 : 0 }}
             >
-              <Media imageKey={commodity.journeyImage} fill sizes="100vw" />
+              <Media
+                imageKey={commodity.journeyImage}
+                fill
+                sizes="100vw"
+                /* Only the first frame is eager — it is the one painted as the
+                   journey comes into view. The other three lazy-load. */
+                priority={index === 0}
+              />
             </div>
           ))}
 

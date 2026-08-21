@@ -1,6 +1,6 @@
-# AM Global Commodities
+# AM INDIA
 
-Website for **AM Global Commodities**, the international trading identity of
+Website for **AM INDIA**, the international trading identity of
 **Antonio Marco Exports and Trade Private Limited** (Tamil Nadu, India).
 
 A premium B2B corporate, sourcing, import–export and commodity-trading site.
@@ -280,7 +280,7 @@ deliberately split into two tones because the lighter one does **not** pass on
 paper.
 
 > The palette is a **restrained temporary system**. It must be re-derived from
-> the official AM Global Commodities logo before launch. The logo itself is not
+> the official Antonio Marco logo before launch. The logo itself is not
 > yet supplied — `components/layout/Logo.tsx` currently renders a typographic
 > wordmark and documents how to swap in the real asset. Never recolour or
 > distort the supplied logo.

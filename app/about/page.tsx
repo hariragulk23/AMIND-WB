@@ -12,7 +12,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "About",
   description:
-    "AM Global Commodities is the international trading identity of Antonio Marco Exports and Trade Private Limited, a company incorporated in India in 2025 with European corporate roots.",
+    "AM INDIA is the international trading identity of Antonio Marco Exports and Trade Private Limited, a company incorporated in India in 2025 with European corporate roots.",
   path: "/about",
 });
 

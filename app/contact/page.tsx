@@ -13,7 +13,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Start a Trade Enquiry",
   description:
-    "Start a trade enquiry with AM Global Commodities. Send the commodity, specification, quantity and destination, and we will review the requirement and come back to you directly.",
+    "Start a trade enquiry with AM INDIA. Send the commodity, specification, quantity and destination, and we will review the requirement and come back to you directly.",
   path: "/contact",
 });
 
