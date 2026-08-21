@@ -66,7 +66,7 @@ export function SiteHeader() {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-colors duration-500 ease-brand",
+          "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-[600ms] ease-brand",
           scrolled && !menuOpen
             ? "border-b border-paper-line bg-paper/92 backdrop-blur-[6px]"
             : "border-b border-transparent bg-transparent",

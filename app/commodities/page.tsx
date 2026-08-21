@@ -35,7 +35,7 @@ export default function CommoditiesPage() {
       />
 
       <section className="bg-paper text-on-light">
-        <Container className="py-20 md:py-28">
+        <Container className="section-y-sm">
           <ul className="grid gap-x-8 gap-y-16 md:grid-cols-2">
             {commodities.map((commodity) => (
               <Reveal as="li" key={commodity.slug} y={24}>
@@ -47,7 +47,7 @@ export default function CommoditiesPage() {
                     <Media
                       imageKey={commodity.tileImage}
                       sizes="(min-width: 768px) 50vw, 100vw"
-                      className="transition-transform duration-[1200ms] ease-brand group-hover:scale-[1.04]"
+                      className="transition-transform duration-[1400ms] ease-brand group-hover:scale-[1.05]"
                     />
                   </div>
 

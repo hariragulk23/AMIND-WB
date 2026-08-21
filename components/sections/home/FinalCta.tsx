@@ -20,7 +20,7 @@ export function FinalCta() {
       aria-labelledby="final-cta-heading"
       className="relative overflow-hidden bg-forest-deep text-on-dark"
     >
-      <Container className="relative py-24 md:py-36 lg:py-48">
+      <Container className="relative section-y">
         <Reveal>
           <SectionLabel index="08" tone="dark">
             {finalCtaContent.label}

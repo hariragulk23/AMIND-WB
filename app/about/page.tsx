@@ -29,7 +29,7 @@ export default function AboutPage() {
       />
 
       <section className="bg-paper text-on-light">
-        <Container className="py-20 md:py-28">
+        <Container className="section-y-sm">
           {aboutContent.sections.map((section, index) => (
             <div
               key={section.title}

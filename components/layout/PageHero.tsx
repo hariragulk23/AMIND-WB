@@ -72,7 +72,7 @@ export function PageHero({ headingLines, intro, crumbs }: PageHeroProps) {
         {intro ? (
           <Reveal
             as="p"
-            className="body-lg mt-8 max-w-[42rem] text-on-light-muted"
+            className="body-lg measure mt-8 text-on-light-muted"
             delay={0.35}
           >
             {intro}

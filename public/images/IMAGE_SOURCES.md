@@ -16,20 +16,20 @@ constraints it has to satisfy.
 Each commodity ships as three files: a landscape hero frame, a portrait hero
 frame for phones, and a studio tile.
 
-| File | Used by | Intrinsic | Ratio | Shows |
-| --- | --- | --- | --- | --- |
-| `coffee/hero-coffee.png` | Homepage journey, tablet + desktop | 1376×768 | 16:9 | Ripe coffee cherries on the branch |
-| `coffee/hero-coffee-mobile.png` | Homepage journey, phones | 768×1376 | 9:16 | Same scene, portrait crop |
-| `coffee/tile-coffee.png` | Commodity grid | 928×1152 | 4:5 | Green coffee beans in an open jute sack |
-| `teak/hero-teak.png` | Homepage journey, tablet + desktop | 1376×768 | 16:9 | Squared teak logs stacked end-on |
-| `teak/hero-teak-mobile.png` | Homepage journey, phones | 768×1376 | 9:16 | Same scene, portrait crop |
-| `teak/tile-teak.png` | Commodity grid | 928×1152 | 4:5 | Sawn teak billets stacked, end grain out |
-| `spices/hero-spices.png` | Homepage journey, tablet + desktop | 1376×768 | 16:9 | Black pepper, star anise, cardamom, dried chilli |
-| `spices/hero-spices-mobile.png` | Homepage journey, phones | 768×1376 | 9:16 | Same scene, portrait crop |
-| `spices/tile-spices.png` | Commodity grid | 928×1152 | 4:5 | Heaps of peppercorns, dried chillies, turmeric |
-| `nuts/hero-nuts.png` | Homepage journey, tablet + desktop | 1376×768 | 16:9 | Cashews, almonds, pistachios, walnuts in bulk |
-| `nuts/hero-nuts-mobile.png` | Homepage journey, phones | 768×1376 | 9:16 | Same scene, portrait crop |
-| `nuts/tile-nuts.png` | Commodity grid | 928×1152 | 4:5 | A cloth sack spilling mixed nuts |
+| File | Used by | Intrinsic | Ratio | On disk | Shows |
+| --- | --- | --- | --- | --- | --- |
+| `coffee/hero-coffee.jpg` | Homepage journey, tablet + desktop | 1376×768 | 16:9 | 126 KB | Ripe coffee cherries on the branch |
+| `coffee/hero-coffee-mobile.jpg` | Homepage journey, phones | 768×1376 | 9:16 | 125 KB | Same scene, portrait crop |
+| `coffee/tile-coffee.jpg` | Commodity grid | 928×1152 | 4:5 | 183 KB | Green coffee beans in an open jute sack |
+| `teak/hero-teak.jpg` | Homepage journey, tablet + desktop | 1376×768 | 16:9 | 295 KB | Squared teak logs stacked end-on |
+| `teak/hero-teak-mobile.jpg` | Homepage journey, phones | 768×1376 | 9:16 | 301 KB | Same scene, portrait crop |
+| `teak/tile-teak.jpg` | Commodity grid | 928×1152 | 4:5 | 154 KB | Sawn teak billets stacked, end grain out |
+| `spices/hero-spices.jpg` | Homepage journey, tablet + desktop | 1376×768 | 16:9 | 221 KB | Black pepper, star anise, cardamom, dried chilli |
+| `spices/hero-spices-mobile.jpg` | Homepage journey, phones | 768×1376 | 9:16 | 289 KB | Same scene, portrait crop |
+| `spices/tile-spices.jpg` | Commodity grid | 928×1152 | 4:5 | 111 KB | Heaps of peppercorns, dried chillies, turmeric |
+| `nuts/hero-nuts.jpg` | Homepage journey, tablet + desktop | 1376×768 | 16:9 | 313 KB | Cashews, almonds, pistachios, walnuts in bulk |
+| `nuts/hero-nuts-mobile.jpg` | Homepage journey, phones | 768×1376 | 9:16 | 292 KB | Same scene, portrait crop |
+| `nuts/tile-nuts.jpg` | Commodity grid | 928×1152 | 4:5 | 162 KB | A cloth sack spilling mixed nuts |
 
 ### Two notes on how these are delivered
 
@@ -38,23 +38,25 @@ crops. `<Media>` renders a real `<picture>` with a `(min-width: 768px)` media
 query, so a phone downloads only the portrait file. Scaling the landscape file
 down to a 9:16 box would destroy the composition, so it is never done.
 
-**Source format is PNG; delivered format is not.** The files were supplied as
-PNG, which is why they are 1.2–2.7 MB each on disk. They are deliberately not
-pre-converted: Next.js negotiates AVIF or WebP per request and resizes to the
-breakpoint, so a full homepage — all four hero frames and all four tiles —
-transfers around **0.4 MB** in total. The source size affects repository weight
-and build time only.
+**Source format is JPEG; delivered format is not.** The sources are stored as
+high-quality JPEG (mozjpeg, quality 90, 4:4:4 chroma — no chroma subsampling, so
+the saturated reds and greens stay clean). They are deliberately *not*
+pre-converted to AVIF or WebP: Next.js negotiates the modern format per request
+and resizes to the breakpoint, so a full homepage — all four hero frames and all
+four tiles — transfers around **0.29 MB** in total. The source format affects
+repository weight and build time only, never what a visitor downloads.
 
-If repository size becomes a concern, re-exporting the sources as high-quality
-JPEG or WebP would cut roughly 20 MB with no visible difference. It would not
-change what visitors download.
-
-### Filename note
+### Filename and format history
 
 These arrived named `hero-coffee.jpg.png` and so on — a double extension, with
 PNG being the true format. They were renamed with `git mv` to drop the
-misleading `.jpg`, so history follows the files. Referenced paths in
-`data/images.ts` match the files on disk exactly.
+misleading `.jpg`.
+
+They were later re-exported in place as JPEG, which took the twelve files from
+**21.6 MB to 2.5 MB — a 19.1 MB saving** — with no visible difference and no
+change to the delivered pipeline. The largest source file is now 313 KB, so
+none exceeds the 600 KB source budget. Referenced paths in `data/images.ts`
+match the files on disk exactly.
 
 ---
 
@@ -84,8 +86,8 @@ broken image request is ever made.
 
 | Path | Notes |
 | --- | --- |
-| `trade/trade-documentation.png` | Documentation, inspection notes or a sample tray |
-| `company/operational-base.png` | Genuine locations only — never a stock office interior |
+| `trade/trade-documentation.jpg` | Documentation, inspection notes or a sample tray |
+| `company/operational-base.jpg` | Genuine locations only — never a stock office interior |
 
 Also outstanding: **`brand/og-card.png`** (1200×630), the social share card.
 See the `TODO(og-card)` comment in `app/layout.tsx`. No `og:image` is emitted

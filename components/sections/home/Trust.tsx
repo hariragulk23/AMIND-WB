@@ -24,7 +24,7 @@ import { trustSignals, verifiedCompliance } from "@/data/compliance";
 export function Trust() {
   return (
     <section aria-labelledby="trust-heading" className="bg-paper text-on-light">
-      <Container className="py-24 md:py-36 lg:py-44">
+      <Container className="section-y">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-6">
             <Reveal>
@@ -42,7 +42,7 @@ export function Trust() {
 
           <Reveal
             as="p"
-            className="body-lg max-w-[32rem] text-on-light-muted lg:col-span-5 lg:col-start-8 lg:pt-4"
+            className="body-lg measure-tight text-on-light-muted lg:col-span-5 lg:col-start-8 lg:pt-4"
           >
             {trustContent.intro}
           </Reveal>

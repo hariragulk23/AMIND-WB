@@ -22,7 +22,7 @@ import { secondaryCtas } from "@/data/navigation";
 export function CommoditiesGrid() {
   return (
     <section aria-labelledby="grid-heading" className="bg-paper text-on-light">
-      <Container className="pb-24 md:pb-36 lg:pb-44">
+      <Container className="section-pb">
         <div className="flex flex-col justify-between gap-8 border-t border-paper-line pt-14 md:flex-row md:items-end">
           <div>
             <Reveal>
@@ -60,7 +60,7 @@ export function CommoditiesGrid() {
                 <Media
                   imageKey={commodity.tileImage}
                   sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                  className="transition-transform duration-[1200ms] ease-brand group-hover:scale-[1.04]"
+                  className="transition-transform duration-[1400ms] ease-brand group-hover:scale-[1.05]"
                 />
               </div>
 

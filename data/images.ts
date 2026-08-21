@@ -15,9 +15,10 @@
  * the composition is never squeezed.
  *
  * FORMAT
- * The sources are PNG. They are deliberately NOT pre-converted — Next.js
- * negotiates AVIF or WebP per request, so the delivered bytes are a fraction of
- * the source. See the note in public/images/IMAGE_SOURCES.md about source size.
+ * The sources are high-quality JPEG (q90, 4:4:4 chroma). That is the source
+ * format only — it is deliberately NOT the delivered one. Next.js negotiates
+ * AVIF or WebP per request and resizes to the breakpoint, so the delivered
+ * bytes are a fraction of the source. See public/images/IMAGE_SOURCES.md.
  *
  * ADDING AN IMAGE: declare it here, set `available: true`, and reference it by
  * key. Until `available` is true, <Media> paints a tonal ground of exactly the
@@ -85,10 +86,10 @@ export const imageManifest = {
      a portrait 9:16 companion for phones. Decorative — see `alt` above. */
   "journey-coffee": {
     key: "journey-coffee",
-    path: "/images/coffee/hero-coffee.png",
+    path: "/images/coffee/hero-coffee.jpg",
     width: 1376,
     height: 768,
-    mobile: { path: "/images/coffee/hero-coffee-mobile.png", width: 768, height: 1376 },
+    mobile: { path: "/images/coffee/hero-coffee-mobile.jpg", width: 768, height: 1376 },
     section: "home-journey",
     aspectRatio: "16/9",
     /* Cherries sit left of centre; hold that side in the crop. */
@@ -100,10 +101,10 @@ export const imageManifest = {
   },
   "journey-teak": {
     key: "journey-teak",
-    path: "/images/teak/hero-teak.png",
+    path: "/images/teak/hero-teak.jpg",
     width: 1376,
     height: 768,
-    mobile: { path: "/images/teak/hero-teak-mobile.png", width: 768, height: 1376 },
+    mobile: { path: "/images/teak/hero-teak-mobile.jpg", width: 768, height: 1376 },
     section: "home-journey",
     aspectRatio: "16/9",
     objectPosition: "50% 50%",
@@ -114,10 +115,10 @@ export const imageManifest = {
   },
   "journey-spices": {
     key: "journey-spices",
-    path: "/images/spices/hero-spices.png",
+    path: "/images/spices/hero-spices.jpg",
     width: 1376,
     height: 768,
-    mobile: { path: "/images/spices/hero-spices-mobile.png", width: 768, height: 1376 },
+    mobile: { path: "/images/spices/hero-spices-mobile.jpg", width: 768, height: 1376 },
     section: "home-journey",
     aspectRatio: "16/9",
     objectPosition: "50% 45%",
@@ -128,10 +129,10 @@ export const imageManifest = {
   },
   "journey-nuts": {
     key: "journey-nuts",
-    path: "/images/nuts/hero-nuts.png",
+    path: "/images/nuts/hero-nuts.jpg",
     width: 1376,
     height: 768,
-    mobile: { path: "/images/nuts/hero-nuts-mobile.png", width: 768, height: 1376 },
+    mobile: { path: "/images/nuts/hero-nuts-mobile.jpg", width: 768, height: 1376 },
     section: "home-journey",
     aspectRatio: "16/9",
     objectPosition: "50% 50%",
@@ -147,7 +148,7 @@ export const imageManifest = {
      the photographs alone — so each gets descriptive alt text. */
   "tile-coffee": {
     key: "tile-coffee",
-    path: "/images/coffee/tile-coffee.png",
+    path: "/images/coffee/tile-coffee.jpg",
     width: 928,
     height: 1152,
     section: "home-grid",
@@ -160,7 +161,7 @@ export const imageManifest = {
   },
   "tile-teak": {
     key: "tile-teak",
-    path: "/images/teak/tile-teak.png",
+    path: "/images/teak/tile-teak.jpg",
     width: 928,
     height: 1152,
     section: "home-grid",
@@ -173,7 +174,7 @@ export const imageManifest = {
   },
   "tile-spices": {
     key: "tile-spices",
-    path: "/images/spices/tile-spices.png",
+    path: "/images/spices/tile-spices.jpg",
     width: 928,
     height: 1152,
     section: "home-grid",
@@ -186,7 +187,7 @@ export const imageManifest = {
   },
   "tile-nuts": {
     key: "tile-nuts",
-    path: "/images/nuts/tile-nuts.png",
+    path: "/images/nuts/tile-nuts.jpg",
     width: 928,
     height: 1152,
     section: "home-grid",
@@ -203,7 +204,7 @@ export const imageManifest = {
      supplied yet, so nothing is requested for them. */
   "home-trade": {
     key: "home-trade",
-    path: "/images/trade/trade-documentation.png",
+    path: "/images/trade/trade-documentation.jpg",
     width: 1600,
     height: 2000,
     section: "home-trade",
@@ -216,7 +217,7 @@ export const imageManifest = {
   },
   "company-base": {
     key: "company-base",
-    path: "/images/company/operational-base.png",
+    path: "/images/company/operational-base.jpg",
     width: 2000,
     height: 1333,
     section: "company",

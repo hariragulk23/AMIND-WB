@@ -31,7 +31,7 @@ export default function SourcingTradePage() {
         aria-labelledby="stages-heading"
         className="bg-paper text-on-light"
       >
-        <Container className="py-20 md:py-28">
+        <Container className="section-y-sm">
           <Reveal>
             <SectionLabel index="01">The sequence</SectionLabel>
           </Reveal>
@@ -54,7 +54,7 @@ export default function SourcingTradePage() {
                   <h3 className="display-md text-heading md:col-span-4">
                     {stage.title}
                   </h3>
-                  <p className="max-w-[42rem] text-on-light-muted md:col-span-6">
+                  <p className="measure text-on-light-muted md:col-span-6">
                     {stage.description}
                   </p>
                 </div>
@@ -68,7 +68,7 @@ export default function SourcingTradePage() {
         aria-labelledby="incoterms-heading"
         className="bg-paper text-on-light"
       >
-        <Container className="pb-20 md:pb-28">
+        <Container className="pb-[clamp(5rem,8vw,9rem)]">
           <div className="grid gap-8 border-t border-paper-line pt-14 lg:grid-cols-12">
             <div className="lg:col-span-4">
               <Reveal>

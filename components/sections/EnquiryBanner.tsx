@@ -24,7 +24,7 @@ export function EnquiryBanner({
       aria-labelledby="enquiry-banner-heading"
       className="relative overflow-hidden bg-forest-deep text-on-dark"
     >
-      <Container className="relative py-20 md:py-28">
+      <Container className="relative section-y-sm">
         <div className="grid gap-10 lg:grid-cols-12">
           <DisplayReveal
             as="h2"

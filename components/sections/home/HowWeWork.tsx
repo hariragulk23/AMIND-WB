@@ -22,7 +22,7 @@ export function HowWeWork() {
       aria-labelledby="process-heading"
       className="bg-paper text-on-light"
     >
-      <Container className="py-24 md:py-36 lg:py-44">
+      <Container className="section-y">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <Reveal>
@@ -38,7 +38,7 @@ export function HowWeWork() {
 
           <Reveal
             as="p"
-            className="body-lg max-w-[30rem] text-on-light-muted lg:col-span-4 lg:col-start-9 lg:pt-4"
+            className="body-lg measure-tight text-on-light-muted lg:col-span-4 lg:col-start-9 lg:pt-4"
           >
             {processContent.intro}
           </Reveal>
@@ -59,7 +59,7 @@ export function HowWeWork() {
                 <h3 className="display-md text-heading md:col-span-4">
                   {step.title}
                 </h3>
-                <p className="max-w-[42rem] text-on-light-muted md:col-span-6">
+                <p className="measure text-on-light-muted md:col-span-6">
                   {step.description}
                 </p>
               </div>

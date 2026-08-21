@@ -19,7 +19,7 @@ export function Positioning() {
       aria-labelledby="positioning-heading"
       className="bg-paper text-on-light"
     >
-      <Container className="py-24 md:py-36 lg:py-44">
+      <Container className="section-y">
         <Reveal>
           <SectionLabel index="03">{positioningContent.label}</SectionLabel>
         </Reveal>

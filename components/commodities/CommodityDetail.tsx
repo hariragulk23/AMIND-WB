@@ -251,7 +251,7 @@ export function CommodityDetail({ commodity }: { commodity: Commodity }) {
 
         {/* ---- Standing note ------------------------------------------- */}
         <div className="border-t border-paper-line py-10">
-          <Reveal as="p" className="max-w-[46rem] text-sm text-on-light-muted">
+          <Reveal as="p" className="measure text-sm text-on-light-muted">
             Specifications, grades, packing formats and commercial terms for{" "}
             {commodity.name.toLowerCase()} are confirmed against each enquiry.
             Send the requirement in writing and we will respond with what can be

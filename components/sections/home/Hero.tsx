@@ -25,6 +25,20 @@ import { primaryCta, secondaryCtas } from "@/data/navigation";
  *
  * Rendered on the server: every one of those is present and fully visible in
  * the initial HTML. The animation only moves them; it never gates them.
+ *
+ * THE ENTRANCE IS CHOREOGRAPHED IN TWO BEATS.
+ * It was originally a three-word stagger — AM / GLOBAL / COMMODITIES — with a
+ * tight 0.09s gap and four separately delayed supporting elements trailing it.
+ * With a two-word wordmark that reading collapses: a short gap between two
+ * words is heard as one hurried beat, not two.
+ *
+ * So the timing is rebuilt rather than trimmed:
+ *   BEAT ONE   the rule and eyebrow set the frame, then AM lands.
+ *   BEAT TWO   a deliberate pause, then INDIA lands — long enough to register
+ *              as a second arrival rather than the tail of the first.
+ *   SETTLE     everything below arrives as one quiet wave overlapping the end
+ *              of beat two, instead of four more separate beats competing
+ *              with the wordmark for attention.
  */
 export function Hero() {
   return (
@@ -41,13 +55,22 @@ export function Hero() {
       />
 
       <Container className="relative flex flex-1 flex-col justify-end">
+        {/* Clears the fixed header. The extra air above the wordmark is
+            desktop-only — on a phone the composition needs every pixel to keep
+            the scroll cue above the fold. */}
         <div
           aria-hidden="true"
-          style={{ paddingTop: "calc(var(--am-header-h) + 1.25rem)" }}
+          className="pt-[calc(var(--am-header-h)+1.25rem)] md:pt-[calc(var(--am-header-h)+2.5rem)]"
         />
 
         {/* ---- Eyebrow: what this company is, in one line --------------- */}
-        <Reveal className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2" immediate>
+        {/* Beat one opens here. */}
+        <Reveal
+          className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2"
+          immediate
+          delay={0.05}
+          y={10}
+        >
           <span aria-hidden="true" className="brand-rule block w-12" />
           <p className="label-xs text-on-light-muted">
             International B2B commodity sourcing &amp; trading
@@ -58,9 +81,12 @@ export function Hero() {
         <DisplayReveal
           as="h1"
           lines={heroContent.lines}
-          className="display-hero mt-5 text-heading md:mt-7"
+          className="display-hero mt-6 text-heading md:mt-8"
           immediate
-          delay={0.12}
+          delay={0.22}
+          /* The pause between AM and INDIA. Nearly three times the old
+             three-word gap — this is what makes it two beats. */
+          lineStagger={0.34}
         />
 
         {/*
@@ -73,7 +99,8 @@ export function Hero() {
         <Reveal
           as="p"
           className="mt-3 label-xs text-on-light-muted md:hidden"
-          delay={0.3}
+          delay={0.92}
+          y={10}
           immediate
         >
           {brandLockup.descriptorLong}
@@ -83,10 +110,10 @@ export function Hero() {
         <Reveal
           as="ul"
           stagger="tight"
-          delay={0.4}
-          y={14}
+          delay={0.98}
+          y={12}
           immediate
-          className="mt-6 grid grid-cols-4 border-t border-paper-line md:mt-8"
+          className="mt-6 grid grid-cols-4 border-t border-paper-line md:mt-9"
         >
           {commodities.map((commodity, index) => (
             <li key={commodity.slug} className="min-w-0">
@@ -106,13 +133,13 @@ export function Hero() {
         </Reveal>
 
         {/* ---- Statement + intro + CTAs ---------------------------------- */}
-        <div className="mt-6 border-t border-paper-line pt-6 md:mt-8 md:pt-8">
+        <div className="mt-6 border-t border-paper-line pt-6 md:mt-9 md:pt-9">
           <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
             <Reveal
               as="p"
               className="display-md font-display uppercase tracking-[0.02em] text-brand-red-deep lg:col-span-3"
-              delay={0.5}
-              y={20}
+              delay={1.06}
+              y={14}
               immediate
             >
               {heroContent.statement.map((line) => (
@@ -124,9 +151,9 @@ export function Hero() {
 
             <Reveal
               as="p"
-              className="body-lg max-w-[34rem] text-on-light-muted lg:col-span-5"
-              delay={0.6}
-              y={20}
+              className="body-lg measure text-on-light-muted lg:col-span-5"
+              delay={1.12}
+              y={14}
               immediate
             >
               {heroContent.intro}
@@ -134,8 +161,8 @@ export function Hero() {
 
             <Reveal
               className="flex flex-col items-start gap-2.5 sm:flex-row lg:col-span-4 lg:flex-col lg:items-stretch"
-              delay={0.7}
-              y={20}
+              delay={1.18}
+              y={14}
               immediate
             >
               <CtaLink href={primaryCta.href} variant="solid">

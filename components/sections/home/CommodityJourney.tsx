@@ -77,8 +77,10 @@ export function CommodityJourney() {
                 ease: "none",
                 scrollTrigger: {
                   trigger: panel,
-                  start: "top 85%",
-                  end: "top 25%",
+                  /* A wider range than the section needs, so the crossfade
+                     reads as a slow dissolve rather than a switch. */
+                  start: "top 96%",
+                  end: "top 18%",
                   scrub: true,
                 },
               },
@@ -125,7 +127,7 @@ export function CommodityJourney() {
         if (!content) return;
 
         const items = Array.from(content.children);
-        gsap.set(items, { opacity: 0, y: 26 });
+        gsap.set(items, { opacity: 0, y: 18 });
         gsap.to(items, {
           opacity: 1,
           y: 0,
@@ -176,7 +178,7 @@ export function CommodityJourney() {
             </div>
           ))}
 
-          <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/25" />
+          <div className="scrim-media absolute inset-0" />
           <div className="grain-layer" />
 
           {/* Platform marker rail */}

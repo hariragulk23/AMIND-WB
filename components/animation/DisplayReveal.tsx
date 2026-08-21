@@ -45,7 +45,7 @@ export function DisplayReveal({
   id,
   immediate = false,
   delay = 0,
-  lineStagger = 0.09,
+  lineStagger = 0.13,
 }: DisplayRevealProps) {
   const scope = useRef<HTMLElement>(null);
 

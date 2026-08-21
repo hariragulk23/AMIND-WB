@@ -38,7 +38,7 @@ export default function QualityCompliancePage() {
         aria-labelledby="registrations-heading"
         className="bg-paper text-on-light"
       >
-        <Container className="py-20 md:py-28">
+        <Container className="section-y-sm">
           <div className="grid gap-8 lg:grid-cols-12">
             <div className="lg:col-span-4">
               <Reveal>
@@ -74,7 +74,7 @@ export default function QualityCompliancePage() {
 
               <Reveal
                 as="p"
-                className="mt-6 max-w-[42rem] text-sm text-on-light-muted"
+                className="measure mt-6 text-sm text-on-light-muted"
               >
                 {complianceContent.verificationNote}
               </Reveal>
@@ -88,7 +88,7 @@ export default function QualityCompliancePage() {
         aria-labelledby="framework-heading"
         className="bg-paper text-on-light"
       >
-        <Container className="pb-20 md:pb-28">
+        <Container className="pb-[clamp(5rem,8vw,9rem)]">
           <div className="grid gap-8 border-t border-paper-line pt-14 lg:grid-cols-12">
             <div className="lg:col-span-4">
               <Reveal>
@@ -110,7 +110,7 @@ export default function QualityCompliancePage() {
               {complianceContent.framework.map((item) => (
                 <li key={item.title} className="border-b border-paper-line py-6">
                   <h3 className="display-md text-on-light">{item.title}</h3>
-                  <p className="mt-2 max-w-[42rem] text-on-light-muted">
+                  <p className="measure mt-2 text-on-light-muted">
                     {item.description}
                   </p>
                 </li>

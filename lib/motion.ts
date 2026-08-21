@@ -43,16 +43,16 @@ export const ease = {
 
 /** Durations in seconds. Kept long on purpose. */
 export const duration = {
-  fast: 0.4,
-  base: 0.9,
-  slow: 1.4,
+  fast: 0.5,
+  base: 1.1,
+  slow: 1.7,
 } as const;
 
 /** Standard stagger for grouped reveals. */
 export const stagger = {
-  tight: 0.06,
-  base: 0.1,
-  loose: 0.16,
+  tight: 0.08,
+  base: 0.13,
+  loose: 0.2,
 } as const;
 
 /**

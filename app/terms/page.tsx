@@ -34,7 +34,7 @@ export default function TermsPage() {
       />
 
       <section className="bg-paper text-on-light">
-        <Container width="text" className="py-20 md:py-28">
+        <Container width="text" className="section-y-sm">
           <div className="space-y-10">
             <div>
               <h2 className="display-md text-on-light">These terms</h2>

@@ -51,7 +51,7 @@ export function Reveal({
   children,
   as: Tag = "div",
   className,
-  y = 28,
+  y = 18,
   delay = 0,
   stagger,
   immediate = false,

@@ -212,11 +212,24 @@
     cursor: pointer;
   }
 
-  /* Visible, high-contrast focus for keyboard users on any ground. */
+  /*
+    One focus treatment for the whole site. Antonio Marco red reads clearly on
+    both the off-white canvas (4.1:1) and the navy grounds (3.5:1), comfortably
+    past the 3:1 WCAG asks of a non-text indicator, so no ground needs a
+    special case. The offset keeps it clear of the element's own rules.
+  */
   :focus-visible {
-    outline: 2px solid var(--am-focus);
+    outline: 3px solid var(--brand-red);
     outline-offset: 3px;
     border-radius: 1px;
+  }
+
+  /* Inputs carry their own bottom rule, so the ring sits tighter to avoid
+     colliding with the field below. */
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline-offset: 2px;
   }
 
   ::selection {
@@ -241,35 +254,35 @@
 @utility display-hero {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(2.5rem, min(9vw, 11.5vh), 7rem);
-  line-height: 0.98;
-  letter-spacing: -0.015em;
+  font-size: clamp(3.5rem, min(11vw, 15vh), 9.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.03em;
   text-transform: uppercase;
 }
 
 @utility display-xl {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(2.25rem, 7.5vw, 6.5rem);
-  line-height: 1;
-  letter-spacing: -0.012em;
+  font-size: clamp(2.5rem, 8.5vw, 7.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
   text-transform: uppercase;
 }
 
 @utility display-lg {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(1.75rem, 4.4vw, 3.5rem);
-  line-height: 1.06;
-  letter-spacing: -0.01em;
+  font-size: clamp(1.875rem, 4.6vw, 4rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
 }
 
 @utility display-md {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
-  line-height: 1.18;
-  letter-spacing: -0.005em;
+  font-size: clamp(1.0625rem, 1.6vw, 1.375rem);
+  line-height: 1.25;
+  letter-spacing: 0;
 }
 
 /* Tracked-out uppercase micro label — the site's structural voice. */
@@ -278,7 +291,7 @@
   font-size: 0.6875rem;
   font-weight: 600;
   line-height: 1.2;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
@@ -287,7 +300,7 @@
   font-size: 0.8125rem;
   font-weight: 600;
   line-height: 1.3;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -307,6 +320,31 @@
 
 @utility gutter {
   padding-inline: var(--am-gutter);
+}
+
+/* Body copy stops at a comfortable measure — roughly 68 characters — instead
+   of running the full width of a large screen. */
+@utility measure {
+  max-width: 68ch;
+}
+
+@utility measure-tight {
+  max-width: 56ch;
+}
+
+/* Vertical rhythm between major sections, scaling with the viewport rather
+   than stepping at breakpoints. Deliberately more generous than feels
+   comfortable at first — it is what separates editorial from cramped. */
+@utility section-y {
+  padding-block: clamp(6.5rem, 12vw, 14rem);
+}
+
+@utility section-y-sm {
+  padding-block: clamp(5rem, 8vw, 9rem);
+}
+
+@utility section-pb {
+  padding-bottom: clamp(6.5rem, 12vw, 14rem);
 }
 
 @utility hairline-t {
@@ -332,6 +370,27 @@
 @utility pull-up-screen {
   margin-top: -100vh;
   margin-top: -100svh;
+}
+
+/* ==========================================================================
+   MEDIA SCRIM
+   --------------------------------------------------------------------------
+   Protects typography sitting over a photograph. Deliberately a NEUTRAL near
+   black rather than the navy ground colour: tinting a scrim with a brand hue
+   casts that hue across the whole image, which visibly desaturated the timber
+   and the coffee cherries. Weighted to the bottom third, where the text sits,
+   so the top of the frame is left essentially untouched.
+   ========================================================================== */
+
+@utility scrim-media {
+  background-image: linear-gradient(
+    to top,
+    rgb(6 8 12 / 0.9) 0%,
+    rgb(6 8 12 / 0.72) 22%,
+    rgb(6 8 12 / 0.38) 44%,
+    rgb(6 8 12 / 0.12) 66%,
+    rgb(6 8 12 / 0) 100%
+  );
 }
 
 /* ==========================================================================
