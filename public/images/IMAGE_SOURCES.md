@@ -75,10 +75,9 @@ Both are placed, never redrawn: components use `Image` with each file's true
 intrinsic dimensions plus `w-auto`, so the mark can only ever scale
 proportionally.
 
-Note: the icon's red/green (`#d02126` / `#5c7845`) do not match the existing
-`--brand-red` / `--brand-green` design tokens (`#c75051` / `#758c67`), which
-were sampled from the old artwork. Flagged, not reconciled — see
-`app/globals.css`.
+`--brand-red` / `--brand-green` were reconciled to match this icon exactly
+(`#d02126` / `#5c7845`, previously `#c75051` / `#758c67` from the old
+artwork) — see `app/globals.css` for the full WCAG re-check that followed.
 
 ### Generated favicon and OG derivatives
 

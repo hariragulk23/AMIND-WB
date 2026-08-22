@@ -20,27 +20,33 @@
 
 :root {
   /* --- Brand colours ------------------------------------------------------
-     Originally measured off the supplied Antonio Marco logo artwork (that
-     file has since been retired — see data/brand.ts):
-        red   #c75051  the diagonal bars and the rule
-        green #758c67  the centre bar and the rule's midsection
-        brown #522f1f  the ANTONIO MARCO wordmark
-        navy  #101f56  the EXPORTS AND TRADE PRIVATE LIMITED descriptor
-     The variants beneath each are the same hue pushed until it passes AA on
-     the ground it is used against; the ratio is noted. The logo red is only
-     4.1:1 on the canvas and carries just 4.47:1 under white, so it is kept for
-     marks and rules while text and fills use the adjusted values.
-
-     FLAGGED — NOT YET RECONCILED: the new am-india-icon.png artwork samples
-     to a visibly different, more saturated pair — red #d02126, green #5c7845
-     — rather than the muted #c75051 / #758c67 below. These tokens have not
-     been changed pending a decision; see the migration report for the full
-     comparison. */
-  --brand-red: #c75051; /* logo red — rules, marks, motif        */
+     Red and green are measured directly off am-india-icon.png (flat fill,
+     non-anti-aliased pixels — not estimated by eye): red #d02126, green
+     #5c7845. Brown and navy below are unchanged, carried over from the
+     retired Antonio Marco artwork.
+        red   #d02126  the icon's diagonal bars, and the brand-rule motif
+        green #5c7845  the icon's centre bar, and the rule's midsection
+        brown #522f1f  editorial headings
+        navy  #101f56  body copy
+     RE-CHECKED AGAINST AA after this update (2026-08-22): every place the
+     base --brand-red renders as text or a UI-component boundary sits on
+     --am-paper (#f6f4ef) — 4.86:1, clearing both the 4.5:1 small-text and
+     3:1 large-text/non-text thresholds. The site's one dark background,
+     --am-ink (navy-deep, #0d1a48), only ever carries the red as the
+     focus-ring outline (non-text, 3:1 required) — that is 3.12:1, still
+     passing but a narrower margin than the old red's 3.73:1. Nothing
+     newly fails AA. Base --brand-green has no text or required-for-
+     understanding use — it only tints decorative, aria-hidden motifs
+     (the brand-rule stripe, background-wash gradients), so no AA
+     threshold applies to it.
+     The -cta / -deep / -light / -deep variants below are independent,
+     unchanged hex values tuned for their own specific ground; they are
+     unaffected by this update. */
+  --brand-red: #d02126; /* icon red — rules, marks, motif        */
   --brand-red-cta: #c24b4c; /* CTA fill      — white text 4.8:1  */
   --brand-red-deep: #a83f3c; /* text on off-white       5.6:1     */
   --brand-red-light: #d4675f; /* text on navy            4.7:1     */
-  --brand-green: #758c67; /* logo green — accents, motif       */
+  --brand-green: #5c7845; /* icon green — accents, motif       */
   --brand-green-deep: #4f6344; /* text on off-white       6.0:1     */
   --brand-brown: #522f1f; /* logo brown — headings  10.7:1     */
   --brand-brown-deep: #2e1a10; /* deep brown band                   */
@@ -219,10 +225,11 @@
   }
 
   /*
-    One focus treatment for the whole site. Antonio Marco red reads clearly on
-    both the off-white canvas (4.1:1) and the navy grounds (3.5:1), comfortably
-    past the 3:1 WCAG asks of a non-text indicator, so no ground needs a
-    special case. The offset keeps it clear of the element's own rules.
+    One focus treatment for the whole site. The AM INDIA red reads clearly on
+    both the off-white canvas (4.86:1) and the site's one dark ground, --am-ink
+    (3.12:1), comfortably past the 3:1 WCAG ask of a non-text indicator, so no
+    ground needs a special case. The offset keeps it clear of the element's
+    own rules.
   */
   :focus-visible {
     outline: 3px solid var(--brand-red);
