@@ -219,12 +219,15 @@ export function CommodityJourney() {
                     {commodity.name}
                   </h3>
 
+                  {/* One line over the photograph, not three. The paragraph
+                      that used to sit here (`description[0]`) is a full
+                      specification note — it is still published in full on
+                      the commodity page this panel links to, so nothing is
+                      lost from the site, but over a full-bleed image it was
+                      competing with the photograph rather than supporting it.
+                      This is the section that is primarily image. */}
                   <p className="body-lg mt-6 max-w-[34rem] text-on-dark-muted">
                     {commodity.summary}
-                  </p>
-
-                  <p className="mt-4 max-w-[34rem] text-sm text-on-dark-muted">
-                    {commodity.description[0]}
                   </p>
 
                   <div className="mt-9">

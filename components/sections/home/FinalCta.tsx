@@ -22,7 +22,7 @@ export function FinalCta() {
     >
       <Container className="relative section-y">
         <Reveal>
-          <SectionLabel index="08" tone="dark">
+          <SectionLabel tone="dark">
             {finalCtaContent.label}
           </SectionLabel>
         </Reveal>
@@ -31,7 +31,7 @@ export function FinalCta() {
           as="h2"
           id="final-cta-heading"
           lines={finalCtaContent.headingLines}
-          className="display-hero mt-10 text-on-dark lg:mt-14"
+          className="display-xl mt-10 text-on-dark lg:mt-14"
         />
 
         <div className="mt-14 grid gap-10 border-t border-white/15 pt-10 lg:grid-cols-12">

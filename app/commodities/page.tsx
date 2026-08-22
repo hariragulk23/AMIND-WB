@@ -38,7 +38,7 @@ export default function CommoditiesPage() {
         <Container className="section-y-sm">
           <ul className="grid gap-x-8 gap-y-16 md:grid-cols-2">
             {commodities.map((commodity) => (
-              <Reveal as="li" key={commodity.slug} y={24}>
+              <Reveal as="li" key={commodity.slug} y={18}>
                 <Link
                   href={`/commodities/${commodity.slug}`}
                   className="group block"
@@ -57,7 +57,7 @@ export default function CommoditiesPage() {
                   <h2 className="display-lg mt-3 text-on-light">
                     {commodity.name}
                   </h2>
-                  <p className="mt-4 max-w-[34rem] text-on-light-muted">
+                  <p className="measure mt-4 text-on-light-muted">
                     {commodity.summary}
                   </p>
                   <span className="label-xs mt-6 inline-flex items-center gap-3 text-on-light transition-colors duration-300 ease-brand group-hover:text-brass-deep">

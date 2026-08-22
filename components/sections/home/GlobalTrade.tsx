@@ -40,63 +40,68 @@ export function GlobalTrade() {
         className="pointer-events-none absolute inset-0 hidden bg-gradient-to-r from-ink via-ink/70 to-transparent lg:block"
       />
 
-      <Container className="relative py-24 md:py-36 lg:py-44">
-        <Reveal>
-          <SectionLabel index="04" tone="dark">
-            {tradeContent.label}
-          </SectionLabel>
-        </Reveal>
+      {/* THE SPARSE SECTION. Everything sits on one centre line with a lot of
+          dark around it, and the four facts — not the prose — are the largest
+          thing in the band. The shape is deliberately unlike the two-column
+          sections above and below: that contrast is what stops the page
+          reading as one template repeated eight times.
 
-        <DisplayReveal
-          as="h2"
-          id="global-trade-heading"
-          lines={tradeContent.headingLines}
-          className="display-lg mt-10 max-w-[22ch] text-on-dark lg:mt-14"
-        />
+          NOTE: this was planned as the full-bleed photographic section. It is
+          not, because there is no trade photograph — `home-trade` in
+          data/images.ts is `available: false`, and the only real photography
+          on the site is commodity-specific, so using a coffee or teak frame
+          here would misrepresent the section. Sparse-and-centred delivers the
+          layout contrast without inventing an image. See the report. */}
+      <Container className="section-y-lg relative">
+        <div className="mx-auto max-w-[62rem] text-center">
+          <Reveal className="flex justify-center">
+            <SectionLabel tone="dark">{tradeContent.label}</SectionLabel>
+          </Reveal>
 
-        <div className="mt-12 grid gap-12 lg:mt-20 lg:grid-cols-12 lg:gap-10">
-          <Reveal stagger="base" className="space-y-6 lg:col-span-5">
+          <DisplayReveal
+            as="h2"
+            id="global-trade-heading"
+            lines={tradeContent.headingLines}
+            className="display-lg mx-auto mt-12 max-w-[18ch] text-on-dark lg:mt-16"
+          />
+
+          <Reveal stagger="base" className="mt-12 space-y-5 lg:mt-16">
             {tradeContent.paragraphs.map((paragraph) => (
-              <p key={paragraph} className="text-on-dark-muted">
+              <p key={paragraph} className="measure mx-auto text-on-dark-muted">
                 {paragraph}
               </p>
             ))}
           </Reveal>
-
-          <div className="lg:col-span-6 lg:col-start-7">
-            <Reveal
-              as="dl"
-              stagger="base"
-              className="border-t border-charcoal"
-            >
-              {tradeContent.facts.map((fact) => (
-                <div
-                  key={fact.label}
-                  className="flex items-baseline justify-between gap-6 border-b border-charcoal py-5"
-                >
-                  <dt className="label-xs text-on-dark-muted">{fact.label}</dt>
-                  <dd className="font-display text-[clamp(1.25rem,2.4vw,1.75rem)] leading-none text-on-dark">
-                    {fact.value}
-                  </dd>
-                </div>
-              ))}
-            </Reveal>
-
-            <Reveal className="mt-8 flex flex-wrap items-baseline gap-x-6 gap-y-2">
-              <p className="label-xs numeral text-brass">
-                {company.baseCoordinates.latitude} /{" "}
-                {company.baseCoordinates.longitude}
-              </p>
-              <p className="label-xs text-on-dark-muted">
-                {company.baseCoordinates.locality}
-              </p>
-            </Reveal>
-
-            <Reveal className="mt-6">
-              <p className="text-sm text-on-dark-muted">{tradeContent.note}</p>
-            </Reveal>
-          </div>
         </div>
+
+        {/* The facts, given the weight the prose used to take. */}
+        <Reveal
+          as="dl"
+          stagger="base"
+          className="mt-20 grid gap-x-10 gap-y-12 border-t border-charcoal pt-14 sm:grid-cols-2 lg:mt-28 lg:grid-cols-4"
+        >
+          {tradeContent.facts.map((fact) => (
+            <div key={fact.label}>
+              <dt className="label-xs text-on-dark-muted">{fact.label}</dt>
+              <dd className="font-display mt-4 text-[clamp(1.5rem,3vw,2.25rem)] leading-[1.1] text-on-dark">
+                {fact.value}
+              </dd>
+            </div>
+          ))}
+        </Reveal>
+
+        <Reveal className="mt-16 flex flex-col gap-3 border-t border-charcoal pt-8 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8">
+          <p className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
+            <span className="label-xs numeral text-brass">
+              {company.baseCoordinates.latitude} /{" "}
+              {company.baseCoordinates.longitude}
+            </span>
+            <span className="label-xs text-on-dark-muted">
+              {company.baseCoordinates.locality}
+            </span>
+          </p>
+          <p className="text-sm text-on-dark-muted">{tradeContent.note}</p>
+        </Reveal>
       </Container>
     </section>
   );

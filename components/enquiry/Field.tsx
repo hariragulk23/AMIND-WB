@@ -70,7 +70,7 @@ function FieldShell({
       {children({ describedBy, invalid: Boolean(error) })}
 
       {showHint ? (
-        <p id={hintId} className="mt-2 text-xs text-on-light-muted">
+        <p id={hintId} className="mt-2 text-sm text-on-light-muted">
           {hint}
         </p>
       ) : null}
@@ -79,7 +79,7 @@ function FieldShell({
         <p
           id={errorId}
           role="alert"
-          className="mt-2 text-xs font-medium text-brass-deep"
+          className="mt-2 text-sm font-medium text-brass-deep"
         >
           {error}
         </p>

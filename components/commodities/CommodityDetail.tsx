@@ -79,7 +79,7 @@ export function CommodityDetail({ commodity }: { commodity: Commodity }) {
       <Container>
         {/* ---- Who the platform is built for --------------------------- */}
         <Block title="Built for" index={nextIndex()}>
-          <Reveal as="p" className="mb-6 text-on-light-muted">
+          <Reveal as="p" className="measure mb-6 text-on-light-muted">
             The specification and documentation set differ by buyer type. This
             platform is structured to serve:
           </Reveal>

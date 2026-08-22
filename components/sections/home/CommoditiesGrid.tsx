@@ -22,11 +22,11 @@ import { secondaryCtas } from "@/data/navigation";
 export function CommoditiesGrid() {
   return (
     <section aria-labelledby="grid-heading" className="bg-paper text-on-light">
-      <Container className="section-pb">
+      <Container className="section-y-lg">
         <div className="flex flex-col justify-between gap-8 border-t border-paper-line pt-14 md:flex-row md:items-end">
           <div>
             <Reveal>
-              <SectionLabel index="06">{gridContent.label}</SectionLabel>
+              <SectionLabel >{gridContent.label}</SectionLabel>
             </Reveal>
             <DisplayReveal
               as="h2"
@@ -46,9 +46,14 @@ export function CommoditiesGrid() {
           </Reveal>
         </div>
 
+        {/* Two across, not four. At four-up on a 1440 canvas each tile was
+            around 300px wide — the photography was reduced to a thumbnail
+            with a caption, which is what "under-used imagery" looked like in
+            practice. Two-up roughly doubles the linear size of every frame
+            and lets the images, rather than the text, carry the section. */}
         <Reveal
           stagger="loose"
-          className="mt-14 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4"
+          className="mt-20 grid gap-x-8 gap-y-20 sm:grid-cols-2 lg:mt-28 lg:gap-x-12"
         >
           {commodities.map((commodity) => (
             <Link
@@ -59,7 +64,7 @@ export function CommoditiesGrid() {
               <div className="relative overflow-hidden">
                 <Media
                   imageKey={commodity.tileImage}
-                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  sizes="(min-width: 640px) 50vw, 100vw"
                   className="transition-transform duration-[1400ms] ease-brand group-hover:scale-[1.05]"
                 />
               </div>
@@ -71,7 +76,7 @@ export function CommoditiesGrid() {
                 </span>
               </div>
 
-              <p className="mt-3 text-sm text-on-light-muted">
+              <p className="measure mt-3 text-sm text-on-light-muted">
                 {commodity.summary}
               </p>
 

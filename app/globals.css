@@ -264,19 +264,18 @@
 
    Sizes are materially smaller than the previous serif scale: Oxanium is a
    broad geometric face, so the same nominal size sets roughly 40% wider. */
-@utility display-hero {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(3.5rem, min(11vw, 15vh), 9.5rem);
-  line-height: 0.94;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
-}
-
+/* THREE DISPLAY STEPS, NOT FOUR.
+   `display-hero` (clamp 3.5→9.5rem) and `display-xl` (2.5→7.5rem) overlapped
+   almost entirely and were doing one job between them; hero had a single
+   caller left once the homepage wordmark became the lockup image. They are
+   merged here into `display-xl`, whose vw term is unchanged so the longest
+   heading on the site — "WE CONNECT / ORIGIN / WITH MARKET." in Positioning —
+   sets exactly as before at every width up to 1412px. Only the ceiling moves,
+   which lets the type keep growing on very wide screens instead of stalling. */
 @utility display-xl {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(2.5rem, 8.5vw, 7.5rem);
+  font-size: clamp(2.5rem, 8.5vw, 8rem);
   line-height: 0.98;
   letter-spacing: -0.025em;
   text-transform: uppercase;
@@ -290,12 +289,16 @@
   letter-spacing: -0.02em;
 }
 
+/* Raised out of the body cluster. At 17–22px this sat on top of body-lg
+   (17–20px) and base body (16px), so subheads and paragraphs read as the same
+   weight of voice — the "narrow mid-range" that made the page feel flat.
+   20–28px puts a clear step between a subhead and the copy beneath it. */
 @utility display-md {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(1.0625rem, 1.6vw, 1.375rem);
-  line-height: 1.25;
-  letter-spacing: 0;
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
 /* Tracked-out uppercase micro label — the site's structural voice. */
@@ -349,15 +352,22 @@
    than stepping at breakpoints. Deliberately more generous than feels
    comfortable at first — it is what separates editorial from cramped. */
 @utility section-y {
-  padding-block: clamp(6.5rem, 12vw, 14rem);
+  padding-block: clamp(8rem, 14vw, 17rem);
 }
 
 @utility section-y-sm {
-  padding-block: clamp(5rem, 8vw, 9rem);
+  padding-block: clamp(6rem, 10vw, 11rem);
 }
 
 @utility section-pb {
-  padding-bottom: clamp(6.5rem, 12vw, 14rem);
+  padding-bottom: clamp(8rem, 14vw, 17rem);
+}
+
+/* For the deliberately sparse sections. The extra air is the point: a section
+   with little in it has to read as composed rather than unfinished, and that
+   difference is almost entirely how much room surrounds what is there. */
+@utility section-y-lg {
+  padding-block: clamp(10rem, 18vw, 22rem);
 }
 
 @utility hairline-t {

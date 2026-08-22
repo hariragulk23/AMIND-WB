@@ -40,7 +40,7 @@ export default function PrivacyPage() {
           <div className="space-y-10">
             <div>
               <h2 className="display-md text-on-light">Who we are</h2>
-              <p className="mt-4 text-on-light-muted">
+              <p className="measure mt-4 text-on-light-muted">
                 This website is operated by {company.legalName}, trading as{" "}
                 {company.brand}, a private limited company registered in India
                 at {registeredOfficeInline}. CIN{" "}
@@ -53,14 +53,14 @@ export default function PrivacyPage() {
               <h2 className="display-md text-on-light">
                 What we collect and why
               </h2>
-              <p className="mt-4 text-on-light-muted">
+              <p className="measure mt-4 text-on-light-muted">
                 We collect the personal data you choose to send us when you make
                 a trade enquiry — typically your name, company, business email
                 address, telephone number and the contents of your enquiry. We
                 use it for one purpose: to assess and respond to that enquiry
                 and to correspond with you about the trade it concerns.
               </p>
-              <p className="mt-4 text-on-light-muted">
+              <p className="measure mt-4 text-on-light-muted">
                 We do not sell personal data, and we do not use it for
                 advertising or profiling.
               </p>
@@ -68,7 +68,7 @@ export default function PrivacyPage() {
 
             <div>
               <h2 className="display-md text-on-light">Cookies and analytics</h2>
-              <p className="mt-4 text-on-light-muted">
+              <p className="measure mt-4 text-on-light-muted">
                 This website does not set analytics, advertising or tracking
                 cookies. Our hosting provider processes standard technical logs,
                 which may include IP addresses, for security and reliability.
@@ -77,7 +77,7 @@ export default function PrivacyPage() {
 
             <div>
               <h2 className="display-md text-on-light">Retention</h2>
-              <p className="mt-4 text-on-light-muted">
+              <p className="measure mt-4 text-on-light-muted">
                 Enquiry correspondence is retained for as long as needed to
                 handle the enquiry and any resulting commercial relationship,
                 and to meet applicable legal, tax and accounting obligations.
@@ -86,7 +86,7 @@ export default function PrivacyPage() {
 
             <div>
               <h2 className="display-md text-on-light">Your rights</h2>
-              <p className="mt-4 text-on-light-muted">
+              <p className="measure mt-4 text-on-light-muted">
                 Subject to applicable law, you may request access to the
                 personal data we hold about you, ask us to correct or delete it,
                 or object to our processing of it. To make a request, contact us
@@ -103,7 +103,7 @@ export default function PrivacyPage() {
 
             <div>
               <h2 className="display-md text-on-light">Contact</h2>
-              <address className="mt-4 not-italic text-on-light-muted">
+              <address className="measure mt-4 not-italic text-on-light-muted">
                 {company.legalName}
                 <br />
                 {registeredOfficeInline}

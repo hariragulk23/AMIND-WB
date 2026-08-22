@@ -38,7 +38,7 @@ export default function TermsPage() {
           <div className="space-y-10">
             <div>
               <h2 className="display-md text-on-light">These terms</h2>
-              <p className="mt-4 text-on-light-muted">
+              <p className="measure mt-4 text-on-light-muted">
                 This website is operated by {company.legalName}, trading as{" "}
                 {company.brand}, registered in India at{" "}
                 {registeredOfficeInline}. By using this website you accept these
@@ -48,7 +48,7 @@ export default function TermsPage() {
 
             <div>
               <h2 className="display-md text-on-light">No offer, no prices</h2>
-              <p className="mt-4 text-on-light-muted">
+              <p className="measure mt-4 text-on-light-muted">
                 Nothing on this website constitutes an offer, a quotation or a
                 commitment to supply. No prices are published. Commodity
                 descriptions are general and indicative; specifications, grades,
@@ -59,7 +59,7 @@ export default function TermsPage() {
 
             <div>
               <h2 className="display-md text-on-light">Contracts of sale</h2>
-              <p className="mt-4 text-on-light-muted">
+              <p className="measure mt-4 text-on-light-muted">
                 Any trade is governed exclusively by the written contract agreed
                 between the parties for that transaction. These website terms do
                 not form part of, vary, or override any such contract.
@@ -68,7 +68,7 @@ export default function TermsPage() {
 
             <div>
               <h2 className="display-md text-on-light">Accuracy</h2>
-              <p className="mt-4 text-on-light-muted">
+              <p className="measure mt-4 text-on-light-muted">
                 We take care to keep the information on this website accurate
                 and current, but it is provided for general information only and
                 may change without notice. It should not be relied on as the
@@ -81,7 +81,7 @@ export default function TermsPage() {
               <h2 className="display-md text-on-light">
                 Intellectual property
               </h2>
-              <p className="mt-4 text-on-light-muted">
+              <p className="measure mt-4 text-on-light-muted">
                 The content, design and marks on this website are the property
                 of {company.legalName} or its licensors, and may not be
                 reproduced without permission.
@@ -92,7 +92,7 @@ export default function TermsPage() {
               <h2 className="display-md text-on-light">
                 Governing law and contact
               </h2>
-              <p className="mt-4 text-on-light-muted">
+              <p className="measure mt-4 text-on-light-muted">
                 These terms are governed by the laws of India. Questions about
                 them can be sent to{" "}
                 <a

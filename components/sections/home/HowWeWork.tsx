@@ -50,16 +50,25 @@ export function HowWeWork() {
               as="li"
               key={step.number}
               className="group border-b border-paper-line"
-              y={22}
+              y={18}
             >
-              <div className="grid gap-4 py-9 md:grid-cols-12 md:gap-8 md:py-12">
-                <p className="numeral font-display text-[clamp(2rem,4vw,3.25rem)] font-semibold leading-none text-brand-red md:col-span-2">
-                  {step.number}
-                </p>
-                <h3 className="display-md text-heading md:col-span-4">
-                  {step.title}
-                </h3>
-                <p className="measure text-on-light-muted md:col-span-6">
+              {/* Asymmetric, not an even twelve-column split: a narrow rail
+                  carries the numeral and the step title, and the description
+                  runs in one wide column beside it. The old 2/4/6 grid put
+                  three roughly equal blocks on every row, which read as a
+                  table — the eye had to re-scan each row to find where the
+                  substance was. Here the rail is fixed and the substance is
+                  always in the same place. */}
+              <div className="grid gap-3 py-10 md:grid-cols-[7rem_1fr] md:gap-12 md:py-14 lg:grid-cols-[10rem_1fr]">
+                <div className="flex items-baseline gap-4 md:block">
+                  <p className="numeral font-display text-[clamp(2rem,4vw,3.25rem)] font-semibold leading-none text-brand-red">
+                    {step.number}
+                  </p>
+                  <h3 className="display-md text-heading md:mt-4">
+                    {step.title}
+                  </h3>
+                </div>
+                <p className="measure text-on-light-muted md:pt-2">
                   {step.description}
                 </p>
               </div>

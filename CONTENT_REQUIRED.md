@@ -133,6 +133,15 @@ _File: `data/commodities.ts` → `nuts`_
 - [ ] Whether any other tree nuts are to be offered, and when.
 - [ ] Minimum order quantity.
 - [ ] Incoterms and loading ports.
+- [ ] **Larger hero frames for the four commodities.** The supplied 16:9
+      frames are 1376x768. The homepage journey renders them full-bleed, so
+      at a 1920px viewport a 1376px source is stretched to 1920 CSS px — a
+      40% upscale beyond native. Next.js is behaving correctly (it caps at
+      the source width and will not invent pixels); the source is simply too
+      small for full-bleed use. Supply >=1920px wide, ideally 2560px, for
+      coffee, teak, spices and nuts. The 9:16 mobile frames (768x1376) are
+      correctly sized and need no change.
+
 - [ ] **A cashew-forward 4:5 tile photograph** to replace
       `public/images/nuts/tile-nuts.jpg`. The platform is cashew-led, but the
       current tile frame contains no cashews at all — only walnuts, almonds

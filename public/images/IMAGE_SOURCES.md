@@ -33,6 +33,13 @@ frame for phones, and a studio tile.
 
 ### Two notes on how these are delivered
 
+**Resolution ceiling on the hero frames.** The 16:9 frames are 1376px wide.
+The homepage journey renders them full-bleed, so above roughly a 1376px
+viewport they are being scaled up past their native size — about 40% at
+1920px. Next.js caps at the source width rather than upscaling on the server,
+so this is a source-resolution limit, not a delivery bug. Replacing them with
+>=1920px (ideally 2560px) frames is logged in CONTENT_REQUIRED.md.
+
 **Art direction, not scaling.** The hero frames are two genuinely different
 crops. `<Media>` renders a real `<picture>` with a `(min-width: 768px)` media
 query, so a phone downloads only the portrait file. Scaling the landscape file

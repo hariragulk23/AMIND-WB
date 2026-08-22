@@ -327,10 +327,10 @@ export function TradeEnquiryForm() {
       {/* ---- Submit ---------------------------------------------------- */}
       <div className="grid gap-8 border-t border-paper-line py-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
-          <p className="text-xs text-on-light-muted">
+          <p className="text-sm text-on-light-muted">
             {enquiryCopy.requiredNote}
           </p>
-          <p className="mt-2 text-xs text-on-light-muted">
+          <p className="mt-2 text-sm text-on-light-muted">
             Your details are used only to respond to this enquiry. See our{" "}
             <Link
               href="/privacy"

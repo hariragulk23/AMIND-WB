@@ -103,7 +103,7 @@ export function SiteFooter() {
 
         {/* ---- Legal bar ---- */}
         <div className="mt-16 flex flex-col gap-5 border-t border-charcoal pt-8 md:flex-row md:items-center md:justify-between">
-          <p className="text-xs text-on-dark-muted">
+          <p className="text-sm text-on-dark-muted">
             © {year} {company.legalName}. All rights reserved.
           </p>
           <ul className="flex flex-wrap gap-x-7 gap-y-2">

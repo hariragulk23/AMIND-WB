@@ -51,7 +51,7 @@ export function Logo({ tone = "light", className }: LogoProps) {
         width={logo.width}
         height={logo.height}
         priority
-        sizes="140px"
+        sizes="176px"
         className="h-8 w-auto xl:h-9"
       />
     </Link>

@@ -28,7 +28,7 @@ export function FooterMark() {
       alt={icon.alt}
       width={icon.width}
       height={icon.height}
-      sizes="56px"
+      sizes="80px"
       className="mt-10 h-12 w-auto lg:h-14"
     />
   );

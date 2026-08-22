@@ -118,7 +118,7 @@ export default function ContactPage() {
                 <p className="label-xs mt-8 text-on-light-muted">
                   Registered office
                 </p>
-                <div className="mt-2 text-on-light-muted">
+                <div className="measure mt-2 text-on-light-muted">
                   {registeredOfficeLines.map((line) => (
                     <span key={line} className="block">
                       {line}

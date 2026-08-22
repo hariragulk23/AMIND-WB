@@ -45,7 +45,7 @@ export default function SourcingTradePage() {
                 as="li"
                 key={stage.number}
                 className="border-b border-paper-line"
-                y={22}
+                y={18}
               >
                 <div className="grid gap-4 py-9 md:grid-cols-12 md:gap-8 md:py-12">
                   <p className="numeral font-display text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold leading-none text-brand-red md:col-span-2">
@@ -86,7 +86,7 @@ export default function SourcingTradePage() {
               className="space-y-5 lg:col-span-7 lg:col-start-6"
             >
               {sourcingContent.incoterms.body.map((paragraph) => (
-                <p key={paragraph} className="text-on-light-muted">
+                <p key={paragraph} className="measure text-on-light-muted">
                   {paragraph}
                 </p>
               ))}
