@@ -12,7 +12,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Quality & Compliance",
   description:
-    "The quality and documentation framework AM INDIA works within — corporate and trade registration, quality documentation, inspection, traceability and shipment documentation.",
+    "The quality and documentation framework AM INDIA works within: corporate and trade registration, inspection, traceability and shipment documentation.",
   path: "/quality-compliance",
 });
 

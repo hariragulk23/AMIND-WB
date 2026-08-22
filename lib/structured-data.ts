@@ -3,7 +3,7 @@
  * ---------------------------------------------------------------------------
  * JSON-LD builders.
  *
- * Only Organization, WebSite and BreadcrumbList are emitted. No review,
+ * Only Organization, WebSite, BreadcrumbList and FAQPage are emitted. No review,
  * rating, aggregateRating or offer schema is produced anywhere — there are no
  * genuine reviews or public prices, and fabricating them would be both a
  * search-guidelines violation and a commercial misrepresentation.
@@ -12,6 +12,7 @@
  */
 
 import { company } from "@/data/company";
+import { faqContent } from "@/data/faq";
 import { absoluteUrl, SITE_URL } from "./seo";
 
 type JsonLd = Record<string, unknown>;
@@ -83,6 +84,32 @@ export function breadcrumbSchema(crumbs: readonly Crumb[]): JsonLd {
       position: i + 1,
       name: crumb.name,
       item: absoluteUrl(crumb.path),
+    })),
+  };
+}
+
+/**
+ * FAQPage, built from the same data the visible FAQ section renders.
+ *
+ * Deriving it from `faqContent` rather than restating the questions here is
+ * the point: Google requires the marked-up Q&A to match what is actually on
+ * the page, and a hand-maintained second copy is exactly how that quietly
+ * stops being true. One source, so the two cannot drift.
+ *
+ * This is emitted IN ADDITION to Organization and WebSite, not instead of
+ * them — a page may legitimately carry several schema types.
+ */
+export function faqSchema(): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqContent.items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
     })),
   };
 }

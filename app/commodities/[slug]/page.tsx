@@ -27,7 +27,7 @@ export async function generateMetadata({
 
   return pageMetadata({
     title: commodity.name,
-    description: `${commodity.summary} ${commodity.sourcingApproach}`,
+    description: commodity.metaDescription,
     path: `/commodities/${commodity.slug}`,
   });
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 
 import { CommoditiesGrid } from "@/components/sections/home/CommoditiesGrid";
+import { Faq } from "@/components/sections/home/Faq";
 import { FinalCta } from "@/components/sections/home/FinalCta";
 import { GlobalTrade } from "@/components/sections/home/GlobalTrade";
 import { Hero } from "@/components/sections/home/Hero";
@@ -51,6 +52,10 @@ export default function HomePage() {
       <HowWeWork />
       <CommoditiesGrid />
       <Trust />
+      {/* Placed after the corporate facts and before the CTA: a buyer who
+          has read this far has the specifics, and these are the questions
+          that remain immediately before deciding to enquire. */}
+      <Faq />
       <FinalCta />
     </>
   );

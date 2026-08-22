@@ -10,9 +10,9 @@ import { commodities } from "@/data/commodities";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Commodities",
+  title: "Commodity Platforms",
   description:
-    "Four commodity platforms — coffee, teak, spices and nuts — sourced and traded B2B from India for international buyers. Specifications and availability confirmed per enquiry.",
+    "Coffee, teak, spices and nuts — four platforms sourced and traded B2B from India for international buyers. Specifications confirmed per enquiry.",
   path: "/commodities",
 });
 

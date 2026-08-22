@@ -10,9 +10,9 @@ import { aboutContent } from "@/data/pages";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "About",
+  title: "About the Company",
   description:
-    "AM INDIA is the international trading identity of Antonio Marco Exports and Trade Private Limited, a company incorporated in India in 2025 with European corporate roots.",
+    "The international trading identity of Antonio Marco Exports and Trade Private Limited — incorporated in India in 2025, with European corporate roots.",
   path: "/about",
 });
 

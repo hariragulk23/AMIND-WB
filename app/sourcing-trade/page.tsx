@@ -11,7 +11,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Sourcing & Trade",
   description:
-    "How a requirement becomes a shipment: understanding the specification, identifying the sourcing route, agreeing trade terms, and coordinating documentation and shipment.",
+    "How a requirement becomes a shipment: specification, sourcing route, trade terms, documentation and shipment coordination — the same sequence every time.",
   path: "/sourcing-trade",
 });
 

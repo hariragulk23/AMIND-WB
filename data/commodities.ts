@@ -52,6 +52,12 @@ export interface Commodity {
   readonly name: string;
   /** Editorial one-liner used in the homepage journey and tiles. */
   readonly summary: string;
+  /**
+   * Search-result description. Written to fit inside the ~160 character
+   * budget: concatenating `summary` + `sourcingApproach` produced 200-253
+   * characters, which Google truncates mid-sentence. Same claims, said once.
+   */
+  readonly metaDescription: string;
   /** 1–2 paragraph B2B overview. General positioning only — no hard specs. */
   readonly description: readonly string[];
   /** Tracked micro-label, e.g. "Platform 01". */
@@ -98,6 +104,8 @@ export const commodities: readonly Commodity[] = [
   {
     slug: "coffee",
     name: "Coffee",
+    metaDescription:
+      "Green coffee for the roasting, importing and food manufacturing trade. Sourcing routes identified against your written specification, not a fixed list.",
     index: "Platform 01",
     descriptor: "Green coffee — Coffea",
     summary:
@@ -129,6 +137,8 @@ export const commodities: readonly Commodity[] = [
   {
     slug: "teak",
     name: "Teak",
+    metaDescription:
+      "Teak traded as a timber commodity, by dimension and documentation. Requirements assessed by form, dimension and volume, then matched to sourcing routes.",
     index: "Platform 02",
     descriptor: "Timber — Tectona grandis",
     summary: "Teak traded as a timber commodity, by dimension and documentation.",
@@ -161,6 +171,8 @@ export const commodities: readonly Commodity[] = [
   {
     slug: "spices",
     name: "Spices",
+    metaDescription:
+      "A spice platform built around specification, purity and clean documentation. Each spice handled as its own commercial product, sourced to your requirement.",
     index: "Platform 03",
     descriptor: "Whole and ground spices",
     summary:
@@ -194,6 +206,8 @@ export const commodities: readonly Commodity[] = [
   {
     slug: "nuts",
     name: "Nuts",
+    metaDescription:
+      "Cashew-led nut sourcing, graded and packed to the buyer's requirement. Grade, size and packing format confirmed in writing before a route is matched.",
     index: "Platform 04",
     descriptor: "Cashew and tree nuts",
     summary: "Cashew-led nut sourcing, graded and packed to the buyer's requirement.",

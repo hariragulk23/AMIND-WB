@@ -49,9 +49,14 @@ export function PageHero({ headingLines, intro, crumbs }: PageHeroProps) {
                   >
                     {crumb.name}
                   </Link>
-                  <span aria-hidden="true" className="text-paper-line">
-                    /
-                  </span>
+                  {/* Decorative, and aria-hidden — the list semantics and
+                      aria-current carry the breadcrumb structure, so this
+                      glyph is exempt from the text-contrast rule. It was
+                      still failing it at 1.36:1, which meant sighted
+                      visitors could not see the separator either. Inherits
+                      the muted tone now: 6.7:1, and at 11px tracked it
+                      still reads as a hairline rather than punctuation. */}
+                  <span aria-hidden="true">/</span>
                 </li>
               ))}
               <li aria-current="page" className="text-on-light">

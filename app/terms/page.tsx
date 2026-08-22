@@ -6,7 +6,7 @@ import { company, registeredOfficeInline } from "@/data/company";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Terms",
+  title: "Terms of Use",
   description:
     "Terms governing use of the AM INDIA website. Nothing on this website constitutes a contractual offer.",
   path: "/terms",
