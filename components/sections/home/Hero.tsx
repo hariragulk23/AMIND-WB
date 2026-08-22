@@ -1,12 +1,12 @@
+import Image from "next/image";
 import Link from "next/link";
-import { DisplayReveal } from "@/components/animation/DisplayReveal";
 import { Reveal } from "@/components/animation/Reveal";
 import { ScrollCue } from "@/components/animation/ScrollCue";
 import { Container } from "@/components/ui/Container";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { commodities } from "@/data/commodities";
 import { company } from "@/data/company";
-import { brandLockup } from "@/data/brand";
+import { brandAssets, brandLockup } from "@/data/brand";
 import { heroContent } from "@/data/home";
 import { primaryCta, secondaryCtas } from "@/data/navigation";
 
@@ -26,19 +26,19 @@ import { primaryCta, secondaryCtas } from "@/data/navigation";
  * Rendered on the server: every one of those is present and fully visible in
  * the initial HTML. The animation only moves them; it never gates them.
  *
- * THE ENTRANCE IS CHOREOGRAPHED IN TWO BEATS.
- * It was originally a three-word stagger — AM / GLOBAL / COMMODITIES — with a
- * tight 0.09s gap and four separately delayed supporting elements trailing it.
- * With a two-word wordmark that reading collapses: a short gap between two
- * words is heard as one hurried beat, not two.
+ * THE WORDMARK IS THE DESIGNED LOCKUP IMAGE, NOT LIVE TEXT.
+ * It was previously set as two staggered lines of live display type (a
+ * two-beat AM / then INDIA entrance, rebuilt from an earlier three-word
+ * stagger). The wordmark is one designed artwork — icon and lettering drawn
+ * together as a single mark — so it is now placed as that one image rather
+ * than reconstructed from text plus a separate icon graphic. A flattened
+ * image can't be staggered by line the way live text could, so the entrance
+ * simplifies to one reveal rather than two beats; everything below still
+ * arrives as a single quiet wave shortly after.
  *
- * So the timing is rebuilt rather than trimmed:
- *   BEAT ONE   the rule and eyebrow set the frame, then AM lands.
- *   BEAT TWO   a deliberate pause, then INDIA lands — long enough to register
- *              as a second arrival rather than the tail of the first.
- *   SETTLE     everything below arrives as one quiet wave overlapping the end
- *              of beat two, instead of four more separate beats competing
- *              with the wordmark for attention.
+ * A visually-hidden h1 carries the real heading text immediately before the
+ * image, so the page keeps a genuine text heading for the accessibility tree
+ * and for search engines even though sighted visitors see the artwork.
  */
 export function Hero() {
   return (
@@ -78,16 +78,22 @@ export function Hero() {
         </Reveal>
 
         {/* ---- Wordmark ------------------------------------------------- */}
-        <DisplayReveal
-          as="h1"
-          lines={heroContent.lines}
-          className="display-hero mt-6 text-heading md:mt-8"
-          immediate
-          delay={0.22}
-          /* The pause between AM and INDIA. Nearly three times the old
-             three-word gap — this is what makes it two beats. */
-          lineStagger={0.34}
-        />
+        {/* Real text heading, kept for the accessibility tree and SEO —
+            visually hidden since the artwork below carries the heading for
+            sighted visitors. */}
+        <h1 className="sr-only">{heroContent.lines.join(" ")}</h1>
+
+        <Reveal immediate delay={0.22} y={18} className="mt-6 md:mt-8">
+          <Image
+            src={brandAssets.fullLockup.path}
+            alt="AM INDIA — Antonio Marco Exports and Trade Private Limited"
+            width={brandAssets.fullLockup.width}
+            height={brandAssets.fullLockup.height}
+            priority
+            sizes="(min-width: 1280px) 620px, (min-width: 640px) 450px, 240px"
+            className="h-[clamp(3.5rem,min(9vw,13vh),9.5rem)] w-auto"
+          />
+        </Reveal>
 
         {/*
           Below `md` the header withholds the Antonio Marco mark to stay

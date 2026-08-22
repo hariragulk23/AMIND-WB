@@ -11,7 +11,12 @@
  */
 
 export const heroContent = {
-  /** Rendered as three separate lines of oversized display type. */
+  /**
+   * The wordmark's real text. No longer rendered as display type directly —
+   * the hero shows the designed AM INDIA lockup image instead — but kept as
+   * the source of truth for the hero's sr-only h1 and any other place the
+   * heading text is needed as real text.
+   */
   lines: ["AM", "India"] as const,
   statement: ["From origin.", "To opportunity."] as const,
   intro:

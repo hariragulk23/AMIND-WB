@@ -68,8 +68,8 @@ entirely by two AM INDIA marks:
 
 | Path | Notes |
 | --- | --- |
-| `../brand/am-india-icon.png` | Icon only — three diagonal bars, red/green/red, genuinely transparent — 725×580, 373 KB. Used in the header/nav beside the live text wordmark, and as the source for favicons and the OG card. |
-| `../brand/am-india-full-lockup.png` | Icon + wordmark + underline, combined artwork — 2340×580, 1133 KB. On disk and ready, but **not wired into any component** — reserved for a future footer/letterhead treatment pending direction. |
+| `../brand/am-india-icon.png` | Icon only — three diagonal bars, red/green/red, genuinely transparent — 725×580, 373 KB. Used in the footer (beneath the separate live-text "AM INDIA" heading), and as the source for favicons and the OG card. |
+| `../brand/am-india-full-lockup.png` | Icon + wordmark + underline, combined artwork — 2340×580, 1133 KB. The primary logo: used in the header/nav and the homepage hero, wherever the mark appears with no separate live-text wordmark beside it. |
 
 Both are placed, never redrawn: components use `Image` with each file's true
 intrinsic dimensions plus `w-auto`, so the mark can only ever scale

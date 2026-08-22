@@ -9,14 +9,16 @@
  * scaled proportionally.
  *
  * /public/brand/am-india-icon.png — the icon alone (three diagonal bars,
- * red/green/red), genuinely transparent. This is the header/nav mark; it sits
- * beside the live "AM INDIA" text wordmark rendered by `Logo.tsx`, not fused
- * into a combined image.
+ * red/green/red), genuinely transparent. Used where the wordmark is already
+ * live text nearby and a second copy of it would repeat the name: the footer
+ * (`FooterMark.tsx`, beneath the large "AM INDIA" text heading) and the
+ * generated favicon/OG derivatives.
  *
- * /public/brand/am-india-full-lockup.png — icon + wordmark + underline as one
- * combined artwork. Supplied and present on disk, but NOT wired into any
- * component yet — reserved for a future footer/letterhead treatment. Do not
- * import or render this asset without explicit direction.
+ * /public/brand/am-india-full-lockup.png — icon + wordmark + underline drawn
+ * as one combined artwork. This is the primary logo: used wherever the mark
+ * stands alone with no separate live-text wordmark beside it — the header
+ * (`Logo.tsx`) and the homepage hero (`Hero.tsx`). Rendered as a single
+ * image, never reconstructed from live text plus a separate icon graphic.
  */
 
 export interface BrandAsset {
@@ -30,7 +32,7 @@ export interface BrandAsset {
 }
 
 export const brandAssets = {
-  /** Icon-only mark. Used in the header beside the text wordmark. */
+  /** Icon-only mark. Footer and generated favicon/OG derivatives. */
   icon: {
     path: "/brand/am-india-icon.png",
     width: 725,
@@ -39,8 +41,11 @@ export const brandAssets = {
     available: true,
   } satisfies BrandAsset,
   /**
-   * Combined icon + wordmark artwork. On disk and ready, but reserved —
-   * not rendered anywhere yet. See the file-level note above.
+   * The primary logo — icon + wordmark, one artwork. Header and hero.
+   * `alt` here is the fuller default; both consumers pass their own
+   * context-appropriate override rather than using it as-is (a concise
+   * nav-landmark alt in the header, a fuller one on the hero, where the
+   * image stands in for the page's primary heading).
    */
   fullLockup: {
     path: "/brand/am-india-full-lockup.png",

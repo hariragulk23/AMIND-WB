@@ -9,8 +9,8 @@ import { brandAssets } from "@/data/brand";
  * lockup: `company.brand` is already set as a large text wordmark directly
  * above this in `SiteFooter.tsx`, so a combined icon+wordmark image here
  * would repeat "AM INDIA" a second time in the same block. The full lockup
- * (`brandAssets.fullLockup`) stays reserved, unused, for a context that
- * doesn't already carry the wordmark as text — a letterhead, say.
+ * (`brandAssets.fullLockup`) is used elsewhere — the header and hero — where
+ * no separate live-text wordmark already carries the name.
  *
  * The icon is genuinely transparent, so it renders directly on the footer's
  * dark ground with no container panel needed.
