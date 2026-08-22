@@ -34,18 +34,33 @@ export function Positioning() {
 
           <div className="lg:col-span-5 lg:pt-3">
             <Reveal stagger="base" className="space-y-6">
-              {positioningContent.paragraphs.map((paragraph, index) => (
-                <p
-                  key={paragraph}
-                  className={
-                    index === 0
-                      ? "body-lg text-on-light"
-                      : "text-on-light-muted"
-                  }
-                >
-                  {paragraph}
+              <p className="body-lg measure text-on-light">
+                {positioningContent.lead}
+              </p>
+
+              <div>
+                <p className="measure text-on-light-muted">
+                  {positioningContent.pointsLead}
                 </p>
-              ))}
+                <ul className="mt-4 space-y-3">
+                  {positioningContent.points.map((point) => (
+                    <li
+                      key={point}
+                      className="measure flex gap-3 text-on-light-muted"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="mt-[0.6em] h-px w-4 shrink-0 bg-brand-red"
+                      />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <p className="measure text-on-light-muted">
+                {positioningContent.coda}
+              </p>
             </Reveal>
 
             <Reveal className="mt-10" delay={0.1}>

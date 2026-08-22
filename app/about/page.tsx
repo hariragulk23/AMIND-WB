@@ -50,12 +50,35 @@ export default function AboutPage() {
                   <p
                     key={paragraph}
                     className={
-                      i === 0 ? "body-lg text-on-light" : "text-on-light-muted"
+                      i === 0
+                        ? "body-lg measure text-on-light"
+                        : "measure text-on-light-muted"
                     }
                   >
                     {paragraph}
                   </p>
                 ))}
+
+                {"points" in section ? (
+                  <ul className="space-y-3">
+                    {section.points.map((point) => (
+                      <li
+                        key={point}
+                        className="measure flex gap-3 text-on-light-muted"
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="mt-[0.6em] h-px w-4 shrink-0 bg-brand-red"
+                        />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+
+                {"coda" in section ? (
+                  <p className="measure text-on-light-muted">{section.coda}</p>
+                ) : null}
               </Reveal>
             </div>
           ))}

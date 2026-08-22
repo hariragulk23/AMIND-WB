@@ -283,31 +283,31 @@ export const trustSignals: readonly TrustSignal[] = [
   {
     title: "India registered company",
     description:
-      "A private limited company incorporated in India and registered with the Ministry of Corporate Affairs, operating from Tamil Nadu.",
+      "Private limited company incorporated in India, registered with the Ministry of Corporate Affairs, operating from Tamil Nadu.",
   },
   {
     title: "European corporate roots",
     description:
-      "Established as the Indian subsidiary of a Spanish corporate shareholder, giving the company a European frame of commercial reference.",
+      "The Indian subsidiary of a Spanish corporate shareholder.",
   },
   {
     title: "Import and export",
     description:
-      "Built for cross-border trade in both directions, with the documentation discipline that international transactions require.",
+      "Cross-border trade in both directions, with the documentation discipline it requires.",
   },
   {
     title: "Multi-commodity platform",
     description:
-      "Four distinct commodity platforms — coffee, teak, spices and nuts — each handled on its own specifications and documentation.",
+      "Coffee, teak, spices and nuts — each on its own specifications and documentation.",
   },
   {
     title: "B2B only",
     description:
-      "No retail channel and no consumer catalogue. The company works with businesses buying to specification and to contract.",
+      "No retail channel, no consumer catalogue. Businesses buying to specification and contract.",
   },
   {
     title: "Documentation-led",
     description:
-      "Trade, quality and shipping documentation is treated as part of the product, not as paperwork that follows it.",
+      "Documentation is part of the product, not paperwork that follows it.",
   },
 ];

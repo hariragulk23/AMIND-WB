@@ -10,56 +10,56 @@
 
 export const sourcingContent = {
   intro:
-    "A trade either works commercially or it does not, and that is decided long before a container is booked. This is the sequence we run, in order, on every enquiry.",
+    "Whether a trade works commercially is decided long before a container is booked. This is the sequence, in order, on every enquiry.",
   stages: [
     {
       number: "01",
       title: "Understand the requirement",
       description:
-        "Commodity, product, specification, quantity, packing, destination and timing — captured in writing so both sides are working from the same document.",
+        "Commodity, product, specification, quantity, packing, destination and timing — in writing, so both sides work from one document.",
     },
     {
       number: "02",
       title: "Identify the sourcing route",
       description:
-        "We assess which sourcing routes can realistically meet the specification and the volume, rather than fitting the requirement to whatever is nearest to hand.",
+        "Which routes can realistically meet the specification and volume — rather than fitting the requirement to whatever is nearest to hand.",
     },
     {
       number: "03",
       title: "Evaluate the commercial specification",
       description:
-        "Samples, analysis and specification sheets are reviewed against the buyer's parameters. Where a contract calls for it, inspection is arranged through independent third parties.",
+        "Samples, analysis and specification sheets reviewed against the buyer's parameters. Independent inspection arranged where the contract calls for it.",
     },
     {
       number: "04",
       title: "Agree trade terms",
       description:
-        "Specification, quantity, packing, Incoterm, payment terms, timing and tolerances are agreed explicitly and confirmed before the transaction proceeds.",
+        "Specification, quantity, packing, Incoterm, payment terms, timing and tolerances — agreed explicitly before the transaction proceeds.",
     },
     {
       number: "05",
       title: "Coordinate documentation",
       description:
-        "We coordinate the trade, quality and shipping documentation set required by the contract and by the destination market's import requirements.",
+        "The trade, quality and shipping documents the contract and the destination market's import rules require.",
     },
     {
       number: "06",
       title: "Coordinate the shipment",
       description:
-        "Booking, loading and handling are arranged and managed with freight forwarders, carriers and handling agents. Physical execution sits with those providers; coordination and accountability sit with us.",
+        "Booking, loading and handling arranged with freight forwarders, carriers and agents. Execution sits with them; coordination and accountability sit with us.",
     },
     {
       number: "07",
       title: "Maintain communication",
       description:
-        "One point of contact through to arrival, with status shared as it changes rather than only when it is asked for.",
+        "One point of contact through to arrival, with status shared as it changes — not only when asked.",
     },
   ],
   incoterms: {
     title: "A note on Incoterms",
     body: [
       "Incoterms® rules define where risk and cost transfer between seller and buyer. FOB places the goods at the buyer's disposal on board the vessel at the named port of loading; CIF adds carriage and insurance to the named port of destination.",
-      "Which terms apply to a given transaction is agreed per contract. Nothing on this website constitutes an offer on any particular Incoterm.",
+      "Which terms apply is agreed per contract. Nothing on this website constitutes an offer on any particular Incoterm.",
     ],
   },
 } as const;
@@ -71,23 +71,29 @@ export const aboutContent = {
     {
       title: "The company",
       paragraphs: [
-        "Antonio Marco Exports and Trade Private Limited is a private limited company incorporated in India and registered with the Ministry of Corporate Affairs. Its registered office is in Sivakasi, Tamil Nadu.",
-        "AM INDIA is the name the business trades under internationally. The two are the same entity: the brand is the commercial identity, the company is the legal one, and every contract is entered into by the registered company.",
+        "A private limited company incorporated in India and registered with the Ministry of Corporate Affairs, with its registered office in Sivakasi, Tamil Nadu.",
+        "AM INDIA is the trading name; Antonio Marco Exports and Trade Private Limited is the legal entity. Every contract is entered into by the registered company.",
       ],
     },
     {
       title: "European roots",
       paragraphs: [
-        "The company was established in India as the subsidiary of a Spanish corporate shareholder. That origin is not decoration — it shapes how the business reads a specification, what it expects of documentation, and the commercial standards it works to.",
-        "India is where the company operates and sources. Europe is where its corporate structure comes from. Both are stated plainly because both are relevant to how it trades.",
+        "Established in India as the subsidiary of a Spanish corporate shareholder. That origin shapes how it reads a specification, what it expects of documentation, and the standards it works to.",
+        "India is where it operates and sources. Europe is where its corporate structure comes from.",
       ],
     },
     {
       title: "Built for international trade",
-      paragraphs: [
-        "The Indian company was incorporated in 2025 and is structured deliberately: registered for cross-border trade from the outset, organised around four commodity platforms, and built to handle specification-led B2B transactions rather than adapted to them later.",
-        "The ambition is to become a trading house that international buyers return to — earned through executed contracts rather than asserted on a website.",
+      /* Lead plus points rather than a 40-word sentence: the three structural
+         facts are the substance, and they read faster stacked than embedded. */
+      paragraphs: ["Incorporated in 2025 and structured deliberately:"],
+      points: [
+        "Registered for cross-border trade from the outset",
+        "Organised around four commodity platforms",
+        "Built for specification-led B2B transactions, not adapted to them later",
       ],
+      coda:
+        "The ambition is a trading house international buyers return to — earned through executed contracts, not asserted on a website.",
     },
   ],
 } as const;

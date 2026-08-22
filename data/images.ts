@@ -194,7 +194,20 @@ export const imageManifest = {
     aspectRatio: "4/5",
     objectPosition: "50% 50%",
     subject: "A cloth sack spilling mixed nuts.",
-    alt: "A cloth sack spilling walnuts, almonds and hazelnuts",
+    /*
+      NOTE — THIS PHOTOGRAPH IS OFF-BRIEF AND SHOULD BE REPLACED.
+      The nut platform is cashew-led ("Cashew-led nut sourcing", data/
+      commodities.ts). This frame contains NO cashews — it is walnuts,
+      almonds and hazelnuts only. The alt text below therefore cannot say
+      "cashews" without describing something that is not in the picture,
+      which would mislead exactly the screen-reader users alt text exists
+      to serve. It is kept accurate and non-specific instead.
+      The real fix is a cashew-forward 4:5 tile frame. The 16:9 hero
+      (journey-nuts) does show cashews prominently, but it cannot be
+      recropped to 4:5 without upscaling 768px of height to 1152px.
+      See CONTENT_REQUIRED.md → Nuts.
+    */
+    alt: "A cloth sack tipped over, spilling mixed nuts across a dark surface",
     available: true,
     tone: "paper",
   },

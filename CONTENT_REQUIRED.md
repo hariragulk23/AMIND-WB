@@ -133,6 +133,12 @@ _File: `data/commodities.ts` → `nuts`_
 - [ ] Whether any other tree nuts are to be offered, and when.
 - [ ] Minimum order quantity.
 - [ ] Incoterms and loading ports.
+- [ ] **A cashew-forward 4:5 tile photograph** to replace
+      `public/images/nuts/tile-nuts.jpg`. The platform is cashew-led, but the
+      current tile frame contains no cashews at all — only walnuts, almonds
+      and hazelnuts — so its alt text cannot honestly describe cashews. The
+      16:9 hero frame does show cashews well; only the tile needs replacing.
+      Native 928×1152 or larger, so nothing is upscaled.
 
 ---
 

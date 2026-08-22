@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, type ElementType } from "react";
+import { Fragment, useRef, type ElementType } from "react";
 import { useGSAP } from "@gsap/react";
 import {
   duration as dur,
@@ -82,17 +82,22 @@ export function DisplayReveal({
 
   return (
     <Tag ref={scope} id={id} className={cn(className)}>
-      {lines.map((line) => (
-        /* The mask is padded and negatively margined so descenders and tight
-           line-heights are never clipped. */
-        <span
-          key={line}
-          className="block overflow-hidden pb-[0.14em] -mb-[0.14em]"
-        >
-          <span data-line className="block">
-            {line}
+      {lines.map((line, index) => (
+        <Fragment key={`${index}-${line}`}>
+          {/* A real space between lines. The masks are block-level, so this
+              whitespace text node collapses to nothing visually — but it IS
+              part of the element's textContent. Without it a heading split
+              across lines is extracted as "We connectoriginwith market." by
+              screen readers, search engines and answer engines. */}
+          {index > 0 ? " " : null}
+          {/* The mask is padded and negatively margined so descenders and
+              tight line-heights are never clipped. */}
+          <span className="block overflow-hidden pb-[0.14em] -mb-[0.14em]">
+            <span data-line className="block">
+              {line}
+            </span>
           </span>
-        </span>
+        </Fragment>
       ))}
     </Tag>
   );
