@@ -62,19 +62,36 @@ match the files on disk exactly.
 
 ## The official logo — SUPPLIED AND LIVE
 
+The Antonio Marco artwork previously registered here (`antonio-marco-logo-original.png`,
+`antonio-marco-logo.webp`) has been retired and deleted. It is superseded
+entirely by two AM INDIA marks:
+
 | Path | Notes |
 | --- | --- |
-| `../brand/antonio-marco-logo-original.png` | Supplied artwork, preserved untouched — 1774×887, 829 KB |
-| `../brand/antonio-marco-logo.webp` | Derivative the site renders — 1567×365, 74 KB |
+| `../brand/am-india-icon.png` | Icon only — three diagonal bars, red/green/red, genuinely transparent — 725×580, 373 KB. Used in the header/nav beside the live text wordmark, and as the source for favicons and the OG card. |
+| `../brand/am-india-full-lockup.png` | Icon + wordmark + underline, combined artwork — 2340×580, 1133 KB. On disk and ready, but **not wired into any component** — reserved for a future footer/letterhead treatment pending direction. |
 
-Two things were done to produce the derivative, neither of which alters the
-mark: the empty canvas was trimmed to the artwork plus 7% brand safe space, and
-the flat white backdrop was lifted to transparency with a soft edge so the
-antialiasing survives. No bar, letterform, proportion or colour was changed.
+Both are placed, never redrawn: components use `Image` with each file's true
+intrinsic dimensions plus `w-auto`, so the mark can only ever scale
+proportionally.
 
-Because the artwork's lettering is brown and navy it needs a light ground. The
-footer places it on a light panel rather than inverting it — a supplied logo is
-never recoloured to suit a background.
+Note: the icon's red/green (`#d02126` / `#5c7845`) do not match the existing
+`--brand-red` / `--brand-green` design tokens (`#c75051` / `#758c67`), which
+were sampled from the old artwork. Flagged, not reconciled — see
+`app/globals.css`.
+
+### Generated favicon and OG derivatives
+
+All four are generated straight from `am-india-icon.png` — the icon inset on
+a transparent (or, for the Apple touch icon, opaque paper) square, never
+redrawn or recoloured:
+
+| Path | Size | Notes |
+| --- | --- | --- |
+| `app/favicon.ico` | 16, 32, 48 px | Multi-resolution ICO, transparent |
+| `app/icon.png` | 512×512 | Modern high-res favicon, transparent |
+| `app/apple-icon.png` | 180×180 | Apple touch icon, opaque paper background (`#f6f4ef`) — Apple's own convention discourages transparency here |
+| `brand/og-card.png` | 1200×630 | Social share card, opaque paper background |
 
 ---
 
@@ -89,9 +106,9 @@ broken image request is ever made.
 | `trade/trade-documentation.jpg` | Documentation, inspection notes or a sample tray |
 | `company/operational-base.jpg` | Genuine locations only — never a stock office interior |
 
-Also outstanding: **`brand/og-card.png`** (1200×630), the social share card.
-See the `TODO(og-card)` comment in `app/layout.tsx`. No `og:image` is emitted
-until it exists.
+**`brand/og-card.png`** (1200×630) is now live — the AM INDIA icon centered
+on the paper canvas, generated from `am-india-icon.png`. `og:image` and the
+Twitter card image are both wired in `app/layout.tsx`.
 
 ---
 
@@ -99,8 +116,8 @@ until it exists.
 
 | File | Source | Photographer / attribution | Licence | Temporary? |
 | --- | --- | --- | --- | --- |
-| `brand/antonio-marco-logo-original.png` | Supplied by the company | Antonio Marco Exports and Trade Private Limited | Company's own mark | No |
-| `brand/antonio-marco-logo.webp` | Derived from the above | — | Company's own mark | No |
+| `brand/am-india-icon.png` | Supplied by the company | Antonio Marco Exports and Trade Private Limited | Company's own mark | No |
+| `brand/am-india-full-lockup.png` | Supplied by the company | Antonio Marco Exports and Trade Private Limited | Company's own mark | No |
 | All twelve commodity files above | Supplied by the company | To be confirmed | To be confirmed | To be confirmed |
 
 **Action required:** confirm the source and licence of the twelve commodity

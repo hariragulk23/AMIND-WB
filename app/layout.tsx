@@ -55,27 +55,20 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: `${company.brand} — International Commodity Sourcing & Trading`,
     description: company.summary,
-    /*
-      TODO(og-card): REPLACE THE SOCIAL SHARE CARD.
-      A regenerated card carrying the AM INDIA brand is being supplied
-      separately. When it arrives, save it at /public/brand/og-card.png
-      (1200x630) and uncomment the block below. Until then no `images` key is
-      emitted at all, so nothing requests a file that does not exist and no
-      stale AM Global Commodities card can be served.
-
-      images: [{
+    images: [
+      {
         url: "/brand/og-card.png",
         width: 1200,
         height: 630,
         alt: `${company.brand} — International Commodity Sourcing & Trading`,
-      }],
-    */
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${company.brand} — International Commodity Sourcing & Trading`,
     description: company.summary,
-    /* TODO(og-card): add `images: ["/brand/og-card.png"]` with the same card. */
+    images: ["/brand/og-card.png"],
   },
   formatDetection: { telephone: false },
 };

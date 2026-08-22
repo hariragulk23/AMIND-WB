@@ -19,9 +19,9 @@
    ========================================================================== */
 
 :root {
-  /* --- Brand colours, sampled from the supplied logo artwork -------------
-     Measured directly off /public/brand/antonio-marco-logo-original.png
-     (median of the ink pixels in each element), not estimated by eye.
+  /* --- Brand colours ------------------------------------------------------
+     Originally measured off the supplied Antonio Marco logo artwork (that
+     file has since been retired — see data/brand.ts):
         red   #c75051  the diagonal bars and the rule
         green #758c67  the centre bar and the rule's midsection
         brown #522f1f  the ANTONIO MARCO wordmark
@@ -29,7 +29,13 @@
      The variants beneath each are the same hue pushed until it passes AA on
      the ground it is used against; the ratio is noted. The logo red is only
      4.1:1 on the canvas and carries just 4.47:1 under white, so it is kept for
-     marks and rules while text and fills use the adjusted values. */
+     marks and rules while text and fills use the adjusted values.
+
+     FLAGGED — NOT YET RECONCILED: the new am-india-icon.png artwork samples
+     to a visibly different, more saturated pair — red #d02126, green #5c7845
+     — rather than the muted #c75051 / #758c67 below. These tokens have not
+     been changed pending a decision; see the migration report for the full
+     comparison. */
   --brand-red: #c75051; /* logo red — rules, marks, motif        */
   --brand-red-cta: #c24b4c; /* CTA fill      — white text 4.8:1  */
   --brand-red-deep: #a83f3c; /* text on off-white       5.6:1     */

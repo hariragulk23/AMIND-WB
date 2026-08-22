@@ -3,32 +3,25 @@
  * ---------------------------------------------------------------------------
  * BRAND ASSET REGISTRY
  *
- * The official ANTONIO MARCO logo is a supplied artwork file, not something
- * this codebase may draw. It must never be redrawn, re-lettered, recoloured,
- * stretched, rotated or cropped into — the component that renders it only ever
- * places the file, scaled proportionally.
+ * The official AM INDIA marks are supplied artwork files, not something this
+ * codebase may draw. They must never be redrawn, re-lettered, recoloured,
+ * stretched, rotated or cropped into — a component only ever places the file,
+ * scaled proportionally.
  *
- * The supplied artwork is preserved untouched at
- * /public/brand/antonio-marco-logo-original.png (1774×887, white canvas).
+ * /public/brand/am-india-icon.png — the icon alone (three diagonal bars,
+ * red/green/red), genuinely transparent. This is the header/nav mark; it sits
+ * beside the live "AM INDIA" text wordmark rendered by `Logo.tsx`, not fused
+ * into a combined image.
  *
- * /public/brand/antonio-marco-logo.webp is the derivative the site renders.
- * Two things were done to it, neither of which alters the mark:
- *   • the empty canvas was trimmed to the artwork plus 7% brand safe space,
- *     taking it from 1774×887 to 1567×365 and 829 KB to 74 KB;
- *   • the flat white backdrop was lifted to transparency, with a soft edge so
- *     the antialiasing survives, so the mark sits on the warm site canvas
- *     without a white rectangle around it.
- * No bar, letterform, proportion or colour was changed. Because the artwork is
- * dark, it needs a light ground — the footer places it on a light panel rather
- * than inverting it.
+ * /public/brand/am-india-full-lockup.png — icon + wordmark + underline as one
+ * combined artwork. Supplied and present on disk, but NOT wired into any
+ * component yet — reserved for a future footer/letterhead treatment. Do not
+ * import or render this asset without explicit direction.
  */
 
 export interface BrandAsset {
-  /** Optimised derivative actually rendered by the site. */
   readonly path: string;
-  /** Untouched original, preserved in the repository for reference. */
-  readonly originalPath: string;
-  /** Intrinsic dimensions of the derivative. Required to reserve layout space. */
+  /** Intrinsic dimensions. Required to reserve layout space. */
   readonly width: number;
   readonly height: number;
   readonly alt: string;
@@ -37,13 +30,23 @@ export interface BrandAsset {
 }
 
 export const brandAssets = {
-  antonioMarcoLogo: {
-    path: "/brand/antonio-marco-logo.webp",
-    originalPath: "/brand/antonio-marco-logo-original.png",
-    /** Intrinsic size of the derivative — reserves the box, prevents shift. */
-    width: 1567,
-    height: 365,
-    alt: "Antonio Marco",
+  /** Icon-only mark. Used in the header beside the text wordmark. */
+  icon: {
+    path: "/brand/am-india-icon.png",
+    width: 725,
+    height: 580,
+    alt: "AM India",
+    available: true,
+  } satisfies BrandAsset,
+  /**
+   * Combined icon + wordmark artwork. On disk and ready, but reserved —
+   * not rendered anywhere yet. See the file-level note above.
+   */
+  fullLockup: {
+    path: "/brand/am-india-full-lockup.png",
+    width: 2340,
+    height: 580,
+    alt: "AM India — Antonio Marco Exports and Trade Private Limited",
     available: true,
   } satisfies BrandAsset,
 } as const;

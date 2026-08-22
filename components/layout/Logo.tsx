@@ -14,25 +14,22 @@ interface LogoProps {
 /**
  * Site identity.
  *
- * BRAND HIERARCHY — AM INDIA is the public brand and leads, set in
- * the display face. The supplied Antonio Marco artwork sits beside it, smaller
- * and behind a hairline, as the corporate identity.
- *
- * The "by Antonio Marco" line that stood here while the artwork was missing has
- * been REMOVED. The logo already reads "ANTONIO MARCO / EXPORTS AND TRADE
- * PRIVATE LIMITED", so keeping the text as well said the same name three times
- * in one lockup. The logo states the relationship better than the caption did.
+ * BRAND HIERARCHY — AM INDIA is the public brand and leads, set in the
+ * display face as live text. The supplied icon mark sits beside it, behind a
+ * hairline, as the corporate/visual mark — icon only, not the combined
+ * icon+wordmark artwork, since the text wordmark is already live here.
  *
  * The artwork is placed, never redrawn: `Image` with the file's true intrinsic
  * dimensions plus `w-auto` means it can only ever scale proportionally.
  *
- * On dark grounds the mark is withheld rather than inverted — its lettering is
- * brown and navy, so it needs a light ground. The footer gives it one.
+ * The icon mark is withheld on the dark tone (the mobile panel open state) so
+ * the header stays minimal there, same as before — not because the icon needs
+ * a light ground; it is genuinely transparent and would render fine on navy.
  */
 export function Logo({ tone = "light", variant = "full", className }: LogoProps) {
   const onDark = tone === "dark";
-  const logo = brandAssets.antonioMarcoLogo;
-  const showMark = variant === "full" && logo.available && !onDark;
+  const icon = brandAssets.icon;
+  const showMark = variant === "full" && icon.available && !onDark;
 
   return (
     <Link
@@ -65,12 +62,12 @@ export function Logo({ tone = "light", variant = "full", className }: LogoProps)
             className="hidden h-9 w-px bg-paper-line md:block"
           />
           <Image
-            src={logo.path}
-            alt={logo.alt}
-            width={logo.width}
-            height={logo.height}
+            src={icon.path}
+            alt={icon.alt}
+            width={icon.width}
+            height={icon.height}
             priority
-            sizes="160px"
+            sizes="48px"
             className="hidden h-7 w-auto md:block xl:h-8"
           />
         </>
