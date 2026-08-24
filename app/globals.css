@@ -351,23 +351,36 @@
 /* Vertical rhythm between major sections, scaling with the viewport rather
    than stepping at breakpoints. Deliberately more generous than feels
    comfortable at first — it is what separates editorial from cramped. */
+/* THE FLOOR IS A MOBILE VALUE, NOT A SHRUNKEN DESKTOP ONE.
+   In a clamp(min, Nvw, max), the vw term only does the scaling between the
+   two ends — below the width where Nvw exceeds the floor, every viewport
+   gets the floor exactly. At 390px, 14vw is 55px, so a floor of 8rem meant
+   phones got the full 128px top AND bottom on every section: 256px of dead
+   space at every boundary, ~300px where a section ended on a CTA and the
+   next opened on a label. That is what produced the near-empty screens on
+   mobile — the rhythm was tuned at 1440 and the floor quietly applied it to
+   360px phones.
+   The floors below are chosen for a phone. Desktop is untouched: above
+   ~570px the vw term takes over and the values are exactly as before. */
 @utility section-y {
-  padding-block: clamp(8rem, 14vw, 17rem);
+  padding-block: clamp(5rem, 14vw, 17rem);
 }
 
 @utility section-y-sm {
-  padding-block: clamp(6rem, 10vw, 11rem);
+  padding-block: clamp(4rem, 10vw, 11rem);
 }
 
 @utility section-pb {
-  padding-bottom: clamp(8rem, 14vw, 17rem);
+  padding-bottom: clamp(5rem, 14vw, 17rem);
 }
 
 /* For the deliberately sparse sections. The extra air is the point: a section
    with little in it has to read as composed rather than unfinished, and that
-   difference is almost entirely how much room surrounds what is there. */
+   difference is almost entirely how much room surrounds what is there.
+   Same floor caveat as above — generous is a desktop idea, and on a phone it
+   just reads as a gap. */
 @utility section-y-lg {
-  padding-block: clamp(10rem, 18vw, 22rem);
+  padding-block: clamp(6rem, 18vw, 22rem);
 }
 
 @utility hairline-t {

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { Reveal } from "@/components/animation/Reveal";
+import { ScrollRail } from "@/components/animation/ScrollRail";
 import { PageHero } from "@/components/layout/PageHero";
 import { EnquiryBanner } from "@/components/sections/EnquiryBanner";
 import { Container } from "@/components/ui/Container";
@@ -39,25 +40,40 @@ export default function SourcingTradePage() {
             The sourcing and trade sequence
           </h2>
 
-          <ol className="mt-12 border-t border-paper-line">
+          {/* Same rail as the homepage's five stages — this is the same kind
+              of thing (an ordered sequence), so it gets the same graphic
+              rather than a second, unrelated treatment. Seven stages benefit
+              from it more than five did: as a stack of equal rows it read as
+              a table and gave no sense of how far through you were. */}
+          <ol className="relative mt-14">
+            <span
+              aria-hidden="true"
+              className="absolute left-5 top-3 bottom-3 w-px bg-paper-line lg:left-8"
+            />
+            <ScrollRail className="absolute left-5 top-3 bottom-3 w-px lg:left-8" />
+
             {sourcingContent.stages.map((stage) => (
               <Reveal
                 as="li"
                 key={stage.number}
-                className="border-b border-paper-line"
+                className="relative pb-12 pl-14 last:pb-0 lg:pb-16 lg:pl-28"
                 y={18}
               >
-                <div className="grid gap-4 py-9 md:grid-cols-12 md:gap-8 md:py-12">
-                  <p className="numeral font-display text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold leading-none text-brand-red md:col-span-2">
+                <span
+                  aria-hidden="true"
+                  className="absolute left-0 top-0 flex w-10 justify-center lg:w-16"
+                >
+                  <span className="numeral bg-paper py-1 font-display text-sm font-semibold leading-none text-brand-red">
                     {stage.number}
-                  </p>
-                  <h3 className="display-md text-heading md:col-span-4">
-                    {stage.title}
-                  </h3>
-                  <p className="measure text-on-light-muted md:col-span-6">
-                    {stage.description}
-                  </p>
-                </div>
+                  </span>
+                </span>
+
+                <h3 className="font-display text-[clamp(1.5rem,2.8vw,2.25rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-heading">
+                  {stage.title}
+                </h3>
+                <p className="measure mt-3 text-on-light-muted">
+                  {stage.description}
+                </p>
               </Reveal>
             ))}
           </ol>

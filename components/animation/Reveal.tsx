@@ -67,6 +67,13 @@ export function Reveal({
       if (targets.length === 0) return;
 
       gsap.set(targets, { opacity: 0, y });
+      /* Marks these as hidden-pending-animation. MotionRoot clears anything
+         still carrying this a few seconds after load, so a trigger that never
+         fires costs the animation rather than the content. */
+      targets.forEach((t) => t.setAttribute("data-reveal-pending", ""));
+
+      const clearPending = () =>
+        targets.forEach((t) => t.removeAttribute("data-reveal-pending"));
 
       gsap.to(targets, {
         opacity: 1,
@@ -75,6 +82,7 @@ export function Reveal({
         delay,
         ease: ease.out,
         stagger: stagger ? staggerTokens[stagger] : 0,
+        onComplete: clearPending,
         ...(immediate
           ? {}
           : {

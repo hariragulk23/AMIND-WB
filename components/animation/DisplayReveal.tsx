@@ -58,6 +58,8 @@ export function DisplayReveal({
       if (targets.length === 0) return;
 
       gsap.set(targets, { yPercent: 108, opacity: 0 });
+      /* See MotionRoot: swept visible if this animation never runs. */
+      targets.forEach((t) => t.setAttribute("data-reveal-pending", ""));
 
       gsap.to(targets, {
         yPercent: 0,
@@ -66,6 +68,8 @@ export function DisplayReveal({
         delay,
         ease: ease.editorial,
         stagger: lineStagger,
+        onComplete: () =>
+          targets.forEach((t) => t.removeAttribute("data-reveal-pending")),
         ...(immediate
           ? {}
           : {

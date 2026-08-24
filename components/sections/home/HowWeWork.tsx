@@ -1,15 +1,19 @@
 import { DisplayReveal } from "@/components/animation/DisplayReveal";
 import { Reveal } from "@/components/animation/Reveal";
+import { ScrollRail } from "@/components/animation/ScrollRail";
 import { Container } from "@/components/ui/Container";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { processContent } from "@/data/home";
 
 /**
- * SECTION 5 — HOW WE WORK
+ * SECTION — HOW WE WORK
  *
- * Five stages as an editorial document: oversized numerals, hairline rules, no
- * icons and no cards.
+ * Five stages drawn as a progression rather than stacked as paragraphs: one
+ * hairline rail with the numerals as nodes on it, and a red line that draws
+ * down the rail as the visitor scrolls. The descriptions were cut back when
+ * the rail went in — the sequencing is now carried by the graphic, so the
+ * prose no longer has to say it as well.
  *
  * Language discipline: every step describes what the company itself does —
  * identify, assess, agree, coordinate, arrange, manage. Physical execution
@@ -44,34 +48,50 @@ export function HowWeWork() {
           </Reveal>
         </div>
 
-        <ol className="mt-16 border-t border-paper-line lg:mt-24">
+        {/* A LITERAL PROGRESSION, NOT A LIST OF PARAGRAPHS.
+            One hairline runs the full height of the sequence and the numerals
+            sit on it as nodes, each one knocked out of the line by its own
+            paper background so the rail appears to pass behind them. A second
+            line in brand red draws down the same path as the visitor scrolls,
+            so the graphic reports how far through the five stages they are.
+            Deliberately not diagram furniture: no arrows, no icon bubbles, no
+            boxes. The only thing added to the page is a line that grows.
+            The rail sits at the same x on every breakpoint, so the sequence
+            reads top-to-bottom identically on a phone and on a desktop; only
+            the indent and the type scale change. */}
+        <ol className="relative mt-16 lg:mt-24">
+          {/* Track, and the drawn progress over it. Inset vertically so the
+              line begins and ends at the first and last numeral rather than
+              floating past them. */}
+          <span
+            aria-hidden="true"
+            className="absolute left-5 top-3 bottom-3 w-px bg-paper-line lg:left-8"
+          />
+          <ScrollRail className="absolute left-5 top-3 bottom-3 w-px lg:left-8" />
+
           {processContent.steps.map((step) => (
             <Reveal
               as="li"
               key={step.number}
-              className="group border-b border-paper-line"
+              className="relative pb-12 pl-14 last:pb-0 lg:pb-20 lg:pl-28"
               y={18}
             >
-              {/* Asymmetric, not an even twelve-column split: a narrow rail
-                  carries the numeral and the step title, and the description
-                  runs in one wide column beside it. The old 2/4/6 grid put
-                  three roughly equal blocks on every row, which read as a
-                  table — the eye had to re-scan each row to find where the
-                  substance was. Here the rail is fixed and the substance is
-                  always in the same place. */}
-              <div className="grid gap-3 py-10 md:grid-cols-[7rem_1fr] md:gap-12 md:py-14 lg:grid-cols-[10rem_1fr]">
-                <div className="flex items-baseline gap-4 md:block">
-                  <p className="numeral font-display text-[clamp(2rem,4vw,3.25rem)] font-semibold leading-none text-brand-red">
-                    {step.number}
-                  </p>
-                  <h3 className="display-md text-heading md:mt-4">
-                    {step.title}
-                  </h3>
-                </div>
-                <p className="measure text-on-light-muted md:pt-2">
-                  {step.description}
-                </p>
-              </div>
+              {/* The node. `bg-paper` is what breaks the rail behind it. */}
+              <span
+                aria-hidden="true"
+                className="absolute left-0 top-0 flex w-10 justify-center lg:w-16"
+              >
+                <span className="numeral bg-paper py-1 font-display text-sm font-semibold leading-none text-brand-red">
+                  {step.number}
+                </span>
+              </span>
+
+              <h3 className="font-display text-[clamp(1.75rem,3.4vw,2.75rem)] font-semibold leading-[1.05] tracking-[-0.02em] text-heading">
+                {step.title}
+              </h3>
+              <p className="measure mt-3 text-on-light-muted lg:mt-4">
+                {step.description}
+              </p>
             </Reveal>
           ))}
         </ol>

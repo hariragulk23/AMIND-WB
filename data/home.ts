@@ -78,31 +78,31 @@ export const processContent = {
       number: "01",
       title: "Source",
       description:
-        "The requirement in writing, then sourcing routes matched by specification, form and volume — not a fixed catalogue.",
+        "The requirement in writing, then routes matched by specification, form and volume — not a fixed catalogue.",
     },
     {
       number: "02",
       title: "Evaluate",
       description:
-        "Samples and specifications assessed against the buyer's parameters. Independent inspection arranged where the contract calls for it.",
+        "Samples assessed against the buyer's parameters, with independent inspection where the contract calls for it.",
     },
     {
       number: "03",
       title: "Trade",
       description:
-        "Specification, quantity, packing, Incoterm, payment terms and timing — agreed explicitly, confirmed before anything moves.",
+        "Specification, quantity, packing, Incoterm, payment and timing — confirmed before anything moves.",
     },
     {
       number: "04",
       title: "Document",
       description:
-        "The trade, quality and shipping documents the contract and destination market require, coordinated so the consignment clears.",
+        "The trade, quality and shipping documents the contract and destination market require, coordinated.",
     },
     {
       number: "05",
       title: "Deliver",
       description:
-        "Shipment arranged and managed with freight forwarders, carriers and handling agents. Communication maintained to arrival.",
+        "Shipment arranged and managed with forwarders, carriers and agents, through to arrival.",
     },
   ] satisfies readonly ProcessStep[],
 } as const;

@@ -32,6 +32,43 @@ export function MotionRoot() {
     if (typeof document !== "undefined" && "fonts" in document) {
       document.fonts.ready.then(() => ScrollTrigger.refresh());
     }
+
+    /* Images settle after fonts do, and they change section heights more than
+       type does — an unloaded commodity frame reserves its box, but a hero
+       that swaps in at a different rendered height still moves everything
+       below it. Measuring before that leaves every start position downstream
+       slightly wrong. */
+    const onLoad = () => ScrollTrigger.refresh();
+    if (document.readyState === "complete") {
+      requestAnimationFrame(onLoad);
+    } else {
+      window.addEventListener("load", onLoad, { once: true });
+    }
+
+    /* FAILSAFE — nothing stays invisible because a trigger did not fire.
+       The reveals hide their target first and animate it in, so a trigger
+       that never fires leaves real content at opacity 0 while still taking
+       up layout height: a blank band the visitor cannot read or scroll past.
+       Rather than trust that never happens, this sweeps up anything still
+       hidden a few seconds after load and simply shows it. A missed reveal
+       then costs the animation, not the content.
+       `data-reveal-pending` is set by the reveal components and cleared by
+       their own onComplete, so this only ever touches elements whose
+       animation genuinely did not run. */
+    const failsafe = window.setTimeout(() => {
+      document
+        .querySelectorAll<HTMLElement>("[data-reveal-pending]")
+        .forEach((el) => {
+          el.style.opacity = "1";
+          el.style.transform = "none";
+          el.removeAttribute("data-reveal-pending");
+        });
+    }, 4000);
+
+    return () => {
+      window.clearTimeout(failsafe);
+      window.removeEventListener("load", onLoad);
+    };
   }, []);
 
   useEffect(() => {
