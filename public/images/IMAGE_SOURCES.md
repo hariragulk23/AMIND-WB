@@ -76,15 +76,22 @@ entirely by two AM INDIA marks:
 | Path | Notes |
 | --- | --- |
 | `../brand/am-india-icon.png` | Icon only — three diagonal bars, red/green/red, genuinely transparent — 725×580, 373 KB. Used in the footer (beneath the separate live-text "AM INDIA" heading), and as the source for favicons and the OG card. |
-| `../brand/am-india-full-lockup.png` | Icon + wordmark + underline, combined artwork — 2340×580, 1133 KB. The primary logo: used in the header/nav and the homepage hero, wherever the mark appears with no separate live-text wordmark beside it. |
+| `../brand/am-india-full-lockup-v2.png` | Icon + "AM INDIA" wordmark + red/green rule + "GLOBAL COMMODITIES" subtitle, combined artwork — 2366×494, 1123 KB. The primary logo: used in the header/nav and the homepage hero, wherever the mark appears with no separate live-text wordmark beside it. |
 
 Both are placed, never redrawn: components use `Image` with each file's true
 intrinsic dimensions plus `w-auto`, so the mark can only ever scale
 proportionally.
 
-`--brand-red` / `--brand-green` were reconciled to match this icon exactly
-(`#d02126` / `#5c7845`, previously `#c75051` / `#758c67` from the old
-artwork) — see `app/globals.css` for the full WCAG re-check that followed.
+**Superseded, not deleted:** `am-india-full-lockup.png` (2340×580, no
+"GLOBAL COMMODITIES" line) was the primary logo before `-v2` replaced it.
+Retired from every component but left on disk — no instruction to delete it
+was given.
+
+`--brand-red` / `--brand-green` are `#d02126` / `#5c7845`, reconciled to
+`am-india-icon.png` — see `app/globals.css` for the WCAG re-check that
+followed. **`am-india-full-lockup-v2.png` samples to different exact
+values — `#e30822` / `#4d7a3e` — flagged, not reconciled.** See the
+migration report for the comparison.
 
 ### Generated favicon and OG derivatives
 
@@ -123,7 +130,7 @@ Twitter card image are both wired in `app/layout.tsx`.
 | File | Source | Photographer / attribution | Licence | Temporary? |
 | --- | --- | --- | --- | --- |
 | `brand/am-india-icon.png` | Supplied by the company | Antonio Marco Exports and Trade Private Limited | Company's own mark | No |
-| `brand/am-india-full-lockup.png` | Supplied by the company | Antonio Marco Exports and Trade Private Limited | Company's own mark | No |
+| `brand/am-india-full-lockup-v2.png` | Supplied by the company | Antonio Marco Exports and Trade Private Limited | Company's own mark | No |
 | All twelve commodity files above | Supplied by the company | To be confirmed | To be confirmed | To be confirmed |
 
 **Action required:** confirm the source and licence of the twelve commodity

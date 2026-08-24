@@ -14,11 +14,17 @@
  * (`FooterMark.tsx`, beneath the large "AM INDIA" text heading) and the
  * generated favicon/OG derivatives.
  *
- * /public/brand/am-india-full-lockup.png — icon + wordmark + underline drawn
- * as one combined artwork. This is the primary logo: used wherever the mark
- * stands alone with no separate live-text wordmark beside it — the header
- * (`Logo.tsx`) and the homepage hero (`Hero.tsx`). Rendered as a single
- * image, never reconstructed from live text plus a separate icon graphic.
+ * /public/brand/am-india-full-lockup-v2.png — the current primary logo.
+ * Icon + "AM INDIA" wordmark + red/green rule + "GLOBAL COMMODITIES"
+ * subtitle, drawn as one combined artwork, genuinely transparent. Used
+ * wherever the mark stands alone with no separate live-text wordmark beside
+ * it — the header (`Logo.tsx`) and the homepage hero (`Hero.tsx`). Rendered
+ * as a single image, never reconstructed from live text plus a separate icon
+ * graphic.
+ *
+ * Supersedes /public/brand/am-india-full-lockup.png (no "GLOBAL COMMODITIES"
+ * line), which is retired from every component but left on disk rather than
+ * deleted — no instruction to remove it was given. See the migration report.
  */
 
 export interface BrandAsset {
@@ -48,9 +54,9 @@ export const brandAssets = {
    * image stands in for the page's primary heading).
    */
   fullLockup: {
-    path: "/brand/am-india-full-lockup.png",
-    width: 2340,
-    height: 580,
+    path: "/brand/am-india-full-lockup-v2.png",
+    width: 2366,
+    height: 494,
     alt: "AM India — Antonio Marco Exports and Trade Private Limited",
     available: true,
   } satisfies BrandAsset,

@@ -90,7 +90,15 @@ export function Hero() {
             width={brandAssets.fullLockup.width}
             height={brandAssets.fullLockup.height}
             priority
-            sizes="(min-width: 1280px) 620px, (min-width: 640px) 450px, 240px"
+            /* Matches the v2 lockup's aspect ratio (2366/494 ≈ 4.79), not
+               the old file's (2340/580 ≈ 4.03) — the new artwork is
+               proportionally wider, so the same height clamp now renders a
+               wider box at every breakpoint. The clamp's ceiling (9.5rem =
+               152px tall) bounds the maximum possible width at 728px
+               regardless of viewport size; each tier below carries margin
+               over its measured rendered width so the srcset candidate is
+               never smaller than the display box. */
+            sizes="(min-width: 1280px) 760px, (min-width: 640px) 600px, 300px"
             className="h-[clamp(3.5rem,min(9vw,13vh),9.5rem)] w-auto"
           />
         </Reveal>
