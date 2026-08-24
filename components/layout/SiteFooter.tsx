@@ -2,6 +2,7 @@ import Link from "next/link";
 import { company, registeredOfficeLines } from "@/data/company";
 import { footerNav, legalNav } from "@/data/navigation";
 import { Container } from "@/components/ui/Container";
+import { StackedLines } from "@/components/ui/StackedLines";
 import { FooterMark } from "./FooterMark";
 
 /**
@@ -37,13 +38,12 @@ export function SiteFooter() {
             <div className="mt-10">
               <h2 className="label-xs text-brass">Registered entity</h2>
               <p className="mt-3 text-sm text-on-dark">{company.legalName}</p>
-              <address className="mt-3 not-italic text-sm leading-relaxed text-on-dark-muted">
-                {registeredOfficeLines.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
-              </address>
+              <StackedLines
+                as="address"
+                lines={registeredOfficeLines}
+                className="mt-3 not-italic text-sm leading-relaxed text-on-dark-muted"
+                separator=", "
+              />
 
               <dl className="mt-5 space-y-1 text-sm">
                 {company.registrations.map((registration) => (

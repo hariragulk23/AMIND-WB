@@ -26,7 +26,7 @@ export function HowWeWork() {
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <Reveal>
-              <SectionLabel index="05">{processContent.label}</SectionLabel>
+              <SectionLabel index="02">{processContent.label}</SectionLabel>
             </Reveal>
             <DisplayReveal
               as="h2"

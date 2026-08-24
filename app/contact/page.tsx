@@ -4,6 +4,7 @@ import { Reveal } from "@/components/animation/Reveal";
 import { TradeEnquiryForm } from "@/components/enquiry/TradeEnquiryForm";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container } from "@/components/ui/Container";
+import { StackedLines } from "@/components/ui/StackedLines";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { company, registeredOfficeLines } from "@/data/company";
 import { enquiryCopy } from "@/data/enquiry";
@@ -118,13 +119,12 @@ export default function ContactPage() {
                 <p className="label-xs mt-8 text-on-light-muted">
                   Registered office
                 </p>
-                <div className="measure mt-2 text-on-light-muted">
-                  {registeredOfficeLines.map((line) => (
-                    <span key={line} className="block">
-                      {line}
-                    </span>
-                  ))}
-                </div>
+                <StackedLines
+                  as="div"
+                  lines={registeredOfficeLines}
+                  className="measure mt-2 text-on-light-muted"
+                  separator=", "
+                />
               </address>
             </Reveal>
 

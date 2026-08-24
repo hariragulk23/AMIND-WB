@@ -154,9 +154,14 @@ export function MobileMenu({ open, onClose, id, toggleRef }: MobileMenuProps) {
               >
                 <span className="display-md block font-display uppercase tracking-[0.04em] text-on-dark">{item.label}</span>
                 {item.description ? (
-                  <span className="mt-1 block text-sm text-on-dark-muted">
-                    {item.description}
-                  </span>
+                  <>
+                    {/* Separates "Commodities" from its descriptor, which
+                        otherwise extract as one run-on string. */}
+                    <span className="sr-only"> — </span>
+                    <span className="mt-1 block text-sm text-on-dark-muted">
+                      {item.description}
+                    </span>
+                  </>
                 ) : null}
               </Link>
             </li>

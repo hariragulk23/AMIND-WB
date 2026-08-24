@@ -21,7 +21,7 @@ export function Positioning() {
     >
       <Container className="section-y">
         <Reveal>
-          <SectionLabel index="03">{positioningContent.label}</SectionLabel>
+          <SectionLabel index="01">{positioningContent.label}</SectionLabel>
         </Reveal>
 
         <div className="mt-10 grid gap-12 lg:mt-16 lg:grid-cols-12 lg:gap-10">

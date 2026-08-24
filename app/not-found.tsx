@@ -1,4 +1,5 @@
 import { Container } from "@/components/ui/Container";
+import { StackedLines } from "@/components/ui/StackedLines";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { primaryCta, secondaryCtas } from "@/data/navigation";
 
@@ -10,8 +11,7 @@ export default function NotFound() {
       <Container className="relative py-24">
         <p className="label-xs numeral text-brass">Error 404</p>
         <h1 className="display-xl mt-8 text-on-dark">
-          <span className="block">Page</span>
-          <span className="block">not found</span>
+          <StackedLines lines={["Page", "not found"]} />
         </h1>
         <p className="body-lg mt-8 max-w-[34rem] text-on-dark-muted">
           The page you asked for is not here. It may have moved, or the address

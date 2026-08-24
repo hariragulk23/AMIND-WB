@@ -43,7 +43,7 @@ export const brandAssets = {
     path: "/brand/am-india-icon.png",
     width: 725,
     height: 580,
-    alt: "AM India",
+    alt: "AM INDIA",
     available: true,
   } satisfies BrandAsset,
   /**
@@ -57,7 +57,7 @@ export const brandAssets = {
     path: "/brand/am-india-full-lockup-v2.png",
     width: 2366,
     height: 494,
-    alt: "AM India — Antonio Marco Exports and Trade Private Limited",
+    alt: "AM INDIA — Antonio Marco Exports and Trade Private Limited",
     available: true,
   } satisfies BrandAsset,
 } as const;

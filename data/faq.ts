@@ -30,14 +30,14 @@ export const faqContent = {
     {
       /* Source: data/commodities.ts (the four platforms),
          data/home.ts → journeyContent.note (per-enquiry confirmation). */
-      question: "What does AM India trade?",
+      question: "What does AM INDIA trade?",
       answer:
         "AM INDIA trades four commodity platforms: coffee, teak, spices and nuts. Each is handled on its own specifications and documentation. Grades, specifications and availability are confirmed per enquiry rather than published as a fixed catalogue.",
     },
     {
       /* Source: data/pages.ts → aboutContent, "The company". */
       question:
-        "Is AM India the same company as Antonio Marco Exports and Trade Private Limited?",
+        "Is AM INDIA the same company as Antonio Marco Exports and Trade Private Limited?",
       answer:
         "Yes. AM INDIA is the trading name; Antonio Marco Exports and Trade Private Limited is the legal entity. Every contract is entered into by the registered company, a private limited company incorporated in India and registered with the Ministry of Corporate Affairs.",
     },
@@ -45,7 +45,7 @@ export const faqContent = {
       /* Source: data/company.ts (registered office), data/pages.ts →
          aboutContent "European roots", data/home.ts → tradeContent facts
          and note. */
-      question: "Where is AM India based, and does it operate internationally?",
+      question: "Where is AM INDIA based, and does it operate internationally?",
       answer:
         "The company is registered and managed in Sivakasi, Tamil Nadu, India, and was established as the Indian subsidiary of a Spanish corporate shareholder. It is structured for cross-border trade in both directions, import and export. Destination markets, ports and routing are confirmed per enquiry.",
     },
@@ -58,7 +58,7 @@ export const faqContent = {
     },
     {
       /* Source: data/compliance.ts → trustSignals, "B2B only". */
-      question: "Does AM India sell to consumers, or only to businesses?",
+      question: "Does AM INDIA sell to consumers, or only to businesses?",
       answer:
         "Businesses only. There is no retail channel and no consumer catalogue. AM INDIA works with businesses buying to specification and to contract.",
     },

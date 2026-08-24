@@ -50,6 +50,23 @@ export const company = {
   domain: "amglobalcommodities.com",
   url: "https://amglobalcommodities.com",
 
+  /**
+   * THE SINGLE SWAP POINT FOR THE ENQUIRY ADDRESS.
+   *
+   * This is the only place the address is written down. Every visible
+   * occurrence — header menu, hero CTA band, final CTA, footer, /contact,
+   * /privacy, /terms and the enquiry form's fallback notice — reads
+   * `company.email`, and so does the Organization JSON-LD. Changing this one
+   * line changes all of them.
+   *
+   * It is also the delivery fallback: `lib/email/index.ts` sends to
+   * `TRADE_ENQUIRY_TO` when that environment variable is set, and to this
+   * address when it is not. So pointing the site at a domain mailbox is
+   * either this line, or the env var, and needs no code change either way.
+   *
+   * Still a gmail.com address pending the domain mailbox — see
+   * CONTENT_REQUIRED.md. Deliberately not changed yet.
+   */
   email: "antoniomarcoindia@gmail.com",
   phone: "+91 7708795669",
   /** E.164 form for tel: links and structured data. */

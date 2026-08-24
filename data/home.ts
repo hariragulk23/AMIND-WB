@@ -12,12 +12,13 @@
 
 export const heroContent = {
   /**
-   * The wordmark's real text. No longer rendered as display type directly —
-   * the hero shows the designed AM INDIA lockup image instead — but kept as
-   * the source of truth for the hero's sr-only h1 and any other place the
-   * heading text is needed as real text.
+   * The hero's h1, set as live display type across two lines.
+   *
+   * Cased to match the logo artwork exactly. The site standardises on
+   * "AM INDIA" everywhere — copy, metadata, JSON-LD and alt text — so the
+   * name never appears in two forms on one page.
    */
-  lines: ["AM", "India"] as const,
+  lines: ["AM", "INDIA"] as const,
   statement: ["From origin.", "To opportunity."] as const,
   intro:
     "A B2B commodity sourcing and trading company connecting reliable supply with international demand across coffee, teak, spices and nuts.",

@@ -1,12 +1,13 @@
-import Image from "next/image";
 import Link from "next/link";
+import { DisplayReveal } from "@/components/animation/DisplayReveal";
 import { Reveal } from "@/components/animation/Reveal";
 import { ScrollCue } from "@/components/animation/ScrollCue";
 import { Container } from "@/components/ui/Container";
 import { CtaLink } from "@/components/ui/CtaLink";
+import { StackedLines } from "@/components/ui/StackedLines";
 import { commodities } from "@/data/commodities";
 import { company } from "@/data/company";
-import { brandAssets, brandLockup } from "@/data/brand";
+import { brandLockup } from "@/data/brand";
 import { heroContent } from "@/data/home";
 import { primaryCta, secondaryCtas } from "@/data/navigation";
 
@@ -26,19 +27,18 @@ import { primaryCta, secondaryCtas } from "@/data/navigation";
  * Rendered on the server: every one of those is present and fully visible in
  * the initial HTML. The animation only moves them; it never gates them.
  *
- * THE WORDMARK IS THE DESIGNED LOCKUP IMAGE, NOT LIVE TEXT.
- * It was previously set as two staggered lines of live display type (a
- * two-beat AM / then INDIA entrance, rebuilt from an earlier three-word
- * stagger). The wordmark is one designed artwork — icon and lettering drawn
- * together as a single mark — so it is now placed as that one image rather
- * than reconstructed from text plus a separate icon graphic. A flattened
- * image can't be staggered by line the way live text could, so the entrance
- * simplifies to one reveal rather than two beats; everything below still
- * arrives as a single quiet wave shortly after.
+ * THE HERO WORDMARK IS LIVE TEXT, NOT THE LOCKUP IMAGE.
+ * For a period it was the designed lockup image with a visually-hidden h1
+ * behind it. That put the company name in the first screenful three times —
+ * the header lockup, the hidden h1, and a second copy of the identical
+ * lockup graphic here — and the duplicated artwork was the redundancy: the
+ * same image twice, roughly 200px apart.
  *
- * A visually-hidden h1 carries the real heading text immediately before the
- * image, so the page keeps a genuine text heading for the accessibility tree
- * and for search engines even though sighted visitors see the artwork.
+ * The header keeps the lockup, so the designed mark still leads the page.
+ * The hero states the name once, as type. Two consequences, both wanted:
+ * the h1 is a real visible heading again rather than an image plus an
+ * sr-only stand-in, and the two-beat AM / INDIA entrance — which a
+ * flattened image cannot stagger — comes back.
  */
 export function Hero() {
   return (
@@ -78,30 +78,18 @@ export function Hero() {
         </Reveal>
 
         {/* ---- Wordmark ------------------------------------------------- */}
-        {/* Real text heading, kept for the accessibility tree and SEO —
-            visually hidden since the artwork below carries the heading for
-            sighted visitors. */}
-        <h1 className="sr-only">{heroContent.lines.join(" ")}</h1>
-
-        <Reveal immediate delay={0.22} y={18} className="mt-6 md:mt-8">
-          <Image
-            src={brandAssets.fullLockup.path}
-            alt="AM INDIA — Antonio Marco Exports and Trade Private Limited"
-            width={brandAssets.fullLockup.width}
-            height={brandAssets.fullLockup.height}
-            priority
-            /* Matches the v2 lockup's aspect ratio (2366/494 ≈ 4.79), not
-               the old file's (2340/580 ≈ 4.03) — the new artwork is
-               proportionally wider, so the same height clamp now renders a
-               wider box at every breakpoint. The clamp's ceiling (9.5rem =
-               152px tall) bounds the maximum possible width at 728px
-               regardless of viewport size; each tier below carries margin
-               over its measured rendered width so the srcset candidate is
-               never smaller than the display box. */
-            sizes="(min-width: 1280px) 760px, (min-width: 640px) 600px, 300px"
-            className="h-[clamp(3.5rem,min(9vw,13vh),9.5rem)] w-auto"
-          />
-        </Reveal>
+        {/* A real, visible h1. `display-xl` is the top step of the scale
+            since display-hero was merged into it. */}
+        <DisplayReveal
+          as="h1"
+          lines={heroContent.lines}
+          className="display-xl mt-6 text-heading md:mt-8"
+          immediate
+          delay={0.22}
+          /* The pause between AM and INDIA — long enough that the two land
+             as two beats rather than one hurried one. */
+          lineStagger={0.34}
+        />
 
         {/*
           Below `md` the header withholds the Antonio Marco mark to stay
@@ -138,6 +126,9 @@ export function Hero() {
                 <span className="label-xs numeral hidden text-brand-red sm:inline">
                   {String(index + 1).padStart(2, "0")}
                 </span>
+                {/* Flex items are blockified, so nothing separates the numeral
+                    from the name in extracted text without this. */}
+                <span className="sr-only"> </span>
                 <span className="label-xs truncate text-on-light md:label-sm">
                   {commodity.name}
                 </span>
@@ -156,11 +147,7 @@ export function Hero() {
               y={14}
               immediate
             >
-              {heroContent.statement.map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
+              <StackedLines lines={heroContent.statement} />
             </Reveal>
 
             <Reveal
@@ -196,10 +183,16 @@ export function Hero() {
         <div className="mt-6 flex items-end justify-between gap-6 pb-5 md:mt-8 md:pb-9">
           <ScrollCue label={heroContent.scrollCue} tone="light" />
 
+          {/* The sr-only comma is what stops this extracting as
+              "77.7983° ESivakasi, Tamil Nadu, India" — the two spans are
+              block-level, so nothing separates them in textContent. It has to
+              be sr-only rather than a bare ", " text node, which would paint a
+              visible comma on a line of its own between them. */}
           <p className="label-xs hidden text-right text-on-light-muted sm:block">
             <span className="numeral block text-brand-green-deep">
               {company.baseCoordinates.latitude} / {company.baseCoordinates.longitude}
             </span>
+            <span className="sr-only">, </span>
             <span className="mt-1.5 block">{company.baseCoordinates.locality}</span>
           </p>
         </div>

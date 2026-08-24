@@ -28,7 +28,7 @@ export function Trust() {
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-6">
             <Reveal>
-              <SectionLabel index="07" >
+              <SectionLabel index="03">
                 {trustContent.label}
               </SectionLabel>
             </Reveal>

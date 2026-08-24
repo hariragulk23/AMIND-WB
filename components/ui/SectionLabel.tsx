@@ -19,9 +19,16 @@ interface SectionLabelProps {
  * turned a signal into wallpaper: if every section is numbered, the numbering
  * stops marking anything, and the repetition compounds the density it was
  * meant to relieve. So the full treatment — numeral, rule, label — is now
- * carried only by the three anchor sections (03 Positioning, 05 How we work,
- * 07 Corporate foundation). Everywhere else the label appears bare, which
- * still names the section without asserting a place in a sequence.
+ * carried only by the three anchor sections. Everywhere else the label
+ * appears bare, which still names the section without asserting a place in a
+ * sequence.
+ *
+ * THE NUMERALS RUN 01, 02, 03 — NOT THE SECTION'S POSITION ON THE PAGE.
+ * They were briefly 03 / 05 / 07, being the positions those sections happen
+ * to occupy once the unnumbered ones are counted. To a reader that is simply
+ * a sequence with 04 and 06 missing, which reads as a bug rather than an
+ * editorial choice. The numerals count the anchors themselves, so the series
+ * a visitor actually sees is complete.
  *
  * Passing `index` is what selects the full treatment; omitting it gives the
  * light one. No caller needs to know about the rule.
@@ -57,6 +64,9 @@ export function SectionLabel({
               tone === "light" ? "bg-paper-line" : "bg-charcoal",
             )}
           />
+          {/* The rule is aria-hidden and carries no text, so without this the
+              numeral and the label extract as "01Positioning". */}
+          <span className="sr-only"> — </span>
         </>
       ) : null}
       <span>{children}</span>

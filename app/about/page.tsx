@@ -5,6 +5,7 @@ import { PageHero } from "@/components/layout/PageHero";
 import { EnquiryBanner } from "@/components/sections/EnquiryBanner";
 import { Container } from "@/components/ui/Container";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { StackedLines } from "@/components/ui/StackedLines";
 import { company, registeredOfficeLines } from "@/data/company";
 import { aboutContent } from "@/data/pages";
 import { pageMetadata } from "@/lib/seo";
@@ -124,26 +125,24 @@ export default function AboutPage() {
               ))}
               <div className="flex flex-col gap-1 border-b border-paper-line py-5 sm:flex-row sm:justify-between sm:gap-6">
                 <dt className="label-xs text-on-light-muted">Directors</dt>
-                <dd className="text-on-light sm:text-right">
-                  {company.directors.map((director) => (
-                    <span key={director.name} className="block">
-                      {director.name}
-                    </span>
-                  ))}
-                </dd>
+                <StackedLines
+                  as="dd"
+                  lines={company.directors.map((d) => d.name)}
+                  className="text-on-light sm:text-right"
+                  separator=", "
+                />
               </div>
               <div className="flex flex-col gap-1 border-b border-paper-line py-5 sm:flex-row sm:justify-between sm:gap-6">
                 <dt className="label-xs text-on-light-muted">
                   Registered office
                 </dt>
                 <dd className="text-on-light sm:text-right">
-                  <address className="not-italic">
-                    {registeredOfficeLines.map((line) => (
-                      <span key={line} className="block">
-                        {line}
-                      </span>
-                    ))}
-                  </address>
+                  <StackedLines
+                    as="address"
+                    lines={registeredOfficeLines}
+                    className="not-italic"
+                    separator=", "
+                  />
                 </dd>
               </div>
             </Reveal>
