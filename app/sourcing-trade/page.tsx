@@ -56,7 +56,8 @@ export default function SourcingTradePage() {
               <Reveal
                 as="li"
                 key={stage.number}
-                className="relative pb-12 pl-14 last:pb-0 lg:pb-16 lg:pl-28"
+                /* Same two-column split as the homepage rail from `lg`. */
+                className="relative pb-12 pl-14 last:pb-0 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,38rem)] lg:items-start lg:gap-x-12 lg:pb-16 lg:pl-28"
                 y={18}
               >
                 <span
@@ -71,7 +72,7 @@ export default function SourcingTradePage() {
                 <h3 className="font-display text-[clamp(1.5rem,2.8vw,2.25rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-heading">
                   {stage.title}
                 </h3>
-                <p className="measure mt-3 text-on-light-muted">
+                <p className="measure mt-3 text-on-light-muted lg:mt-0 lg:pt-2">
                   {stage.description}
                 </p>
               </Reveal>

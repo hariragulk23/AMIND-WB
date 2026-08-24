@@ -34,6 +34,14 @@ export interface Specification {
   readonly method?: string;
 }
 
+
+/**
+ * Shown above every indicative specification table. The wording is the whole
+ * safeguard: it has to be impossible to read these tables as an offer.
+ */
+export const indicativeSpecNote =
+  "Reference parameters only. These are the standards this commodity is commonly traded against internationally — not stock in hand, not an offer, and not a statement of what is currently available. Grades, exact specification and availability are confirmed per enquiry.";
+
 export interface ProductType {
   readonly name: string;
   readonly note?: string;
@@ -82,6 +90,22 @@ export interface Commodity {
   readonly productTypes?: readonly ProductType[];
   readonly grades?: readonly string[];
   readonly specifications?: readonly Specification[];
+  /**
+   * INDICATIVE ONLY — the published market parameters this commodity is
+   * traded against internationally, NOT this company's offer.
+   *
+   * Deliberately a separate field from `specifications` above. That one is
+   * reserved for figures verified against what the company can actually
+   * supply; this one exists so a buyer can tell within a few seconds whether
+   * their requirement is the kind of thing this platform handles at all,
+   * which "confirmed per enquiry" alone never told them.
+   *
+   * Every table is rendered under `indicativeSpecNote`, which states plainly
+   * that these are reference parameters and not stock. When real figures are
+   * confirmed they go in `specifications` and supersede this — see
+   * CONTENT_REQUIRED.md for exactly which fields need replacing.
+   */
+  readonly indicativeSpecifications?: readonly Specification[];
   readonly process?: readonly string[];
   readonly crop?: string;
   readonly packaging?: readonly string[];
@@ -125,6 +149,32 @@ export const commodities: readonly Commodity[] = [
       "Sourcing routes are identified against the buyer's written specification rather than offered from a fixed list, so the species, preparation and volume are matched to the requirement.",
     qualityApproach:
       "Sample approval before shipment, with inspection and analysis arranged through independent third parties where the contract requires it.",
+    /* Coffee Board of India grade designations and the ISO methods green
+       coffee is assessed against. Published standards, not our figures. */
+    indicativeSpecifications: [
+      {
+        parameter: "Grade families",
+        value:
+          "Arabica: Plantation (washed) AA / A / B / PB; Cherry (natural) AB / PB. Robusta: Parchment (washed) and Cherry (natural), AA / AB / PB.",
+        method: "Coffee Board of India designations",
+      },
+      {
+        parameter: "Screen size",
+        value:
+          "Grade-dependent — AA commonly screen 17/18, A and AB screen 15/16; PB is peaberry.",
+        method: "ISO 4150",
+      },
+      {
+        parameter: "Moisture",
+        value: "Commonly 9–12.5% for green coffee.",
+        method: "ISO 6673",
+      },
+      {
+        parameter: "Defect count",
+        value: "Assessed as full-defect equivalents per 300 g green sample.",
+        method: "ISO 10470",
+      },
+    ],
     journeyImage: "journey-coffee",
     tileImage: "tile-coffee",
     availabilityStatus: "enquiry",
@@ -157,6 +207,34 @@ export const commodities: readonly Commodity[] = [
       "Requirements are assessed by form, dimension and volume, and matched against sourcing routes able to supply a legally documented consignment.",
     qualityApproach:
       "Measurement, grading and moisture verification are coordinated before loading, with inspection arranged independently where a buyer requires it.",
+    /* Timber is bought on dimension, seasoning and legality documentation.
+       FEQ is a long-established teak trade designation, not an invention. */
+    indicativeSpecifications: [
+      {
+        parameter: "Forms traded",
+        value: "Round logs, squares and sawn timber (scantlings, boards).",
+      },
+      {
+        parameter: "Dimension",
+        value:
+          "Specified as thickness × width × length against a cutting list; sawn lengths commonly 1.8–4.0 m.",
+      },
+      {
+        parameter: "Moisture",
+        value:
+          "Air-dried commonly 15–20%; kiln-dried commonly 8–12%, set by end use.",
+      },
+      {
+        parameter: "Grade",
+        value:
+          "Visual grading against the buyer's stated standard — FEQ (First European Quality) and A / B / C grade conventions are the common reference.",
+      },
+      {
+        parameter: "Legality documentation",
+        value:
+          "Transit permits, origin declaration and chain of ownership travel with the consignment; the destination market sets what is required.",
+      },
+    ],
     journeyImage: "journey-teak",
     tileImage: "tile-teak",
     availabilityStatus: "enquiry",
@@ -192,6 +270,39 @@ export const commodities: readonly Commodity[] = [
       "Each spice is handled as its own commercial product, with the sourcing route identified against the written specification for that product.",
     qualityApproach:
       "Specification, purity and moisture are confirmed against agreed parameters, with laboratory analysis arranged through independent third parties where the contract requires it.",
+    /* Deliberately the PARAMETER SET and its ISO methods rather than named
+       spices with values: which spices this platform offers is not yet
+       confirmed (see CONTENT_REQUIRED.md), and naming them here would be a
+       claim. The methods are what a spice buyer actually needs to see to
+       judge whether a supplier works to their regime. */
+    indicativeSpecifications: [
+      {
+        parameter: "Form",
+        value: "Whole, ground or crushed, specified per product.",
+      },
+      {
+        parameter: "Moisture",
+        value:
+          "Set per spice — commonly 8–12% for whole spices, lower for ground.",
+        method: "ISO 939",
+      },
+      {
+        parameter: "Extraneous and foreign matter",
+        value: "Specified per spice as a maximum percentage by weight.",
+        method: "ISO 927",
+      },
+      {
+        parameter: "Volatile oil",
+        value:
+          "Applies to aromatic spices; the minimum is set per product and per contract.",
+        method: "ISO 6571",
+      },
+      {
+        parameter: "Contaminant limits",
+        value:
+          "Worked to the destination market's regime — pesticide MRLs, aflatoxin and treatment restrictions differ by market and are agreed before contract.",
+      },
+    ],
     journeyImage: "journey-spices",
     tileImage: "tile-spices",
     availabilityStatus: "enquiry",
@@ -226,6 +337,33 @@ export const commodities: readonly Commodity[] = [
       "Grade, size and packing format are confirmed in writing first, then matched to a sourcing route able to supply them consistently.",
     qualityApproach:
       "Sample approval and grade verification are coordinated ahead of packing, with independent inspection arranged where the contract requires it.",
+    /* Standard commercial cashew kernel grades. These are the AFI / CEPCI
+       designations the whole trade quotes in — a buyer asking for W-320 is
+       using a definition neither side sets. */
+    indicativeSpecifications: [
+      {
+        parameter: "Whole white kernel grades",
+        value:
+          "W-180, W-210, W-240, W-320 and W-450, where the number is the approximate kernel count per pound. W-320 is the most widely traded.",
+        method: "AFI / CEPCI grade definitions",
+      },
+      {
+        parameter: "Scorched and broken grades",
+        value:
+          "Scorched wholes (SW), butts, splits, and large and small white pieces (LWP / SWP).",
+        method: "AFI / CEPCI grade definitions",
+      },
+      {
+        parameter: "Moisture",
+        value: "Commonly a maximum of 5% for cashew kernels.",
+        method: "AFI specification",
+      },
+      {
+        parameter: "Defect tolerances",
+        value:
+          "Colour, breakage and foreign matter tolerances are set by grade and confirmed against an approved sample.",
+      },
+    ],
     journeyImage: "journey-nuts",
     tileImage: "tile-nuts",
     availabilityStatus: "enquiry",

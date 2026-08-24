@@ -223,6 +223,54 @@ Also required:
 
 ---
 
+## 8b. Indicative specification tables — REPLACE BEFORE LAUNCH
+
+_File: `data/commodities.ts` → each commodity's `indicativeSpecifications`_
+
+Each commodity page now carries an **indicative** specification table so a
+buyer can judge relevance before enquiring. Every one is published industry
+reference — Coffee Board grade designations, ISO test methods, FEQ timber
+conventions, AFI/CEPCI cashew grades — and every table renders beneath
+`indicativeSpecNote`, which states plainly that these are reference
+parameters and not stock, an offer, or current availability.
+
+**They are not this company's figures, and must be replaced.** When a value
+is confirmed for what AM INDIA can actually supply, put it in
+`specifications` (the separate, verified field) — that table renders above
+the indicative one and supersedes it. Then delete the corresponding
+indicative row.
+
+Confirm and replace, per commodity:
+
+- [ ] **Coffee** — which grade families are actually offered (the table lists
+      the full Coffee Board set); the screen sizes genuinely supplied;
+      the moisture and defect tolerances contracted to.
+- [ ] **Teak** — which forms are handled; real dimension ranges and cutting
+      lists; the seasoning actually offered (air- vs kiln-dried, target %);
+      the grading standard the company contracts on; the exact legality
+      document set issued.
+- [ ] **Spices** — **which spices are offered at all.** The table deliberately
+      lists the parameter set and ISO methods rather than named spices with
+      values, because naming them would be a claim. Once products are
+      confirmed, add per-spice values.
+- [ ] **Nuts** — which cashew grades are actually offered (the table lists the
+      standard commercial set); the moisture and defect tolerances contracted
+      to; whether scorched and broken grades are handled.
+
+**Deliberately left out of every table, and still required** — these could
+not be stated as market reference without implying a commitment this company
+has not made:
+
+- [ ] Packing formats and net weights. Universal market units exist (60 kg
+      jute for coffee, 22.68 kg vacuum tin for cashew kernels) but packing is
+      a commercial commitment, not a parameter, so no table states one.
+- [ ] Origins, volumes, MOQs, prices, loading ports, Incoterms.
+- [ ] Any certification. Nothing in these tables asserts one — the ISO and
+      AFI references name the METHOD a parameter is measured by, which is not
+      a claim to hold a certificate.
+
+---
+
 ## 9. Photography
 
 _File: `data/images.ts` — the manifest specifies path, aspect ratio, minimum

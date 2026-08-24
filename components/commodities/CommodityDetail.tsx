@@ -1,7 +1,7 @@
 import { Reveal } from "@/components/animation/Reveal";
 import { Container } from "@/components/ui/Container";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import type { Commodity } from "@/data/commodities";
+import { indicativeSpecNote, type Commodity } from "@/data/commodities";
 
 /**
  * REUSABLE COMMODITY PAGE BODY
@@ -164,6 +164,67 @@ export function CommodityDetail({ commodity }: { commodity: Commodity }) {
                       </th>
                       <td className="py-4 pr-6 text-on-light-muted">{spec.value}</td>
                       <td className="py-4 text-on-light-muted">{spec.method ?? "—"}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </Reveal>
+          </Block>
+        ) : null}
+
+        {/* ---- Indicative specifications ------------------------------- */}
+        {/* The framing note is not decoration — it is the reason this table
+            can exist at all. It renders above the table, in brand red, and is
+            not collapsible or dismissible, so the table is never read in
+            isolation as an offer. If the note is ever removed, the table has
+            to go with it. */}
+        {commodity.indicativeSpecifications &&
+        commodity.indicativeSpecifications.length > 0 ? (
+          <Block title="Indicative specifications" index={nextIndex()}>
+            <Reveal>
+              <p className="measure border-l-2 border-brand-red pl-5 text-on-light-muted">
+                {indicativeSpecNote}
+              </p>
+            </Reveal>
+
+            <Reveal className="mt-10 overflow-x-auto">
+              <table className="w-full min-w-[34rem] border-collapse text-left">
+                <caption className="sr-only">
+                  Indicative market parameters for {commodity.name}. Reference
+                  only — not stock in hand and not an offer. Exact
+                  specification and availability are confirmed per enquiry.
+                </caption>
+                <thead>
+                  <tr className="border-b border-paper-line">
+                    <th scope="col" className="label-xs py-3 pr-6 text-on-light-muted">
+                      Parameter
+                    </th>
+                    <th scope="col" className="label-xs py-3 pr-6 text-on-light-muted">
+                      Typical market reference
+                    </th>
+                    <th scope="col" className="label-xs py-3 text-on-light-muted">
+                      Standard
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {commodity.indicativeSpecifications.map((spec) => (
+                    <tr
+                      key={spec.parameter}
+                      className="border-b border-paper-line align-top"
+                    >
+                      <th
+                        scope="row"
+                        className="w-[10rem] py-5 pr-6 font-normal text-on-light lg:w-[14rem]"
+                      >
+                        {spec.parameter}
+                      </th>
+                      <td className="py-5 pr-6 text-on-light-muted">
+                        {spec.value}
+                      </td>
+                      <td className="w-[9rem] py-5 text-sm text-on-light-muted lg:w-[12rem]">
+                        {spec.method ?? "—"}
+                      </td>
                     </tr>
                   ))}
                 </tbody>

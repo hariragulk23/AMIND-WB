@@ -70,13 +70,23 @@ export function HowWeWork() {
           <ScrollRail className="absolute left-5 top-3 bottom-3 w-px lg:left-8" />
 
           {processContent.steps.map((step) => (
+            /* From `lg` the row splits: stage name in the left column,
+               description in the right. The section previously ran the whole
+               row at reading measure and left the right half of a 1440 canvas
+               empty — this uses that width with content already on the page
+               rather than filling it with something invented. The right
+               column is sized to the reading measure, so the description
+               occupies its column exactly instead of being capped inside a
+               wider one. Below `lg` it collapses back to one top-to-bottom
+               sequence. */
             <Reveal
               as="li"
               key={step.number}
-              className="relative pb-12 pl-14 last:pb-0 lg:pb-20 lg:pl-28"
+              className="relative pb-12 pl-14 last:pb-0 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,38rem)] lg:items-start lg:gap-x-12 lg:pb-20 lg:pl-28"
               y={18}
             >
-              {/* The node. `bg-paper` is what breaks the rail behind it. */}
+              {/* The node. `bg-paper` is what breaks the rail behind it.
+                  Absolutely positioned, so it takes no grid cell. */}
               <span
                 aria-hidden="true"
                 className="absolute left-0 top-0 flex w-10 justify-center lg:w-16"
@@ -89,7 +99,7 @@ export function HowWeWork() {
               <h3 className="font-display text-[clamp(1.75rem,3.4vw,2.75rem)] font-semibold leading-[1.05] tracking-[-0.02em] text-heading">
                 {step.title}
               </h3>
-              <p className="measure mt-3 text-on-light-muted lg:mt-4">
+              <p className="measure mt-3 text-on-light-muted lg:mt-0 lg:pt-2">
                 {step.description}
               </p>
             </Reveal>
