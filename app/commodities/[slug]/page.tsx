@@ -51,7 +51,7 @@ export default async function CommodityPage({
     <>
       <PageHero
         headingLines={[commodity.name]}
-        intro={commodity.summary}
+        intro={commodity.heroIntro}
         crumbs={[
           { name: "Home", path: "/" },
           { name: "Commodities", path: "/commodities" },

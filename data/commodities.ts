@@ -61,6 +61,14 @@ export interface Commodity {
   /** Editorial one-liner used in the homepage journey and tiles. */
   readonly summary: string;
   /**
+   * The detail page's own hero statement — same facts as `summary`, said as
+   * a fuller sentence. `summary` is now cut for a four-across tile at 1024px
+   * and reads as thin/clipped sitting alone under a display-size h1 with the
+   * page's full measure to fill, so the two are kept separate rather than
+   * forcing one string to serve both a caption and an opening statement.
+   */
+  readonly heroIntro: string;
+  /**
    * Search-result description. Written to fit inside the ~160 character
    * budget: concatenating `summary` + `sourcingApproach` produced 200-253
    * characters, which Google truncates mid-sentence. Same claims, said once.
@@ -136,6 +144,8 @@ export const commodities: readonly Commodity[] = [
        screen they get roughly 28 characters a line, so anything much past
        ~52 characters wraps to a third line. Keep them to two. */
     summary: "Green coffee for roasters and food manufacturers.",
+    heroIntro:
+      "Green coffee for the roasting, importing and food manufacturing trade.",
     description: [
       "Coffee is a specification-led commodity. Buyers are precise about species, screen size, defect count, moisture and processing method, and a contract is only as good as the consistency behind it.",
       "AM INDIA approaches coffee as a green commodity trade: understanding the exact specification a buyer works to, identifying a sourcing route capable of meeting it, and coordinating the quality evidence and documentation that allow the contract to be executed with confidence.",
@@ -194,6 +204,8 @@ export const commodities: readonly Commodity[] = [
     index: "Platform 02",
     descriptor: "Timber — Tectona grandis",
     summary: "Teak traded by dimension and documentation.",
+    heroIntro:
+      "Teak traded as a timber commodity, by dimension and documentation.",
     description: [
       "Teak is bought on dimension, grade, moisture and legality. Importers work to tolerances, cutting lists and container plans, and the paperwork that travels with a consignment matters as much as the timber itself.",
       "We treat teak as a timber commodity rather than a finished product: the requirement is defined in measurable terms, the sourcing route is assessed against it, and the legal and shipping documentation is coordinated so the consignment clears cleanly at destination.",
@@ -256,6 +268,8 @@ export const commodities: readonly Commodity[] = [
     index: "Platform 03",
     descriptor: "Whole and ground spices",
     summary: "Spices traded on specification and purity.",
+    heroIntro:
+      "A spice platform built around specification, purity and clean documentation.",
     description: [
       "Spices are traded on purity, moisture, volatile oil and contaminant limits, and requirements differ sharply between an industrial processor and a repacker. Specification control is the whole discipline.",
       "The platform is structured to handle individual spices as distinct commercial products, each with its own specification, packing format and documentation set, rather than as a single undifferentiated category.",
@@ -323,6 +337,8 @@ export const commodities: readonly Commodity[] = [
     index: "Platform 04",
     descriptor: "Cashew and tree nuts",
     summary: "Cashew-led nut sourcing, graded to requirement.",
+    heroIntro:
+      "Cashew-led nut sourcing, graded and packed to the buyer's requirement.",
     description: [
       "Cashew is a graded commodity where count, colour, breakage and moisture decide the commercial value, and where packing format is part of the specification rather than an afterthought.",
       "Cashew is the initial focus of the nut platform, structured so further tree nuts can be added as distinct products with their own grades, sizes and packing formats.",
