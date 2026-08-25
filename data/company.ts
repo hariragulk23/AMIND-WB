@@ -147,3 +147,8 @@ export const registeredOfficeLines: readonly string[] = [
 
 /** Single-line address for structured data and meta tags. */
 export const registeredOfficeInline: string = registeredOfficeLines.join(", ");
+
+/** wa.me wants the E.164 number with no leading "+". Derived from
+ *  `phoneHref` rather than written separately, so the two can never drift
+ *  apart if the number ever changes. */
+export const whatsappHref: string = `https://wa.me/${company.phoneHref.replace("+", "")}`;

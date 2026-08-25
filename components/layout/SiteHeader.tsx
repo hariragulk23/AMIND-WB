@@ -11,17 +11,22 @@ import { MobileMenu } from "./MobileMenu";
 /**
  * Site header.
  *
- * Sits transparent over the off-white hero and settles into a solid bar with a
- * hairline once the visitor scrolls past it. The state is driven by a passive
- * scroll listener throttled to one animation frame — deliberately not a
+ * Sits transparent over the off-white hero and settles into a solid navy bar
+ * with a hairline once the visitor scrolls past it — the same navy the
+ * footer uses, so the two read as one enclosing frame around the page rather
+ * than two different treatments. The state is driven by a passive scroll
+ * listener throttled to one animation frame — deliberately not a
  * ScrollTrigger, so the header stays correct even before ScrollTrigger has
  * measured the page (which matters on mobile, where the collapsing URL bar
  * changes heights).
  *
- * Every page hero on this site now uses the light canvas, so the header keeps
- * one consistent dark-on-light treatment across all routes. The only exception
- * is while the mobile panel is open, when the toggle sits over a navy ground
- * and inverts.
+ * Every page hero on this site uses the light canvas, so the transparent
+ * (unscrolled) state stays dark-on-light — changing that would fight the
+ * hero it sits over. Every piece of header content (logo, nav links, the
+ * menu toggle) is toned off the same `scrolled` boolean instead of a fixed
+ * light/dark choice, so it flips to light-on-navy the moment the bar goes
+ * solid, and to the same light-on-navy while the mobile panel is open (its
+ * own ground is navy too, independent of scroll position).
  *
  * The active navigation state uses the logo's red/green/red rule — one of the
  * three places that motif is allowed to appear.
@@ -62,13 +67,18 @@ export function SiteHeader() {
     });
   }, [pathname]);
 
+  /* Everything in the header (not just the toggle) is toned off this one
+     flag: solid-and-scrolled or the mobile panel's own navy ground both mean
+     the header's content now sits on a dark background. */
+  const dark = scrolled || menuOpen;
+
   return (
     <>
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-[600ms] ease-brand",
           scrolled && !menuOpen
-            ? "border-b border-paper-line bg-paper/92 backdrop-blur-[6px]"
+            ? "border-b border-charcoal bg-ink/92 backdrop-blur-[6px]"
             : "border-b border-transparent bg-transparent",
         )}
       >
@@ -76,7 +86,7 @@ export function SiteHeader() {
           className="gutter mx-auto flex max-w-[100rem] items-center justify-between gap-6"
           style={{ height: "var(--am-header-h)" }}
         >
-          <Logo tone={menuOpen ? "dark" : "light"} />
+          <Logo tone={dark ? "dark" : "light"} />
 
           <nav aria-label="Main" className="hidden lg:block">
             <ul className="flex items-center gap-8">
@@ -90,9 +100,13 @@ export function SiteHeader() {
                       aria-current={active ? "page" : undefined}
                       className={cn(
                         "label-xs group relative block py-2 transition-colors duration-300 ease-brand",
-                        active
-                          ? "text-on-light"
-                          : "text-on-light-muted hover:text-on-light",
+                        dark
+                          ? active
+                            ? "text-on-dark"
+                            : "text-on-dark-muted hover:text-on-dark"
+                          : active
+                            ? "text-on-light"
+                            : "text-on-light-muted hover:text-on-light",
                       )}
                     >
                       {item.label}
@@ -128,7 +142,7 @@ export function SiteHeader() {
               aria-controls={menuId}
               className={cn(
                 "label-xs -mr-2 p-2 transition-colors duration-300 lg:hidden",
-                menuOpen
+                dark
                   ? "text-on-dark hover:text-brass"
                   : "text-on-light hover:text-brand-red",
               )}

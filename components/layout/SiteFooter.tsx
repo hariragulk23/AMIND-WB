@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { company, registeredOfficeInline } from "@/data/company";
+import { company, registeredOfficeInline, whatsappHref } from "@/data/company";
 import { footerNav, legalNav } from "@/data/navigation";
 import { Container } from "@/components/ui/Container";
+import { MailIcon, WhatsAppIcon } from "@/components/ui/icons";
 import { FooterMark } from "./FooterMark";
 
 /**
@@ -80,21 +81,30 @@ export function SiteFooter() {
             </div>
           </nav>
 
-          {/* ---- Contact ---- */}
+          {/* ---- Contact ----
+              Icon plus the actual address/number as visible text, not
+              icon-only: a B2B buyer often wants to read or copy the detail
+              before deciding to click it. */}
           <div className="lg:col-span-3 lg:col-start-10">
             <h2 className="label-xs text-brass">Contact</h2>
-            <address className="mt-3 space-y-2 not-italic text-sm">
+            <address className="mt-3 space-y-3 not-italic text-sm">
               <a
                 href={`mailto:${company.email}`}
-                className="block break-words text-on-dark-muted transition-colors duration-300 ease-brand hover:text-on-dark"
+                aria-label={`Email ${company.brand} at ${company.email}`}
+                className="group flex items-center gap-2.5 text-on-dark-muted transition-colors duration-300 ease-brand hover:text-on-dark"
               >
-                {company.email}
+                <MailIcon className="h-4 w-4 shrink-0" />
+                <span className="break-words">{company.email}</span>
               </a>
               <a
-                href={`tel:${company.phoneHref}`}
-                className="block text-on-dark-muted transition-colors duration-300 ease-brand hover:text-on-dark"
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Message ${company.brand} on WhatsApp at ${company.phone}`}
+                className="group flex items-center gap-2.5 text-on-dark-muted transition-colors duration-300 ease-brand hover:text-on-dark"
               >
-                {company.phone}
+                <WhatsAppIcon className="h-4 w-4 shrink-0" />
+                <span className="numeral">{company.phone}</span>
               </a>
             </address>
           </div>

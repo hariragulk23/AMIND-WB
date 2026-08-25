@@ -14,17 +14,21 @@
  * (`FooterMark.tsx`, beneath the large "AM INDIA" text heading) and the
  * generated favicon/OG derivatives.
  *
- * /public/brand/am-india-full-lockup-v2.png — the current primary logo.
- * Icon + "AM INDIA" wordmark + red/green rule + "GLOBAL COMMODITIES"
- * subtitle, drawn as one combined artwork, genuinely transparent. Used
- * wherever the mark stands alone with no separate live-text wordmark beside
- * it — the header (`Logo.tsx`) and the homepage hero (`Hero.tsx`). Rendered
- * as a single image, never reconstructed from live text plus a separate icon
- * graphic.
+ * /public/brand/am-india-full-lockup-v2.png — icon + "AM INDIA" wordmark +
+ * red/green rule + "GLOBAL COMMODITIES" subtitle, drawn as one combined
+ * artwork, genuinely transparent. NOT CURRENTLY USED by any component: the
+ * header (`Logo.tsx`) originally rendered this as a single image, but was
+ * changed to pair the icon with a live "AM INDIA" text wordmark instead,
+ * matching the footer's live-text-plus-icon treatment and dropping the
+ * subtitle, which read as clutter at header scale. The homepage hero
+ * (`Hero.tsx`) has its own separate live h1 and never rendered this file.
+ * Left in the registry and on disk rather than deleted — no instruction to
+ * remove it — in case a future context (print, a share/OG image, a page
+ * with no adjacent live wordmark) genuinely wants the combined mark as one
+ * image again.
  *
  * Supersedes /public/brand/am-india-full-lockup.png (no "GLOBAL COMMODITIES"
- * line), which is retired from every component but left on disk rather than
- * deleted — no instruction to remove it was given. See the migration report.
+ * line), also unused and left on disk. See the migration report.
  */
 
 export interface BrandAsset {
@@ -47,11 +51,9 @@ export const brandAssets = {
     available: true,
   } satisfies BrandAsset,
   /**
-   * The primary logo — icon + wordmark, one artwork. Header and hero.
-   * `alt` here is the fuller default; both consumers pass their own
-   * context-appropriate override rather than using it as-is (a concise
-   * nav-landmark alt in the header, a fuller one on the hero, where the
-   * image stands in for the page's primary heading).
+   * The combined icon + wordmark artwork. Currently unused by any
+   * component — see the file-level comment above for why and what would
+   * bring it back.
    */
   fullLockup: {
     path: "/brand/am-india-full-lockup-v2.png",
