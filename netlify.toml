@@ -16,3 +16,19 @@
 [build.environment]
   # Match the Node version the project is developed and built against.
   NODE_VERSION = "22"
+
+# The .in domain (and its www subdomain) redirect to the canonical .com
+# domain — one property, one indexable origin, no duplicate-content split
+# between the two. `force = true` makes the rule win even once the .in
+# domain also has DNS/hosting pointed at this same site.
+[[redirects]]
+  from = "https://amglobalcommodities.in/*"
+  to = "https://amglobalcommodities.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.amglobalcommodities.in/*"
+  to = "https://amglobalcommodities.com/:splat"
+  status = 301
+  force = true
