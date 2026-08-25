@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { company } from "@/data/company";
 import { tradeContent } from "@/data/home";
+import { cn, gridDividers } from "@/lib/utils";
 import { TradeField } from "./TradeField";
 
 /**
@@ -99,16 +100,27 @@ export function GlobalTrade() {
 
         {/* The data row. Divided rather than merely spaced, so four short
             facts read as one deliberate band across the full width instead of
-            four items adrift in it. */}
+            four items adrift in it. The divider rules hold at every
+            breakpoint, not just `lg` — a rule between rows below `sm`, rules
+            between both rows and columns at `sm`/`md` (two-up), and a single
+            row of column rules at `lg` (four-up), so the row never degrades
+            to a plain stacked list on a tablet. */}
         <Reveal
           as="dl"
           stagger="base"
-          className="mt-20 grid gap-x-8 gap-y-12 border-t border-charcoal pt-14 sm:grid-cols-2 lg:mt-28 lg:grid-cols-4"
+          className="mt-20 grid gap-x-8 gap-y-0 border-t border-charcoal pt-14 sm:grid-cols-2 lg:mt-28 lg:grid-cols-4"
         >
-          {tradeContent.facts.map((fact) => (
+          {tradeContent.facts.map((fact, index) => (
             <div
               key={fact.label}
-              className="lg:border-l lg:border-charcoal lg:pl-8 lg:first:border-l-0 lg:first:pl-0"
+              className={cn(
+                "min-w-0 border-charcoal",
+                gridDividers(index, [
+                  { prefix: "", cols: 1 },
+                  { prefix: "sm", cols: 2 },
+                  { prefix: "lg", cols: 4 },
+                ]),
+              )}
             >
               <dt className="label-xs text-on-dark-muted">{fact.label}</dt>
               <dd className="font-display mt-4 text-[clamp(1.5rem,3vw,2.25rem)] leading-[1.1] text-on-dark">

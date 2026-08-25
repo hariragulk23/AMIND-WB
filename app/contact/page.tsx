@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
 
-import { Reveal } from "@/components/animation/Reveal";
 import { TradeEnquiryForm } from "@/components/enquiry/TradeEnquiryForm";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container } from "@/components/ui/Container";
-import { StackedLines } from "@/components/ui/StackedLines";
-import { SectionLabel } from "@/components/ui/SectionLabel";
-import { company, registeredOfficeLines } from "@/data/company";
+import { company } from "@/data/company";
 import { enquiryCopy } from "@/data/enquiry";
 import { isEmailConfigured } from "@/lib/email";
 import { pageMetadata } from "@/lib/seo";
@@ -41,7 +38,10 @@ export default function ContactPage() {
       />
 
       <section className="bg-paper text-on-light">
-        <Container className="pb-8 pt-16 md:pt-20">
+        {/* Short top padding: the first form section opens on its own
+            border-t immediately below, which already marks the boundary
+            with the hero. */}
+        <Container className="pb-8 pt-6 md:pt-8">
           {/*
             Told up front, not after fourteen fields. While no transactional
             email provider is configured, a buyer should not invest the time to
@@ -74,77 +74,6 @@ export default function ContactPage() {
           ) : null}
 
           <TradeEnquiryForm />
-        </Container>
-      </section>
-
-      {/* ---- Direct contact + registered entity ------------------------ */}
-      <section
-        aria-labelledby="direct-contact-heading"
-        className="bg-paper text-on-light"
-      >
-        <Container className="pb-16 md:pb-20">
-          <div className="grid gap-10 border-t border-paper-line pt-14 lg:grid-cols-12">
-            <div className="lg:col-span-4">
-              <Reveal>
-                <SectionLabel>Direct</SectionLabel>
-              </Reveal>
-              <h2
-                id="direct-contact-heading"
-                className="display-md mt-6 text-on-light"
-              >
-                Or contact us directly
-              </h2>
-            </div>
-
-            <Reveal className="lg:col-span-4 lg:col-start-6">
-              <address className="not-italic">
-                <p className="label-xs text-on-light-muted">Email</p>
-                <a
-                  href={`mailto:${company.email}`}
-                  className="mt-2 block break-words text-on-light transition-colors duration-300 ease-brand hover:text-brass-deep"
-                >
-                  {company.email}
-                </a>
-
-                <p className="label-xs mt-8 text-on-light-muted">
-                  Phone / WhatsApp
-                </p>
-                <a
-                  href={`tel:${company.phoneHref}`}
-                  className="numeral mt-2 block text-on-light transition-colors duration-300 ease-brand hover:text-brass-deep"
-                >
-                  {company.phone}
-                </a>
-
-                <p className="label-xs mt-8 text-on-light-muted">
-                  Registered office
-                </p>
-                <StackedLines
-                  as="div"
-                  lines={registeredOfficeLines}
-                  className="measure mt-2 text-on-light-muted"
-                  separator=", "
-                />
-              </address>
-            </Reveal>
-
-            <Reveal className="lg:col-span-3 lg:col-start-10">
-              <p className="label-xs text-on-light-muted">Registered entity</p>
-              <p className="mt-2 text-sm text-on-light">{company.legalName}</p>
-              <dl className="mt-4 space-y-1 text-sm">
-                {company.registrations.map((registration) => (
-                  <div key={registration.label} className="flex gap-3">
-                    <dt className="label-xs pt-1 text-on-light-muted">
-                      {registration.label}
-                    </dt>
-                    <dd className="numeral text-on-light">
-                      {registration.value}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </Reveal>
-          </div>
         </Container>
       </section>
     </>

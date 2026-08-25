@@ -29,7 +29,7 @@ export function FooterMark() {
       width={icon.width}
       height={icon.height}
       sizes="80px"
-      className="mt-10 h-12 w-auto lg:h-14"
+      className="mt-6 h-12 w-auto lg:h-14"
     />
   );
 }

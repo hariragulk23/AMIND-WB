@@ -23,11 +23,12 @@ export function CommoditiesGrid() {
   return (
     <section aria-labelledby="grid-heading" className="bg-paper text-on-light">
       {/* Opens on a full-width rule, which marks the section break on its
-          own — so the top padding is roughly half the sitewide rhythm and
-          the rule sits close under the previous section's closing CTA,
-          rather than floating in a second stretch of empty paper. */}
-      <Container className="pt-[clamp(2.5rem,6vw,5.5rem)] section-pb">
-        <div className="flex flex-col justify-between gap-8 border-t border-paper-line pt-14 md:flex-row md:items-end">
+          own — so the Container's own top padding is cut to a minimum
+          (the previous section's bottom padding already provides the
+          run-out) and the space between the rule and the label below it
+          is the only top padding doing real work. */}
+      <Container className="pt-[clamp(0.5rem,2vw,1.5rem)] section-pb">
+        <div className="flex flex-col justify-between gap-8 border-t border-paper-line pt-10 md:flex-row md:items-end">
           <div>
             <Reveal>
               <SectionLabel >{gridContent.label}</SectionLabel>

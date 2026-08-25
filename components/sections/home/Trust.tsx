@@ -6,6 +6,7 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 import { company } from "@/data/company";
 import { trustContent } from "@/data/home";
 import { trustSignals, verifiedCompliance } from "@/data/compliance";
+import { cn, gridDividers } from "@/lib/utils";
 
 /**
  * SECTION 7 — TRUST
@@ -67,23 +68,45 @@ export function Trust() {
           ))}
         </Reveal>
 
-        {/* ---- Verified registrations + incorporation ------------------- */}
-        <Reveal className="mt-14 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-          <dl className="flex flex-wrap gap-x-12 gap-y-6">
-            <div>
-              <dt className="label-xs text-on-light-muted">Incorporated</dt>
-              <dd className="numeral mt-2 font-display text-xl text-on-light">
-                {company.incorporation.displayDate}
-              </dd>
-            </div>
-            {verifiedCompliance.map((record) => (
-              <div key={record.id}>
+        {/* ---- Verified registrations + incorporation -------------------
+            Its own top rule, so this reads as a second, distinct data row
+            rather than a caption trailing off the grid above it. Dividers
+            between items carry the same treatment as the Global Trade
+            section's facts row, so the two read as one established pattern
+            rather than two different treatments for the same kind of
+            content. */}
+        <Reveal className="mt-14 flex flex-col gap-8 border-t border-paper-line pt-8 lg:flex-row lg:items-end lg:justify-between">
+          <dl className="grid min-w-0 grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-3">
+            {[
+              { key: "incorporated", label: "Incorporated", value: company.incorporation.displayDate, name: undefined as string | undefined },
+              ...verifiedCompliance.map((record) => ({
+                key: record.id,
+                label: record.label,
+                value: record.number,
+                name: record.name,
+              })),
+            ].map((item, index) => (
+              <div
+                key={item.key}
+                className={cn(
+                  "min-w-0 border-paper-line",
+                  gridDividers(index, [
+                    { prefix: "", cols: 2 },
+                    { prefix: "sm", cols: 3 },
+                  ]),
+                )}
+              >
                 <dt className="label-xs text-on-light-muted">
-                  {record.label}
-                  <span className="sr-only"> — {record.name}</span>
+                  {item.label}
+                  {item.name ? (
+                    <span className="sr-only"> — {item.name}</span>
+                  ) : null}
                 </dt>
-                <dd className="numeral mt-2 font-display text-xl text-on-light">
-                  {record.number}
+                {/* break-all: CIN/GSTIN are long unbroken alphanumeric
+                    strings that would otherwise overflow a narrow grid
+                    column into the next one instead of wrapping. */}
+                <dd className="numeral mt-2 break-all font-display text-xl text-on-light">
+                  {item.value}
                 </dd>
               </div>
             ))}

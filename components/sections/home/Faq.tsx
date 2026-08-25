@@ -35,7 +35,12 @@ import { cn } from "@/lib/utils";
 export function Faq() {
   return (
     <section aria-labelledby="faq-heading" className="bg-paper text-on-light">
-      <Container className="section-y">
+      {/* Closes on the last accordion item's own border, which already
+          marks the boundary — so the bottom padding is cut below the
+          standard section-y rhythm while the top keeps it (nothing marks
+          the top boundary except the section label, same as everywhere
+          else). */}
+      <Container className="pt-[clamp(3.5rem,9vw,6rem)] pb-[clamp(2.5rem,6vw,4.5rem)]">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <Reveal>

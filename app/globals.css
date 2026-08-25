@@ -374,19 +374,27 @@
    but the separation is a clear break, not a pause. After this cut plus a
    structural pass (sections that open on a full-width rule take roughly
    half this padding on top, since the rule itself marks the break), the
-   measured gap between any two sections on any page sits at roughly
+   measured gap between any two sections on any page sat at roughly
    160-280px at desktop and 70-155px on a phone, down from 380-490 and
-   160-233. */
+   160-233.
+
+   THIRD PASS — every section opens on a SectionLabel, and that label is
+   already a boundary marker the same way a rule is. The desktop ceiling
+   above still gave labelled sections the full "generous" allowance on top
+   of that, which is what kept the 1440/1920 gap between two full-padding
+   sections at 250-280px even with nothing left unaccounted for. Ceilings
+   cut again, floor and tablet values untouched since those were already
+   in range: desktop gaps now run roughly 130-215px, phone unchanged. */
 @utility section-y {
-  padding-block: clamp(3.5rem, 9vw, 8rem);
+  padding-block: clamp(3.5rem, 9vw, 6rem);
 }
 
 @utility section-y-sm {
-  padding-block: clamp(3rem, 7vw, 6.5rem);
+  padding-block: clamp(3rem, 7vw, 5.5rem);
 }
 
 @utility section-pb {
-  padding-bottom: clamp(3.5rem, 9vw, 8rem);
+  padding-bottom: clamp(3.5rem, 9vw, 6rem);
 }
 
 @utility hairline-t {

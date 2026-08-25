@@ -30,13 +30,13 @@ export default function AboutPage() {
       />
 
       <section className="bg-paper text-on-light">
-        {/* The first block opens on its own full-width rule, and each block
-            carries its own vertical padding — so the Container's top padding
-            is roughly half the sitewide rhythm to keep the hero-to-rule
-            run-out from doubling up. The bottom keeps the standard small
-            rhythm so the hand-off to the enquiry banner matches every other
-            page. */}
-        <Container className="pt-[clamp(2rem,4.5vw,4rem)] pb-[clamp(3rem,7vw,6.5rem)]">
+        {/* The first block opens on its own full-width rule and carries its
+            own vertical padding, so the Container's top padding is cut to a
+            minimum — just enough optical air under the hero's intro before
+            the rule, not a second helping of section rhythm on top of it.
+            The bottom keeps the standard small rhythm so the hand-off to the
+            enquiry banner matches every other page. */}
+        <Container className="pt-[clamp(0.5rem,2vw,1.5rem)] pb-[clamp(3rem,7vw,5.5rem)]">
           {aboutContent.sections.map((section, index) => (
             <div
               key={section.title}

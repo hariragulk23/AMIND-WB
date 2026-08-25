@@ -2,7 +2,6 @@ import { DisplayReveal } from "@/components/animation/DisplayReveal";
 import { Reveal } from "@/components/animation/Reveal";
 import { Container } from "@/components/ui/Container";
 import { CtaLink } from "@/components/ui/CtaLink";
-import { company } from "@/data/company";
 import { primaryCta } from "@/data/navigation";
 
 interface EnquiryBannerProps {
@@ -38,27 +37,12 @@ export function EnquiryBanner({
               {intro}
             </Reveal>
 
+            {/* Email and phone used to repeat here — the footer that
+                follows immediately after already carries both. */}
             <Reveal className="mt-8">
               <CtaLink href={primaryCta.href} tone="dark" variant="solid">
                 {primaryCta.labelLong}
               </CtaLink>
-            </Reveal>
-
-            <Reveal className="mt-8">
-              <address className="not-italic text-sm text-on-dark-muted">
-                <a
-                  href={`mailto:${company.email}`}
-                  className="block break-words transition-colors duration-300 ease-brand hover:text-brass"
-                >
-                  {company.email}
-                </a>
-                <a
-                  href={`tel:${company.phoneHref}`}
-                  className="numeral mt-1 block transition-colors duration-300 ease-brand hover:text-brass"
-                >
-                  {company.phone}
-                </a>
-              </address>
             </Reveal>
           </div>
         </div>

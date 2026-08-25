@@ -325,7 +325,7 @@ export function TradeEnquiryForm() {
       </fieldset>
 
       {/* ---- Submit ---------------------------------------------------- */}
-      <div className="grid gap-8 border-t border-paper-line py-12 lg:grid-cols-12">
+      <div className="grid gap-8 border-t border-paper-line py-10 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <p className="text-sm text-on-light-muted">
             {enquiryCopy.requiredNote}
@@ -386,14 +386,14 @@ function EnquirySection({
   const section = enquirySections[index];
 
   return (
-    <section className="grid gap-8 border-t border-paper-line py-12 lg:grid-cols-12 lg:py-16">
+    <section className="grid gap-8 border-t border-paper-line py-8 lg:grid-cols-12 lg:py-10">
       <div className="lg:col-span-4">
         <SectionLabel index={section.index}>{section.title}</SectionLabel>
         <p className="mt-4 max-w-[24rem] text-sm text-on-light-muted">
           {section.description}
         </p>
       </div>
-      <div className="grid content-start gap-x-8 gap-y-9 sm:grid-cols-2 lg:col-span-7 lg:col-start-6">
+      <div className="grid content-start gap-x-8 gap-y-6 sm:grid-cols-2 lg:col-span-7 lg:col-start-6">
         {children}
       </div>
     </section>

@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { company, registeredOfficeLines } from "@/data/company";
+import { company, registeredOfficeInline } from "@/data/company";
 import { footerNav, legalNav } from "@/data/navigation";
 import { Container } from "@/components/ui/Container";
-import { StackedLines } from "@/components/ui/StackedLines";
 import { FooterMark } from "./FooterMark";
 
 /**
@@ -22,33 +21,33 @@ export function SiteFooter() {
           places the motif is allowed to appear. */}
       <div aria-hidden="true" className="brand-rule w-full" />
 
-      <Container className="relative py-16 md:py-24">
-        <div className="grid gap-14 lg:grid-cols-12 lg:gap-10">
+      <Container className="relative py-12 md:py-16">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
           {/* ---- Identity + legal entity ---- */}
           <div className="lg:col-span-5">
             <p className="font-display text-[clamp(1.75rem,3vw,2.5rem)] font-semibold uppercase leading-none tracking-[0.1em] text-on-dark">
               {company.brand}
             </p>
-            <p className="mt-4 max-w-[28rem] text-sm text-on-dark-muted">
+            <p className="mt-3 max-w-[28rem] text-sm text-on-dark-muted">
               {company.tagline}
             </p>
 
             <FooterMark />
 
-            <div className="mt-10">
+            <div className="mt-6">
               <h2 className="label-xs text-brass">Registered entity</h2>
-              <p className="mt-3 text-sm text-on-dark">{company.legalName}</p>
-              <StackedLines
-                as="address"
-                lines={registeredOfficeLines}
-                className="mt-3 not-italic text-sm leading-relaxed text-on-dark-muted"
-                separator=", "
-              />
+              <p className="mt-2 text-sm text-on-dark">{company.legalName}</p>
+              {/* One wrapped line rather than five stacked ones — the
+                  registered-entity block was the single biggest
+                  contributor to mobile footer height. */}
+              <address className="mt-2 max-w-[26rem] text-sm not-italic leading-snug text-on-dark-muted">
+                {registeredOfficeInline}
+              </address>
 
-              <dl className="mt-5 space-y-1 text-sm">
+              <dl className="mt-4 flex flex-wrap gap-x-6 gap-y-1 text-sm">
                 {company.registrations.map((registration) => (
-                  <div key={registration.label} className="flex gap-3">
-                    <dt className="label-xs pt-1 text-on-dark-muted">
+                  <div key={registration.label} className="flex gap-2">
+                    <dt className="label-xs pt-0.5 text-on-dark-muted">
                       {registration.label}
                     </dt>
                     <dd className="numeral text-on-dark">{registration.value}</dd>
@@ -60,11 +59,11 @@ export function SiteFooter() {
 
           {/* ---- Navigation ---- */}
           <nav aria-label="Footer" className="lg:col-span-4 lg:col-start-6">
-            <div className="grid grid-cols-2 gap-10">
+            <div className="grid grid-cols-2 gap-8">
               {footerNav.map((group) => (
                 <div key={group.title}>
                   <h2 className="label-xs text-brass">{group.title}</h2>
-                  <ul className="mt-4 space-y-2.5">
+                  <ul className="mt-3 space-y-2">
                     {group.items.map((item) => (
                       <li key={item.href}>
                         <Link
@@ -84,7 +83,7 @@ export function SiteFooter() {
           {/* ---- Contact ---- */}
           <div className="lg:col-span-3 lg:col-start-10">
             <h2 className="label-xs text-brass">Contact</h2>
-            <address className="mt-4 space-y-2.5 not-italic text-sm">
+            <address className="mt-3 space-y-2 not-italic text-sm">
               <a
                 href={`mailto:${company.email}`}
                 className="block break-words text-on-dark-muted transition-colors duration-300 ease-brand hover:text-on-dark"
@@ -102,7 +101,7 @@ export function SiteFooter() {
         </div>
 
         {/* ---- Legal bar ---- */}
-        <div className="mt-16 flex flex-col gap-5 border-t border-charcoal pt-8 md:flex-row md:items-center md:justify-between">
+        <div className="mt-10 flex flex-col gap-4 border-t border-charcoal pt-6 md:flex-row md:items-center md:justify-between">
           <p className="text-sm text-on-dark-muted">
             © {year} {company.legalName}. All rights reserved.
           </p>
