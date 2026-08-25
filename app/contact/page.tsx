@@ -82,7 +82,7 @@ export default function ContactPage() {
         aria-labelledby="direct-contact-heading"
         className="bg-paper text-on-light"
       >
-        <Container className="pb-20 md:pb-28">
+        <Container className="pb-16 md:pb-20">
           <div className="grid gap-10 border-t border-paper-line pt-14 lg:grid-cols-12">
             <div className="lg:col-span-4">
               <Reveal>

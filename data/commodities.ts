@@ -132,8 +132,10 @@ export const commodities: readonly Commodity[] = [
       "Green coffee for the roasting, importing and food manufacturing trade. Sourcing routes identified against your written specification, not a fixed list.",
     index: "Platform 01",
     descriptor: "Green coffee — Coffea",
-    summary:
-      "Green coffee for the roasting, importing and food manufacturing trade.",
+    /* Summaries are tile copy first: at four tiles across on a 1024px
+       screen they get roughly 28 characters a line, so anything much past
+       ~52 characters wraps to a third line. Keep them to two. */
+    summary: "Green coffee for roasters and food manufacturers.",
     description: [
       "Coffee is a specification-led commodity. Buyers are precise about species, screen size, defect count, moisture and processing method, and a contract is only as good as the consistency behind it.",
       "AM INDIA approaches coffee as a green commodity trade: understanding the exact specification a buyer works to, identifying a sourcing route capable of meeting it, and coordinating the quality evidence and documentation that allow the contract to be executed with confidence.",
@@ -191,7 +193,7 @@ export const commodities: readonly Commodity[] = [
       "Teak traded as a timber commodity, by dimension and documentation. Requirements assessed by form, dimension and volume, then matched to sourcing routes.",
     index: "Platform 02",
     descriptor: "Timber — Tectona grandis",
-    summary: "Teak traded as a timber commodity, by dimension and documentation.",
+    summary: "Teak traded by dimension and documentation.",
     description: [
       "Teak is bought on dimension, grade, moisture and legality. Importers work to tolerances, cutting lists and container plans, and the paperwork that travels with a consignment matters as much as the timber itself.",
       "We treat teak as a timber commodity rather than a finished product: the requirement is defined in measurable terms, the sourcing route is assessed against it, and the legal and shipping documentation is coordinated so the consignment clears cleanly at destination.",
@@ -253,8 +255,7 @@ export const commodities: readonly Commodity[] = [
       "A spice platform built around specification, purity and clean documentation. Each spice handled as its own commercial product, sourced to your requirement.",
     index: "Platform 03",
     descriptor: "Whole and ground spices",
-    summary:
-      "A spice platform built around specification, purity and clean documentation.",
+    summary: "Spices traded on specification and purity.",
     description: [
       "Spices are traded on purity, moisture, volatile oil and contaminant limits, and requirements differ sharply between an industrial processor and a repacker. Specification control is the whole discipline.",
       "The platform is structured to handle individual spices as distinct commercial products, each with its own specification, packing format and documentation set, rather than as a single undifferentiated category.",
@@ -321,7 +322,7 @@ export const commodities: readonly Commodity[] = [
       "Cashew-led nut sourcing, graded and packed to the buyer's requirement. Grade, size and packing format confirmed in writing before a route is matched.",
     index: "Platform 04",
     descriptor: "Cashew and tree nuts",
-    summary: "Cashew-led nut sourcing, graded and packed to the buyer's requirement.",
+    summary: "Cashew-led nut sourcing, graded to requirement.",
     description: [
       "Cashew is a graded commodity where count, colour, breakage and moisture decide the commercial value, and where packing format is part of the specification rather than an afterthought.",
       "Cashew is the initial focus of the nut platform, structured so further tree nuts can be added as distinct products with their own grades, sizes and packing formats.",

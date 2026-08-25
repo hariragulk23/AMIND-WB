@@ -22,7 +22,11 @@ import { secondaryCtas } from "@/data/navigation";
 export function CommoditiesGrid() {
   return (
     <section aria-labelledby="grid-heading" className="bg-paper text-on-light">
-      <Container className="section-y-lg">
+      {/* Opens on a full-width rule, which marks the section break on its
+          own — so the top padding is roughly half the sitewide rhythm and
+          the rule sits close under the previous section's closing CTA,
+          rather than floating in a second stretch of empty paper. */}
+      <Container className="pt-[clamp(2.5rem,6vw,5.5rem)] section-pb">
         <div className="flex flex-col justify-between gap-8 border-t border-paper-line pt-14 md:flex-row md:items-end">
           <div>
             <Reveal>
@@ -46,14 +50,13 @@ export function CommoditiesGrid() {
           </Reveal>
         </div>
 
-        {/* Two across, not four. At four-up on a 1440 canvas each tile was
-            around 300px wide — the photography was reduced to a thumbnail
-            with a caption, which is what "under-used imagery" looked like in
-            practice. Two-up roughly doubles the linear size of every frame
-            and lets the images, rather than the text, carry the section. */}
+        {/* One row of four from `lg`, two-up on tablet, stacked on mobile.
+            The vertical gap tightens as the columns multiply: at four across
+            the tiles are short enough that a 5rem gutter between rows reads
+            as a break in the grid rather than rhythm. */}
         <Reveal
           stagger="loose"
-          className="mt-20 grid gap-x-8 gap-y-20 sm:grid-cols-2 lg:mt-28 lg:gap-x-12"
+          className="mt-16 grid gap-x-6 gap-y-14 sm:grid-cols-2 sm:gap-y-16 lg:mt-20 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-0"
         >
           {commodities.map((commodity) => (
             <Link
@@ -64,7 +67,7 @@ export function CommoditiesGrid() {
               <div className="relative overflow-hidden">
                 <Media
                   imageKey={commodity.tileImage}
-                  sizes="(min-width: 640px) 50vw, 100vw"
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                   className="transition-transform duration-[1400ms] ease-brand group-hover:scale-[1.05]"
                 />
               </div>

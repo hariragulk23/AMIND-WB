@@ -363,34 +363,30 @@
    The floors below are chosen for a phone.
 
    THE CEILING HAD THE MIRROR-IMAGE PROBLEM. Above the width where Nvw
-   exceeds the max, every viewport gets the max — so at 1920 a section-y
-   bottom of 272px met a section-y-lg top of 352px and produced a 624px
-   gap, 58% of a 1080px screen with nothing in it. Same defect as the
-   floor, at the other end. The ceilings are lowered so the largest gap
-   between two stacked sections is ~430px rather than 624px.
+   exceeds the max, every viewport gets the max, so the two ends of the
+   clamp both need to be viewport-appropriate rather than one value scaled.
 
-   Between roughly 570px and 1370px nothing changes at all — the vw term
-   is doing the work there, which is most of tablet and laptop. At 1440
-   the change is 10-19px; the reduction is only really felt above 1600. */
+   These were then cut again after measuring the real gap between every
+   section on every page. The rhythm had been set by eye at desktop and was
+   producing 380-490px of empty background between sections at 1440 — a
+   third to a half of a screen with nothing in it, repeatedly. The standard
+   here is compact and intentional: sections still have to read as separate,
+   but the separation is a clear break, not a pause. After this cut plus a
+   structural pass (sections that open on a full-width rule take roughly
+   half this padding on top, since the rule itself marks the break), the
+   measured gap between any two sections on any page sits at roughly
+   160-280px at desktop and 70-155px on a phone, down from 380-490 and
+   160-233. */
 @utility section-y {
-  padding-block: clamp(5rem, 14vw, 12rem);
+  padding-block: clamp(3.5rem, 9vw, 8rem);
 }
 
 @utility section-y-sm {
-  padding-block: clamp(4rem, 10vw, 9rem);
+  padding-block: clamp(3rem, 7vw, 6.5rem);
 }
 
 @utility section-pb {
-  padding-bottom: clamp(5rem, 14vw, 12rem);
-}
-
-/* For the deliberately sparse sections. The extra air is the point: a section
-   with little in it has to read as composed rather than unfinished, and that
-   difference is almost entirely how much room surrounds what is there.
-   Same floor caveat as above — generous is a desktop idea, and on a phone it
-   just reads as a gap. */
-@utility section-y-lg {
-  padding-block: clamp(6rem, 18vw, 15rem);
+  padding-bottom: clamp(3.5rem, 9vw, 8rem);
 }
 
 @utility hairline-t {

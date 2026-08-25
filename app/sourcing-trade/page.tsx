@@ -85,7 +85,7 @@ export default function SourcingTradePage() {
         aria-labelledby="incoterms-heading"
         className="bg-paper text-on-light"
       >
-        <Container className="pb-[clamp(5rem,8vw,9rem)]">
+        <Container className="pb-[clamp(3.5rem,6vw,7rem)]">
           <div className="grid gap-8 border-t border-paper-line pt-14 lg:grid-cols-12">
             <div className="lg:col-span-4">
               <Reveal>

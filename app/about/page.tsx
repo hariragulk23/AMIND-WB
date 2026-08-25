@@ -30,11 +30,17 @@ export default function AboutPage() {
       />
 
       <section className="bg-paper text-on-light">
-        <Container className="section-y-sm">
+        {/* The first block opens on its own full-width rule, and each block
+            carries its own vertical padding — so the Container's top padding
+            is roughly half the sitewide rhythm to keep the hero-to-rule
+            run-out from doubling up. The bottom keeps the standard small
+            rhythm so the hand-off to the enquiry banner matches every other
+            page. */}
+        <Container className="pt-[clamp(2rem,4.5vw,4rem)] pb-[clamp(3rem,7vw,6.5rem)]">
           {aboutContent.sections.map((section, index) => (
             <div
               key={section.title}
-              className="grid gap-8 border-t border-paper-line py-14 lg:grid-cols-12 lg:py-20"
+              className="grid gap-8 border-t border-paper-line py-12 lg:grid-cols-12 lg:py-16"
             >
               <div className="lg:col-span-4">
                 <Reveal>
@@ -85,7 +91,11 @@ export default function AboutPage() {
           ))}
 
           {/* ---- Corporate record ---------------------------------------- */}
-          <div className="grid gap-8 border-t border-paper-line py-14 lg:grid-cols-12 lg:py-20">
+          {/* No bottom padding of its own: the Container's section-y-sm
+              already closes the section, so the record block ending flush
+              keeps the run-out to the enquiry banner the same size as on
+              every other page. */}
+          <div className="grid gap-8 border-t border-paper-line pt-12 lg:grid-cols-12 lg:pt-16">
             <div className="lg:col-span-4">
               <Reveal>
                 <SectionLabel index="04">Corporate record</SectionLabel>
