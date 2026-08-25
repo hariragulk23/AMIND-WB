@@ -360,18 +360,28 @@
    next opened on a label. That is what produced the near-empty screens on
    mobile — the rhythm was tuned at 1440 and the floor quietly applied it to
    360px phones.
-   The floors below are chosen for a phone. Desktop is untouched: above
-   ~570px the vw term takes over and the values are exactly as before. */
+   The floors below are chosen for a phone.
+
+   THE CEILING HAD THE MIRROR-IMAGE PROBLEM. Above the width where Nvw
+   exceeds the max, every viewport gets the max — so at 1920 a section-y
+   bottom of 272px met a section-y-lg top of 352px and produced a 624px
+   gap, 58% of a 1080px screen with nothing in it. Same defect as the
+   floor, at the other end. The ceilings are lowered so the largest gap
+   between two stacked sections is ~430px rather than 624px.
+
+   Between roughly 570px and 1370px nothing changes at all — the vw term
+   is doing the work there, which is most of tablet and laptop. At 1440
+   the change is 10-19px; the reduction is only really felt above 1600. */
 @utility section-y {
-  padding-block: clamp(5rem, 14vw, 17rem);
+  padding-block: clamp(5rem, 14vw, 12rem);
 }
 
 @utility section-y-sm {
-  padding-block: clamp(4rem, 10vw, 11rem);
+  padding-block: clamp(4rem, 10vw, 9rem);
 }
 
 @utility section-pb {
-  padding-bottom: clamp(5rem, 14vw, 17rem);
+  padding-bottom: clamp(5rem, 14vw, 12rem);
 }
 
 /* For the deliberately sparse sections. The extra air is the point: a section
@@ -380,7 +390,7 @@
    Same floor caveat as above — generous is a desktop idea, and on a phone it
    just reads as a gap. */
 @utility section-y-lg {
-  padding-block: clamp(6rem, 18vw, 22rem);
+  padding-block: clamp(6rem, 18vw, 15rem);
 }
 
 @utility hairline-t {

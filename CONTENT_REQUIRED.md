@@ -297,10 +297,21 @@ has rights to and a genuine connection with.
 
 _Files: `app/privacy/page.tsx`, `app/terms/page.tsx`_
 
-- [ ] **Legal review of the privacy policy.** It currently describes the site
-      accurately as built (no analytics or advertising cookies; enquiry
-      correspondence only) and **must be revised** when the enquiry form,
-      any analytics, or any third-party embed is added.
+- [ ] **Legal review of the privacy policy.**
+- [ ] ⚠ **The privacy policy now describes Netlify Analytics, which is not
+      yet enabled.** The copy was written ahead of switching it on, so the
+      page does not claim "no analytics" the moment it goes live. Two things
+      follow, and one of them must be done:
+      - If Netlify Analytics **is** enabled, the copy is accurate as written
+        (server-side, log-derived, no client script, no cookies, no personal
+        identifiers) — nothing to change.
+      - If it is **not** enabled, the paragraph overstates what is collected
+        and must be removed.
+      - If a **different** tool is chosen (Plausible, Umami, GA4, anything
+        client-side), the paragraph is wrong: those run a script in the
+        visitor's browser, which changes what must be disclosed and may
+        require consent. Rewrite before enabling.
+      Must also be revised when any third-party embed is added.
 - [ ] **Legal review of the website terms.** Scope is limited to use of the
       website; they are explicitly not terms of sale.
 - [ ] Confirm the data controller identity and any grievance officer or DPO
@@ -309,7 +320,9 @@ _Files: `app/privacy/page.tsx`, `app/terms/page.tsx`_
 - [ ] Standard terms and conditions of sale, if these should be published or
       offered for download.
 - [ ] Confirm whether a cookie banner will be needed — **not required as
-      built**, since the site sets no analytics or advertising cookies.
+      built**, since the site sets no cookies at all and Netlify Analytics
+      is server-side. This changes if a client-side analytics tool is
+      chosen instead. The site sets no analytics or advertising cookies.
 
 ---
 
