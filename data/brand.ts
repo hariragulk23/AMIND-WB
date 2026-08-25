@@ -16,19 +16,17 @@
  *
  * /public/brand/am-india-full-lockup-v2.png — icon + "AM INDIA" wordmark +
  * red/green rule + "GLOBAL COMMODITIES" subtitle, drawn as one combined
- * artwork, genuinely transparent. NOT CURRENTLY USED by any component: the
- * header (`Logo.tsx`) originally rendered this as a single image, but was
- * changed to pair the icon with a live "AM INDIA" text wordmark instead,
- * matching the footer's live-text-plus-icon treatment and dropping the
- * subtitle, which read as clutter at header scale. The homepage hero
- * (`Hero.tsx`) has its own separate live h1 and never rendered this file.
- * Left in the registry and on disk rather than deleted — no instruction to
- * remove it — in case a future context (print, a share/OG image, a page
- * with no adjacent live wordmark) genuinely wants the combined mark as one
- * image again.
+ * artwork, genuinely transparent. Rendered as a single image in the header
+ * (`Logo.tsx`) — the one place on the site with no separate live-text
+ * wordmark already carrying the name, so the designed mark leads there
+ * rather than being reconstructed from live text plus a separate icon
+ * graphic. NOT used by the homepage hero (`Hero.tsx`): the hero has its own
+ * separate live h1 and never rendered this file, a stale claim in an
+ * earlier version of this comment notwithstanding.
  *
  * Supersedes /public/brand/am-india-full-lockup.png (no "GLOBAL COMMODITIES"
- * line), also unused and left on disk. See the migration report.
+ * line), which is retired from every component but left on disk rather than
+ * deleted — no instruction to remove it was given. See the migration report.
  */
 
 export interface BrandAsset {
@@ -51,9 +49,9 @@ export const brandAssets = {
     available: true,
   } satisfies BrandAsset,
   /**
-   * The combined icon + wordmark artwork. Currently unused by any
-   * component — see the file-level comment above for why and what would
-   * bring it back.
+   * The combined icon + wordmark artwork. Header. `alt` here is the fuller
+   * default; the header passes its own concise nav-landmark override rather
+   * than using it as-is.
    */
   fullLockup: {
     path: "/brand/am-india-full-lockup-v2.png",
