@@ -129,5 +129,5 @@ export const finalCtaContent = {
   label: "Next step",
   headingLines: ["Let's", "talk", "trade."] as const,
   paragraph:
-    "Send the specification, quantity and destination. We will come back with a clear view of whether and how it can be sourced.",
+    "Tell us what you are looking for and how to reach you. We will come back with a clear view of whether and how it can be sourced.",
 } as const;

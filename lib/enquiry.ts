@@ -13,28 +13,14 @@
  * schema library would be a disproportionate addition for it.
  */
 
-import {
-  commodityOptions,
-  incotermOptions,
-  purchaseFrequencyOptions,
-  quantityUnitOptions,
-  type EnquiryFieldName,
-} from "@/data/enquiry";
+import { commodityOptions, type EnquiryFieldName } from "@/data/enquiry";
 
 export interface TradeEnquiry {
-  commodity: string;
-  specificProduct: string;
-  quantity: string;
-  quantityUnit: string;
-  destinationCountry: string;
-  destinationPort: string;
-  incoterm: string;
-  packaging: string;
-  frequency: string;
-  companyName: string;
   contactName: string;
+  companyName: string;
   email: string;
   phone: string;
+  commodity: string;
   message: string;
 }
 
@@ -54,19 +40,11 @@ export interface ParseResult {
 
 /** Per-field caps. Anything longer is a mistake or an abuse attempt. */
 const MAX_LENGTH: Record<EnquiryFieldName, number> = {
-  commodity: 40,
-  specificProduct: 160,
-  quantity: 40,
-  quantityUnit: 20,
-  destinationCountry: 80,
-  destinationPort: 120,
-  incoterm: 20,
-  packaging: 400,
-  frequency: 40,
-  companyName: 160,
   contactName: 120,
+  companyName: 160,
   email: 254,
   phone: 40,
+  commodity: 40,
   message: 4000,
 };
 
@@ -119,62 +97,45 @@ function constrain(
 /**
  * Validates and sanitises a submitted enquiry.
  *
- * Required: commodity, destination country, company name, contact name, a
- * valid business email, and EITHER an approximate quantity OR a description of
- * the requirement in the message. That last pair reflects how these enquiries
- * actually arrive — a buyer scoping a purchase often cannot state a volume yet.
+ * Required: contact name, company name, a valid business email, a commodity,
+ * and a message. Phone is optional — it is a useful second channel, not a
+ * precondition of making contact, and email is already mandatory.
+ *
+ * The message is required because it is now the only field carrying what the
+ * buyer actually wants. The previous rule was "an approximate quantity OR a
+ * message"; with the structured trade fields gone, the message is the whole
+ * requirement, and an enquiry naming a commodity and nothing else is not
+ * something anyone can respond to. Note this requires only that they write
+ * something — no minimum detail, volume or destination is demanded.
  */
 export function parseEnquiry(formData: FormData): ParseResult {
   const data: TradeEnquiry = {
-    commodity: constrain(clean(formData.get("commodity"), MAX_LENGTH.commodity), commodityOptions),
-    specificProduct: clean(formData.get("specificProduct"), MAX_LENGTH.specificProduct),
-    quantity: clean(formData.get("quantity"), MAX_LENGTH.quantity),
-    quantityUnit: constrain(
-      clean(formData.get("quantityUnit"), MAX_LENGTH.quantityUnit),
-      quantityUnitOptions,
-    ),
-    destinationCountry: clean(
-      formData.get("destinationCountry"),
-      MAX_LENGTH.destinationCountry,
-    ),
-    destinationPort: clean(formData.get("destinationPort"), MAX_LENGTH.destinationPort),
-    incoterm: constrain(clean(formData.get("incoterm"), MAX_LENGTH.incoterm), incotermOptions),
-    packaging: cleanMultiline(formData.get("packaging"), MAX_LENGTH.packaging),
-    frequency: constrain(
-      clean(formData.get("frequency"), MAX_LENGTH.frequency),
-      purchaseFrequencyOptions,
-    ),
-    companyName: clean(formData.get("companyName"), MAX_LENGTH.companyName),
     contactName: clean(formData.get("contactName"), MAX_LENGTH.contactName),
+    companyName: clean(formData.get("companyName"), MAX_LENGTH.companyName),
     email: clean(formData.get("email"), MAX_LENGTH.email),
     phone: clean(formData.get("phone"), MAX_LENGTH.phone),
+    commodity: constrain(
+      clean(formData.get("commodity"), MAX_LENGTH.commodity),
+      commodityOptions,
+    ),
     message: cleanMultiline(formData.get("message"), MAX_LENGTH.message),
   };
 
   const errors: EnquiryErrors = {};
 
-  if (!data.commodity) {
-    errors.commodity = "Select a commodity.";
-  } else if (data.commodity === "other" && !data.specificProduct) {
-    errors.specificProduct = "Tell us which product you are looking for.";
-  }
-
-  if (!data.quantity && !data.message) {
-    errors.quantity =
-      "Give an approximate quantity, or describe the requirement in the message below.";
-  }
-
-  if (!data.destinationCountry) {
-    errors.destinationCountry = "Enter the destination country.";
-  }
-
-  if (!data.companyName) errors.companyName = "Enter your company name.";
   if (!data.contactName) errors.contactName = "Enter your name.";
+  if (!data.companyName) errors.companyName = "Enter your company name.";
 
   if (!data.email) {
     errors.email = "Enter your business email address.";
   } else if (!isValidEmail(data.email)) {
     errors.email = "Enter a valid email address.";
+  }
+
+  if (!data.commodity) errors.commodity = "Select a commodity.";
+
+  if (!data.message) {
+    errors.message = "Tell us what you are looking for.";
   }
 
   return { ok: Object.keys(errors).length === 0, data, errors };

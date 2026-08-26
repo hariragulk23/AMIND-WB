@@ -64,9 +64,16 @@ export function SiteHeader() {
 
   return (
     <>
+      {/* `backdrop-filter` is deliberately NOT in the transition list. It was,
+          and animating it meant 600ms of continuous backdrop re-blurring every
+          time the visitor crossed the 24px scroll threshold — one of the most
+          expensive things a compositor can be asked to interpolate, on the one
+          element that is composited over everything else. The blur now snaps
+          while the background colour fades under it, which is imperceptible
+          because the colour is what carries the transition. */}
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-[600ms] ease-brand",
+          "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color] duration-[600ms] ease-brand",
           scrolled && !menuOpen
             ? "border-b border-paper-line bg-paper/92 backdrop-blur-[6px]"
             : "border-b border-transparent bg-transparent",

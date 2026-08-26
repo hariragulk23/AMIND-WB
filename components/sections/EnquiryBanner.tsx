@@ -15,7 +15,7 @@ interface EnquiryBannerProps {
  * uses its own, larger treatment in components/sections/home/FinalCta.tsx.
  */
 export function EnquiryBanner({
-  intro = "Send the specification, quantity and destination. We will come back with a clear view of whether and how it can be sourced.",
+  intro = "Tell us what you are looking for and how to reach you. We will come back with a clear view of whether and how it can be sourced.",
   headingLines = ["Start a", "trade enquiry."],
 }: EnquiryBannerProps) {
   return (

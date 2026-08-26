@@ -5,7 +5,15 @@ import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import { company } from "@/data/company";
 import { primaryCta, primaryNav } from "@/data/navigation";
-import { ease, gsap, prefersReducedMotion, registerGsap } from "@/lib/motion";
+import {
+  duration as dur,
+  ease,
+  gsap,
+  prefersReducedMotion,
+  registerGsap,
+  stagger as staggerTokens,
+  travel,
+} from "@/lib/motion";
 
 registerGsap();
 
@@ -101,27 +109,42 @@ export function MobileMenu({ open, onClose, id, toggleRef }: MobileMenuProps) {
         return;
       }
 
+      /* OPEN AND CLOSE ARE SYMMETRICAL. Close used to be a bare 0.32s
+         autoAlpha fade on a different curve — less than half the open
+         duration, with no clip-path — so the panel unrolled deliberately and
+         then simply blinked out. It now retracts the way it arrived, just
+         faster, which is the normal relationship between an opening and a
+         closing gesture. */
       if (open) {
         gsap.set(panel, { autoAlpha: 1 });
         gsap.fromTo(
           panel,
           { clipPath: "inset(0% 0% 100% 0%)" },
-          { clipPath: "inset(0% 0% 0% 0%)", duration: 0.72, ease: ease.editorial },
+          {
+            clipPath: "inset(0% 0% 0% 0%)",
+            duration: dur.ui,
+            ease: ease.out,
+          },
         );
         gsap.fromTo(
           "[data-menu-item]",
-          { y: 22, opacity: 0 },
+          { y: travel.sm, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.6,
-            delay: 0.18,
-            stagger: 0.055,
+            duration: dur.base,
+            delay: 0.16,
+            stagger: staggerTokens.tight,
             ease: ease.out,
           },
         );
       } else {
-        gsap.to(panel, { autoAlpha: 0, duration: 0.32, ease: "power2.inOut" });
+        gsap.to(panel, {
+          clipPath: "inset(0% 0% 100% 0%)",
+          duration: dur.fast,
+          ease: ease.inOut,
+          onComplete: () => gsap.set(panel, { autoAlpha: 0 }),
+        });
       }
     },
     { scope, dependencies: [open] },

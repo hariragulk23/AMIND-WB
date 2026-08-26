@@ -9,6 +9,7 @@ import {
   prefersReducedMotion,
   registerGsap,
   REVEAL_START,
+  stagger as staggerTokens,
 } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
@@ -45,7 +46,7 @@ export function DisplayReveal({
   id,
   immediate = false,
   delay = 0,
-  lineStagger = 0.13,
+  lineStagger = staggerTokens.tight,
 }: DisplayRevealProps) {
   const scope = useRef<HTMLElement>(null);
 
@@ -66,7 +67,7 @@ export function DisplayReveal({
         opacity: 1,
         duration: dur.slow,
         delay,
-        ease: ease.editorial,
+        ease: ease.out,
         stagger: lineStagger,
         onComplete: () =>
           targets.forEach((t) => t.removeAttribute("data-reveal-pending")),

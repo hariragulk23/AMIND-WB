@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useEffect, useRef, useState } from "react";
+import { useActionState, useEffect, useRef } from "react";
 import { submitTradeEnquiry, type EnquiryState } from "@/app/contact/actions";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { company } from "@/data/company";
@@ -10,9 +10,6 @@ import {
   enquiryCopy,
   enquirySections,
   fieldLabels,
-  incotermOptions,
-  purchaseFrequencyOptions,
-  quantityUnitOptions,
 } from "@/data/enquiry";
 import { HONEYPOT_FIELD, TIMING_FIELD } from "@/lib/enquiry";
 import { SelectField, TextAreaField, TextField } from "./Field";
@@ -41,20 +38,6 @@ export function TradeEnquiryForm() {
     submitTradeEnquiry,
     INITIAL,
   );
-  const [commodity, setCommodity] = useState("");
-  /*
-    Adjusting state during render rather than in an effect. After a validation
-    round trip the commodity has to be re-adopted from the server's echoed
-    values so the conditional required-field logic stays correct — doing that
-    in an effect would queue a second render pass for every submission.
-    See https://react.dev/learn/you-might-not-need-an-effect
-  */
-  const [seenState, setSeenState] = useState<EnquiryState>(INITIAL);
-  if (state !== seenState) {
-    setSeenState(state);
-    setCommodity(state.status === "invalid" ? state.values.commodity : "");
-  }
-
   const formRef = useRef<HTMLFormElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
   const timingRef = useRef<HTMLInputElement>(null);
@@ -84,10 +67,9 @@ export function TradeEnquiryForm() {
     React resets an uncontrolled form once its action resolves. Feeding the
     server's sanitised values back in as `defaultValue` means the reset
     restores them instead of clearing the form — so a validation error never
-    costs the buyer the fourteen fields they just filled in.
+    costs the buyer what they typed, the long message field above all.
   */
   const values = state.status === "invalid" ? state.values : undefined;
-  const otherCommodity = commodity === "other";
 
   /* ---- Delivered ----------------------------------------------------- */
   if (state.status === "sent") {
@@ -190,98 +172,8 @@ export function TradeEnquiryForm() {
       <fieldset disabled={pending} className="min-w-0 border-0 p-0">
         <legend className="sr-only">Trade enquiry details</legend>
 
-        {/* ---- 01 Product requirement ---------------------------------- */}
+        {/* ---- 01 Your details ----------------------------------------- */}
         <EnquirySection index={0}>
-          <SelectField
-            name="commodity"
-            label={fieldLabels.commodity}
-            defaultValue={values?.commodity}
-            options={commodityOptions}
-            placeholder="Select a commodity"
-            required
-            error={errors.commodity}
-            onChange={setCommodity}
-          />
-          <TextField
-            name="specificProduct"
-            label={fieldLabels.specificProduct}
-            defaultValue={values?.specificProduct}
-            required={otherCommodity}
-            error={errors.specificProduct}
-            hint={
-              otherCommodity
-                ? "Tell us which product you are looking for."
-                : undefined
-            }
-          />
-          <TextField
-            name="quantity"
-            label={fieldLabels.quantity}
-            defaultValue={values?.quantity}
-            inputMode="text"
-            error={errors.quantity}
-            hint={enquiryCopy.quantityNote}
-            className="sm:col-span-2 lg:col-span-1"
-          />
-          <SelectField
-            name="quantityUnit"
-            label={fieldLabels.quantityUnit}
-            defaultValue={values?.quantityUnit}
-            options={quantityUnitOptions}
-            placeholder="Select a unit"
-          />
-        </EnquirySection>
-
-        {/* ---- 02 Destination & trade ---------------------------------- */}
-        <EnquirySection index={1}>
-          <TextField
-            name="destinationCountry"
-            label={fieldLabels.destinationCountry}
-            defaultValue={values?.destinationCountry}
-            autoComplete="country-name"
-            required
-            error={errors.destinationCountry}
-          />
-          <TextField
-            name="destinationPort"
-            label={fieldLabels.destinationPort}
-            defaultValue={values?.destinationPort}
-            error={errors.destinationPort}
-          />
-          <SelectField
-            name="incoterm"
-            label={fieldLabels.incoterm}
-            defaultValue={values?.incoterm}
-            options={incotermOptions}
-            placeholder="Select a term"
-            hint={enquiryCopy.incotermNote}
-          />
-          <SelectField
-            name="frequency"
-            label={fieldLabels.frequency}
-            defaultValue={values?.frequency}
-            options={purchaseFrequencyOptions}
-            placeholder="Select frequency"
-          />
-          <TextAreaField
-            name="packaging"
-            label={fieldLabels.packaging}
-            defaultValue={values?.packaging}
-            rows={3}
-            className="sm:col-span-2"
-          />
-        </EnquirySection>
-
-        {/* ---- 03 Your company ----------------------------------------- */}
-        <EnquirySection index={2}>
-          <TextField
-            name="companyName"
-            label={fieldLabels.companyName}
-            defaultValue={values?.companyName}
-            autoComplete="organization"
-            required
-            error={errors.companyName}
-          />
           <TextField
             name="contactName"
             label={fieldLabels.contactName}
@@ -289,6 +181,14 @@ export function TradeEnquiryForm() {
             autoComplete="name"
             required
             error={errors.contactName}
+          />
+          <TextField
+            name="companyName"
+            label={fieldLabels.companyName}
+            defaultValue={values?.companyName}
+            autoComplete="organization"
+            required
+            error={errors.companyName}
           />
           <TextField
             name="email"
@@ -311,14 +211,25 @@ export function TradeEnquiryForm() {
           />
         </EnquirySection>
 
-        {/* ---- 04 Additional information ------------------------------- */}
-        <EnquirySection index={3}>
+        {/* ---- 02 Your enquiry ----------------------------------------- */}
+        <EnquirySection index={1}>
+          <SelectField
+            name="commodity"
+            label={fieldLabels.commodity}
+            defaultValue={values?.commodity}
+            options={commodityOptions}
+            placeholder="Select a commodity"
+            required
+            error={errors.commodity}
+          />
           <TextAreaField
             name="message"
             label={fieldLabels.message}
             defaultValue={values?.message}
-            rows={6}
+            rows={7}
+            required
             error={errors.message}
+            hint={enquiryCopy.messageNote}
             className="sm:col-span-2"
           />
         </EnquirySection>

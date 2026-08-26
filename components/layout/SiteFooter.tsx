@@ -26,14 +26,18 @@ export function SiteFooter() {
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
           {/* ---- Identity + legal entity ---- */}
           <div className="lg:col-span-5">
-            <p className="font-display text-[clamp(1.75rem,3vw,2.5rem)] font-semibold uppercase leading-none tracking-[0.1em] text-on-dark">
-              {company.brand}
-            </p>
+            {/* Icon and wordmark on one line, as a single mark — the icon used
+                to sit on its own row below the tagline, reading as a stray
+                graphic rather than as part of the brand signature. */}
+            <div className="flex items-center gap-3">
+              <FooterMark />
+              <p className="font-display text-[clamp(1.75rem,3vw,2.5rem)] font-semibold uppercase leading-none tracking-[0.1em] text-on-dark">
+                {company.brand}
+              </p>
+            </div>
             <p className="mt-3 max-w-[28rem] text-sm text-on-dark-muted">
               {company.tagline}
             </p>
-
-            <FooterMark />
 
             <div className="mt-6">
               <h2 className="label-xs text-brass">Registered entity</h2>

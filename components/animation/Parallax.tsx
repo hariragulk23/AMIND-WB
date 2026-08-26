@@ -2,7 +2,13 @@
 
 import { useRef, type ReactNode } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap, prefersReducedMotion, registerGsap } from "@/lib/motion";
+import {
+  ease,
+  gsap,
+  prefersReducedMotion,
+  registerGsap,
+  scrub as scrubTokens,
+} from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 registerGsap();
@@ -59,12 +65,15 @@ export function Parallax({
         { yPercent: -amount / 2 },
         {
           yPercent: amount / 2,
-          ease: "none",
+          ease: ease.scrub,
           scrollTrigger: {
             trigger: scope.current,
             start,
             end,
-            scrub: true,
+            /* Smoothed rather than `true`: parallax tied 1:1 to a discrete
+               wheel or trackpad step moves in the same discrete steps, which
+               is precisely what makes parallax read as cheap. */
+            scrub: scrubTokens.smooth,
           },
         },
       );

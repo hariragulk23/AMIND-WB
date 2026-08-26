@@ -8,6 +8,7 @@ import { Container } from "@/components/ui/Container";
 import { Media } from "@/components/ui/Media";
 import { commodities } from "@/data/commodities";
 import { pageMetadata } from "@/lib/seo";
+import { travel } from "@/lib/motion";
 
 export const metadata: Metadata = pageMetadata({
   title: "Commodity Platforms",
@@ -38,7 +39,7 @@ export default function CommoditiesPage() {
         <Container className="section-y-sm">
           <ul className="grid gap-x-8 gap-y-16 md:grid-cols-2">
             {commodities.map((commodity) => (
-              <Reveal as="li" key={commodity.slug} y={18}>
+              <Reveal as="li" key={commodity.slug} y={travel.sm}>
                 <Link
                   href={`/commodities/${commodity.slug}`}
                   className="group block"

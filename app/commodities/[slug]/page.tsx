@@ -63,7 +63,7 @@ export default async function CommodityPage({
 
       <EnquiryBanner
         headingLines={["Enquire about", commodity.name.toLowerCase() + "."]}
-        intro={`Send the specification, quantity and destination for ${commodity.name.toLowerCase()}. We will come back with a clear view of whether and how it can be sourced.`}
+        intro={`Tell us what you are looking for in ${commodity.name.toLowerCase()} and how to reach you. We will come back with a clear view of whether and how it can be sourced.`}
       />
     </>
   );

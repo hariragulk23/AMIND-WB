@@ -51,10 +51,13 @@ export const faqContent = {
     },
     {
       /* Source: data/home.ts → processContent (the five stages) and
-         finalCtaContent.paragraph (what to send, what comes back). */
+         finalCtaContent.paragraph (what to send, what comes back).
+         The first-step description matches what the enquiry form actually
+         asks for — see data/enquiry.ts. If the form's field set changes,
+         this answer changes with it. */
       question: "How does the trade enquiry process work?",
       answer:
-        "Five stages, in the same order every time: source, evaluate, trade, document, deliver. Send the specification, quantity and destination, and AM INDIA comes back with a clear view of whether and how it can be sourced.",
+        "Five stages, in the same order every time: source, evaluate, trade, document, deliver. The first step is short: your contact details, the commodity you are interested in, and what you are looking for in your own words. AM INDIA reviews it and comes back with a clear view of whether and how it can be sourced. Specification, volume, destination and terms are settled in the conversation that follows, not demanded up front.",
     },
     {
       /* Source: data/compliance.ts → trustSignals, "B2B only". */

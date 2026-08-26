@@ -10,6 +10,7 @@ import {
   registerGsap,
   REVEAL_START,
   stagger as staggerTokens,
+  travel,
 } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
@@ -51,7 +52,7 @@ export function Reveal({
   children,
   as: Tag = "div",
   className,
-  y = 18,
+  y = travel.base,
   delay = 0,
   stagger,
   immediate = false,

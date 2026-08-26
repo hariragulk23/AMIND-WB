@@ -7,10 +7,23 @@
  * edited without touching the form component, the validator or the server
  * action.
  *
- * IMPORTANT — the Incoterm list is a list of terms a buyer may WORK TO, not a
- * list of terms this company offers. Which terms apply is agreed per contract
- * (see `incotermNote` below, which is rendered beside the field). Do not
- * reword that note into an offer.
+ * SCOPE — THIS IS A FIRST-CONTACT FORM, NOT A SPECIFICATION SHEET.
+ * It collects who is asking, how to reach them, which platform they are
+ * interested in, and what they want in their own words. Nothing else.
+ *
+ * The structured trade fields this form used to carry — approximate quantity
+ * and unit, destination country and port, preferred Incoterm, packaging
+ * requirements, purchase frequency, and a separate "specific product" line —
+ * were removed deliberately. Fourteen fields is a specification sheet, and
+ * asking a buyer to complete one before anyone has replied to them is the
+ * wrong order: those details belong to the Evaluate and Trade stages in
+ * `data/home.ts → processContent`, once a conversation is open. A buyer who
+ * already knows their volume, destination or terms can still state them in
+ * the message; the form simply no longer demands them as a precondition of
+ * making contact.
+ *
+ * If structured fields are ever wanted again, they belong on a second-stage
+ * form behind a reply — not here.
  */
 
 export interface SelectOption {
@@ -18,7 +31,14 @@ export interface SelectOption {
   readonly label: string;
 }
 
-/** Commodity list is derived from the platforms, plus an escape hatch. */
+/**
+ * Commodity list is derived from the platforms, plus an escape hatch.
+ *
+ * "Other" is kept deliberately. The field is required, so without it a buyer
+ * interested in something outside the four platforms would have to pick a
+ * commodity they do not want in order to submit at all. What they actually
+ * want then goes in the message.
+ */
 export const commodityOptions: readonly SelectOption[] = [
   { value: "coffee", label: "Coffee" },
   { value: "teak", label: "Teak" },
@@ -27,52 +47,18 @@ export const commodityOptions: readonly SelectOption[] = [
   { value: "other", label: "Other" },
 ];
 
-export const quantityUnitOptions: readonly SelectOption[] = [
-  { value: "kg", label: "kg" },
-  { value: "mt", label: "MT" },
-  { value: "bags", label: "Bags" },
-  { value: "containers", label: "Containers" },
-  { value: "m3", label: "m³" },
-  { value: "other", label: "Other" },
-];
-
-export const incotermOptions: readonly SelectOption[] = [
-  { value: "fob", label: "FOB" },
-  { value: "cif", label: "CIF" },
-  { value: "cfr", label: "CFR" },
-  { value: "exw", label: "EXW" },
-  { value: "fca", label: "FCA" },
-  { value: "discuss", label: "Not sure / discuss" },
-];
-
-export const purchaseFrequencyOptions: readonly SelectOption[] = [
-  { value: "spot", label: "One-off / spot" },
-  { value: "repeat", label: "Repeat purchase" },
-  { value: "contract", label: "Ongoing contract" },
-  { value: "undecided", label: "Not yet decided" },
-];
-
-/** Section headings for the form's four steps. */
+/** Section headings for the form's two steps. */
 export const enquirySections = [
   {
     index: "01",
-    title: "Product requirement",
-    description: "What you are looking to source, and in what volume.",
+    title: "Your details",
+    description: "So we know who we are responding to, and how.",
   },
   {
     index: "02",
-    title: "Destination & trade",
-    description: "Where it is going and the terms you work to.",
-  },
-  {
-    index: "03",
-    title: "Your company",
-    description: "So we know who we are responding to.",
-  },
-  {
-    index: "04",
-    title: "Additional information",
-    description: "Specifications, tolerances, timelines — anything relevant.",
+    title: "Your enquiry",
+    description:
+      "What you are looking for. Volume, destination and timing are welcome here if you have them — not required.",
   },
 ] as const;
 
@@ -82,10 +68,8 @@ export const enquiryCopy = {
     "Tell us what you are looking to source, buy or trade. We will review the requirement and come back to you directly.",
   submitLabel: "Submit trade enquiry",
   submittingLabel: "Submitting…",
-  incotermNote:
-    "Listed for reference only. The terms applying to a transaction are agreed per contract.",
-  quantityNote:
-    "An approximate figure is fine. If the volume is not yet defined, describe the requirement in the message instead.",
+  messageNote:
+    "Include anything that helps us scope it — approximate volume, destination market, timing, grade or specification. If it is not settled yet, describe the requirement as it stands.",
   requiredNote: "Fields marked with an asterisk are required.",
   privacyNote:
     "Your details are used only to respond to this enquiry. See our Privacy Policy.",
@@ -93,20 +77,12 @@ export const enquiryCopy = {
 
 /** Human-readable labels used by both the form and the notification email. */
 export const fieldLabels = {
-  commodity: "Commodity",
-  specificProduct: "Specific product",
-  quantity: "Approximate quantity",
-  quantityUnit: "Quantity unit",
-  destinationCountry: "Destination country",
-  destinationPort: "Destination port",
-  incoterm: "Preferred Incoterm",
-  packaging: "Packaging requirements",
-  frequency: "Purchase frequency",
-  companyName: "Company name",
-  contactName: "Contact name",
+  contactName: "Name",
+  companyName: "Company",
   email: "Business email",
   phone: "Phone / WhatsApp",
-  message: "Message / additional requirements",
+  commodity: "Commodity of interest",
+  message: "Message / requirement",
 } as const;
 
 export type EnquiryFieldName = keyof typeof fieldLabels;

@@ -11,14 +11,7 @@
  * or the other both render sensibly.
  */
 
-import {
-  commodityOptions,
-  fieldLabels,
-  incotermOptions,
-  optionLabel,
-  purchaseFrequencyOptions,
-  quantityUnitOptions,
-} from "@/data/enquiry";
+import { commodityOptions, fieldLabels, optionLabel } from "@/data/enquiry";
 import type { TradeEnquiry } from "@/lib/enquiry";
 
 export interface BuiltMessage {
@@ -40,51 +33,39 @@ function escapeHtml(value: string): string {
 
 /**
  * Builds a subject from whatever is known, e.g.
- *   "New Trade Enquiry — Coffee — Spain — 10 MT"
+ *   "New Trade Enquiry — Coffee — Nordkaffe AB"
  * Absent parts are simply omitted rather than rendered as "unknown".
+ *
+ * Commodity and company are what make one enquiry distinguishable from another
+ * in an inbox list. Destination and volume used to appear here; they are no
+ * longer collected as fields, and pulling a guess out of the free-text message
+ * would put an unverified figure in a subject line.
  */
 function buildSubject(enquiry: TradeEnquiry): string {
   const parts = ["New Trade Enquiry"];
 
   const commodity = optionLabel(commodityOptions, enquiry.commodity);
-  if (commodity) {
-    parts.push(
-      enquiry.commodity === "other" && enquiry.specificProduct
-        ? enquiry.specificProduct
-        : commodity,
-    );
-  }
+  if (commodity) parts.push(commodity);
 
-  if (enquiry.destinationCountry) parts.push(enquiry.destinationCountry);
-
-  if (enquiry.quantity) {
-    const unit = optionLabel(quantityUnitOptions, enquiry.quantityUnit);
-    parts.push(
-      unit && enquiry.quantityUnit !== "other"
-        ? `${enquiry.quantity} ${unit}`
-        : enquiry.quantity,
-    );
-  }
+  if (enquiry.companyName) parts.push(enquiry.companyName);
 
   return parts.join(" — ").slice(0, 200);
 }
 
-/** Ordered rows for the body. Empty values are dropped, not shown blank. */
+/**
+ * Ordered rows for the body. Empty values are dropped, not shown blank.
+ *
+ * Who and how to reach them first, then what they want — the order someone
+ * triaging the inbox actually reads in, and the message last because it is the
+ * only row that runs to multiple lines.
+ */
 function rows(enquiry: TradeEnquiry): [string, string][] {
   const all: [string, string][] = [
-    [fieldLabels.commodity, optionLabel(commodityOptions, enquiry.commodity)],
-    [fieldLabels.specificProduct, enquiry.specificProduct],
-    [fieldLabels.quantity, enquiry.quantity],
-    [fieldLabels.quantityUnit, optionLabel(quantityUnitOptions, enquiry.quantityUnit)],
-    [fieldLabels.destinationCountry, enquiry.destinationCountry],
-    [fieldLabels.destinationPort, enquiry.destinationPort],
-    [fieldLabels.incoterm, optionLabel(incotermOptions, enquiry.incoterm)],
-    [fieldLabels.packaging, enquiry.packaging],
-    [fieldLabels.frequency, optionLabel(purchaseFrequencyOptions, enquiry.frequency)],
-    [fieldLabels.companyName, enquiry.companyName],
     [fieldLabels.contactName, enquiry.contactName],
+    [fieldLabels.companyName, enquiry.companyName],
     [fieldLabels.email, enquiry.email],
     [fieldLabels.phone, enquiry.phone],
+    [fieldLabels.commodity, optionLabel(commodityOptions, enquiry.commodity)],
     [fieldLabels.message, enquiry.message],
   ];
   return all.filter(([, value]) => value.trim() !== "");

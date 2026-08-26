@@ -14,7 +14,10 @@ import {
   gsap,
   prefersReducedMotion,
   registerGsap,
+  scrub as scrubTokens,
   ScrollTrigger,
+  stagger as staggerTokens,
+  travel,
 } from "@/lib/motion";
 
 registerGsap();
@@ -74,33 +77,54 @@ export function CommodityJourney() {
               { opacity: 0 },
               {
                 opacity: 1,
-                ease: "none",
+                ease: ease.scrub,
                 scrollTrigger: {
                   trigger: panel,
                   /* A wider range than the section needs, so the crossfade
                      reads as a slow dissolve rather than a switch. */
                   start: "top 96%",
                   end: "top 18%",
-                  scrub: true,
+                  /* Was `true`. With no smoothing the dissolve moved in
+                     exactly the steps the input device produced: measured at
+                     17% of the full crossfade range in a single frame per
+                     mouse-wheel notch, so six notches took it end to end as
+                     a series of visible steps. The wide start/end range was
+                     doing nothing, because the range only controls how much
+                     scrolling maps to the fade — not how smoothly it gets
+                     there. */
+                  scrub: scrubTokens.smooth,
                 },
               },
             );
           }
         }
 
-        /* ---- Slow settle on the incoming layer ----------------------- */
+        /* ---- Slow settle on the incoming layer -----------------------
+           Smoothed for the same reason as the crossfade above. This one
+           matters more on mid-range hardware: it is a continuous transform
+           on a full-viewport image, so an unsmoothed scrub asks the
+           compositor to re-rasterise at a new scale on every scroll step.
+           Travel reduced from 7% to 4% — at 7% the top and bottom edges
+           visibly creep during an ordinary scroll, which reads as drift
+           rather than depth. */
         if (layer && !reduced) {
           gsap.fromTo(
             layer,
-            { scale: 1.07 },
+            { scale: 1.04 },
             {
               scale: 1,
-              ease: "none",
+              ease: ease.scrub,
+              /* Explicit, because this is the one transform on the site big
+                 enough for the difference to matter: without a 3D matrix the
+                 browser may re-rasterise a full-viewport image at each new
+                 scale instead of letting the compositor scale a cached
+                 texture. */
+              force3D: true,
               scrollTrigger: {
                 trigger: panel,
                 start: "top bottom",
                 end: "bottom top",
-                scrub: true,
+                scrub: scrubTokens.smooth,
               },
             },
           );
@@ -127,12 +151,12 @@ export function CommodityJourney() {
         if (!content) return;
 
         const items = Array.from(content.children);
-        gsap.set(items, { opacity: 0, y: 18 });
+        gsap.set(items, { opacity: 0, y: travel.sm });
         gsap.to(items, {
           opacity: 1,
           y: 0,
           duration: dur.base,
-          stagger: 0.08,
+          stagger: staggerTokens.tight,
           ease: ease.out,
           scrollTrigger: { trigger: panel, start: "top 60%", once: true },
         });

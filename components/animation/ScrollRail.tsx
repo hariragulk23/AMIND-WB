@@ -2,7 +2,13 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { ease, gsap, prefersReducedMotion, registerGsap } from "@/lib/motion";
+import {
+  ease,
+  gsap,
+  prefersReducedMotion,
+  registerGsap,
+  scrub as scrubTokens,
+} from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 registerGsap();
@@ -59,7 +65,7 @@ export function ScrollRail({ className }: ScrollRailProps) {
                the whole time the stages are being read. */
             start: "top 70%",
             end: "bottom 55%",
-            scrub: 0.6,
+            scrub: scrubTokens.tight,
           },
         },
       );

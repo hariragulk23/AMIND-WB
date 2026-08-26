@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { processContent } from "@/data/home";
+import { travel } from "@/lib/motion";
 
 /**
  * SECTION — HOW WE WORK
@@ -83,7 +84,7 @@ export function HowWeWork() {
               as="li"
               key={step.number}
               className="relative pb-12 pl-14 last:pb-0 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,38rem)] lg:items-start lg:gap-x-12 lg:pb-20 lg:pl-28"
-              y={18}
+              y={travel.sm}
             >
               {/* The node. `bg-paper` is what breaks the rail behind it.
                   Absolutely positioned, so it takes no grid cell. */}

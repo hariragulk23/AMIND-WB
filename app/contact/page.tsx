@@ -11,7 +11,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Start a Trade Enquiry",
   description:
-    "Send the commodity, specification, quantity and destination. AM INDIA reviews the requirement and comes back directly on whether it can be sourced.",
+    "Send your contact details, the commodity you are interested in, and what you are looking for. AM INDIA reviews the requirement and comes back directly on whether it can be sourced.",
   path: "/contact",
 });
 

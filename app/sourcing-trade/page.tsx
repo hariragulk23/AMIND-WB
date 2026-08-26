@@ -8,6 +8,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { sourcingContent } from "@/data/pages";
 import { pageMetadata } from "@/lib/seo";
+import { travel } from "@/lib/motion";
 
 export const metadata: Metadata = pageMetadata({
   title: "Sourcing & Trade",
@@ -58,7 +59,7 @@ export default function SourcingTradePage() {
                 key={stage.number}
                 /* Same two-column split as the homepage rail from `lg`. */
                 className="relative pb-12 pl-14 last:pb-0 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,38rem)] lg:items-start lg:gap-x-12 lg:pb-16 lg:pl-28"
-                y={18}
+                y={travel.sm}
               >
                 <span
                   aria-hidden="true"
@@ -114,7 +115,7 @@ export default function SourcingTradePage() {
 
       <EnquiryBanner
         headingLines={["Submit a trade", "requirement."]}
-        intro="Set out the commodity, specification, quantity and destination. We will respond with a clear view of the sourcing route and the terms it would work on."
+        intro="Tell us which commodity and what you are looking for. We will respond with a clear view of the sourcing route and the terms it would work on."
       />
     </>
   );
